@@ -1,0 +1,118 @@
+/*-- scss:defaults --*/
+
+// Sass Variables
+// https://quarto.org/docs/output-formats/html-themes.html#sass-variables
+
+/* Colors */
+$body-bg: #FFFFFF;
+$body-color: rgb(55, 58, 60);
+$link-color: rgb(39, 128, 227);
+
+/* Fonts */
+$font-family-sans-serif: "Source Sans Pro", -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$font-size-root: 17px;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=DM+Serif+Display&display=swap');
+
+/*Portada*/
+
+
+/* Oculta el título por defecto */
+  .quarto-title-block { display: none; }
+  #quarto-content .content { padding-top: 0; }
+
+/* === NAVBAR ENCIMA, SEMITRANSPARENTE === */
+header#quarto-header {
+  position: fixed !important;      /* flota sobre el contenido */
+  top: 0; left: 0; right: 0;
+  background: rgba(255,255,255,.55) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: none !important;
+  z-index: 9999 !important; 
+}
+.navbar { 
+  background: transparent !important; 
+  margin-bottom: 0 !important; 
+}
+
+/* === SIN HUECOS ARRIBA === */
+body { margin: 0 !important; padding: 0 !important; }
+#quarto-content,
+#quarto-content .page-columns,
+#quarto-content .content,
+main#quarto-document-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+main#quarto-document-content > *:first-child { 
+  margin-top: 0 !important; 
+  
+}
+
+/* === HERO FULL-BLEED === */
+.hero-video {
+  position: relative;
+  width: 100vw;
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  z-index: 0 !important;
+}
+.hero-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 0 !important;           /* fondo del hero */
+}
+
+  /* Texto sobre el vídeo */
+.hero-text {
+  position: absolute;
+  bottom: 0; 
+  z-index: 1;
+  color: white;
+  text-align: right;
+  padding-right: 5%;
+  width: 75%;
+  font-family: 'DM Serif Display', serif;
+  text-shadow: 
+  0 2px 5px rgba(0, 0, 0, 0.9),
+  0 3px 50px rgba(0, 0, 0, 0.9),
+  0 6px 25px rgba(0, 0, 0, 0.6);
+  padding: 1rem;
+}
+
+.hero-text h1 {
+  font-size: 5rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem 0;
+  line-height: 1.1;
+}
+
+.hero-text h1 span {
+  display: block;
+  font-size: 4rem; 
+  font-weight: 400;
+}
+
+.hero-text p {
+  font-size: 1.8rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.1rem;
+  font-weight: 400;
+  line-height: .8;
+  font-family: "Poppins", "Nunito Sans", sans-serif;
+}
+
+
+

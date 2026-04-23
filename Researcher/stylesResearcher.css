@@ -1,0 +1,166 @@
+/*---------------------------------------------*
+ |                RESEARCHER PAGE              |
+ *---------------------------------------------*/
+body::before {
+  content: "";
+  position: fixed;   /* se queda fija al hacer scroll */
+  inset: 0;
+  background: url("clouds.jpg") center / cover no-repeat fixed;
+  filter: brightness(0.92);   /* baja un pelín el brillo para legibilidad */
+  z-index: -1;       /* detrás de todo */
+}
+
+/* --- CONTENEDOR TIMELINE --- */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 .5rem;
+}
+
+/* Línea vertical centrada */
+.timeline::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  bottom: 0;
+  left: 50%;
+  width: 18px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    rgba(180, 220, 255, 1) 0%,
+    rgba(140, 190, 255, 0.8) 40%,
+    rgba(100, 160, 255, 0.5) 70%,
+    rgba(80, 140, 255, 0.3) 100%
+  );
+  filter: blur(2.5px);
+  border-radius: 15px;
+  box-shadow:
+    0 0 10px rgba(160, 200, 255, 0.8),
+    0 0 25px rgba(80, 160, 255, 0.5);
+}
+
+/* --- SPACESHIP --- */
+.timeline::before {
+  content: "";
+  background: url("../Researcher/cohete.png") center/contain no-repeat;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: -140px;
+  left: 50%;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
+transform: translateX(-50%);
+  z-index: 2; 
+}
+
+/* --- ITEMS --- */
+:root { --gap: 30px; }           /* hueco junto a la línea */
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 0;                    /* no padding en el contenedor del item */
+  margin: 0 0 0 0;          /* separación vertical entre items */
+}
+
+/* Lado izquierdo: ocupa la mitad izquierda */
+.timeline-item.left {
+  left: 0;
+}
+/* Lado derecho: desplaza la caja media pantalla a la derecha */
+.timeline-item.right {
+  left: 50%;
+}
+/* Contenido de la tarjeta (dejamos hueco junto a la línea) */
+.timeline-item.left  .timeline-content { margin-right: var(--gap); }
+.timeline-item.right .timeline-content { margin-left:  var(--gap); }
+
+/* Clouds */
+.timeline-item::before { 
+  content: '☁️'; 
+  position: absolute; 
+  top: 0px; 
+  font-size: 60pt;
+  width: 16px; 
+  height: 16px; 
+  z-index: 1; 
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
+}
+
+.timeline-item.left::before {
+  right: calc(-1 * var(--gap) / 2 + 1px);  /* mueve hacia el centro */
+  transform: scaleX(-1);             
+  transform-origin: center;         
+}
+
+.timeline-item.right::before {
+  left: calc(-1 * var(--gap) / 2 + 1px);   /* igual pero al otro lado */
+}
+
+/* --- TARJETA (colapsable) --- */
+.timeline-content {
+  background-color: rgba(255,255,255,0.9);
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  position: relative;
+  transition: box-shadow .3s ease, transform .2s ease;
+  overflow: visible;                 /* clave: que pueda crecer sin cortar */
+}
+
+/* el short title define la altura cerrada */
+.timeline-content .short-title {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;                /* ajusta si quieres más compacto */
+  line-height: 1.2;
+  /* si quieres que quepa en 2 líneas, no pongas line-clamp */
+}
+
+.short-title img {
+  width: 2rem;
+  margin-right: .5rem;
+  vertical-align: middle;
+}
+
+/* colapsamos sólo el bloque detallado */
+.timeline-content .full-text {
+  max-height: 0;                     /* oculto inicialmente */
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height .5s ease, opacity .25s ease;
+  will-change: max-height;
+  margin-top: .35rem;                /* aparecerá con un pequeño gap */
+}
+
+/* Hover → se despliega sólo el full-text */
+.timeline-content:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,.15);
+}
+.timeline-content:hover .full-text {
+  max-height: 1000px;               /* lo bastante grande para su contenido */
+  opacity: 1;
+}
+
+/* si usabas el degradado ::after, ya no es necesario; elimínalo o déjalo sin height */
+.timeline-content::after { content: none; }
+/* Short vs. full text */
+.timeline-content .short-title { 
+  display:block; 
+  font-weight:400; 
+  font-size:1rem; }
+.timeline-content .full-text   { opacity:0; transition: opacity .3s ease .1s; }
+.timeline-content:hover .full-text { opacity:1; }
+
+/* Links */
+.timeline-content a {
+  text-decoration: none;
+  margin-left: 4px;
+  color: #2780e3;
+  opacity: .7;
+  transition: opacity .2s;
+}
+.timeline-content a:hover { opacity: 1; }

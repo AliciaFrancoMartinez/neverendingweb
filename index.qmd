@@ -1,0 +1,36 @@
+---
+title: "Alicia Franco-Martínez"
+subtitle: ""
+page-layout: full
+about: 
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/AliciaFrancoMartinez
+    - icon: researchgate
+      text: ResearchGate
+      href: https://www.researchgate.net/profile/Alicia-Franco-Martinez
+execute:
+  echo: false
+  warning: false
+  output: asis
+---
+
+
+```{=html}
+<div class="hero-video">
+  <video autoplay muted loop playsinline>
+    <source src="prueba.mp4" type="video/mp4">
+  </video>
+  <div class="hero-text">
+    <p>PhD candidate</p>
+  <h1>
+  Alicia
+  <span>Franco-Martínez</span>
+  </h1>
+    <p>Psychometrics & Stats</p>
+    <p>Collaborative Open Science</p>
+  </div>
+</div>
+```

@@ -1,0 +1,24 @@
+project:
+  type: website
+resources:
+  - assets/video/**
+website:
+  title: "Alicia Franco-Martínez"
+  open-graph: true # https://quarto.org/docs/websites/website-tools.html#open-graph
+  navbar:
+    logo: logo.png
+    right:
+      - text: Person
+        href: index.qmd
+      - text: Researcher
+        href: Researcher/Researcher.qmd
+      - text: Visitor
+        href: Visitor/Visitor.qmd
+      
+format:
+  html:
+    anchor-sections: false
+    mainfont: 'DM Serif Display'
+    theme: [cosmo, styles.scss]
+    css: styles.scss
+
