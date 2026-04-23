@@ -1,12 +1,12 @@
 project:
   type: website
 resources:
-  - assets/video/**
+  - assets/**
 website:
   title: "Alicia Franco-Martínez"
   open-graph: true # https://quarto.org/docs/websites/website-tools.html#open-graph
   navbar:
-    logo: logo.png
+    logo: assets/logo.png
     right:
       - text: Person
         href: index.qmd

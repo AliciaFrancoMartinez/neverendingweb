@@ -13,14 +13,14 @@ format:
 <div id="map-stage" aria-label="Mapa panorámico interactivo">
   <div id="map-pan">
     <section class="map-tile" aria-hidden="false">
-      <img class="map-img" src="mapa.png" alt="Mapa del mundo">
+      <img class="map-img" src="assets/mapa.png" alt="Mapa del mundo">
 
       <button class="marker" aria-label="Madrid" data-lat="33.4168" data-lon="-25.7038">
         <span class="dot" aria-hidden="true">
-          <img src="eamlogo.png" alt="Logo marcador" class="dot-logo">
+          <img src="assets/eamlogo.png" alt="Logo marcador" class="dot-logo">
         </span>
         <span class="tip">
-          <img src="eam2021.png" alt="EAM logo" class="tip-logo">
+          <img src="assets/eam2021.png" alt="EAM logo" class="tip-logo">
           <strong>EAM 2021</strong><br>
           Oral communication<br>
           <em>Range restriction</em>
@@ -29,14 +29,14 @@ format:
     </section>
 
     <section class="map-tile" aria-hidden="true">
-      <img class="map-img" src="mapa.png" alt="">
+      <img class="map-img" src="assets/mapa.png" alt="">
 
       <button class="marker" aria-label="Madrid" data-lat="33.4168" data-lon="-25.7038">
         <span class="dot" aria-hidden="true">
-          <img src="eamlogo.png" alt="Logo marcador" class="dot-logo">
+          <img src="assets/eamlogo.png" alt="Logo marcador" class="dot-logo">
         </span>
         <span class="tip">
-          <img src="eam2021.png" alt="EAM logo" class="tip-logo">
+          <img src="assets/eam2021.png" alt="EAM logo" class="tip-logo">
           <strong>EAM 2021</strong><br>
           Oral communication<br>
           <em>Range restriction</em>

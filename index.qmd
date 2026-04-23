@@ -21,7 +21,7 @@ execute:
 ```{=html}
 <div class="hero-video">
   <video autoplay muted loop playsinline>
-    <source src="prueba.mp4" type="video/mp4">
+    <source src="assets/prueba.mp4" type="video/mp4">
   </video>
   <div class="hero-text">
     <p>PhD candidate</p>
