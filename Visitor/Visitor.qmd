@@ -12,54 +12,85 @@ format:
 ```{=html}
 <div id="map-stage" aria-label="Mapa panorámico interactivo">
   <div id="map-pan">
-    <img id="map-img" src="mapa.png" alt="Mapa del mundo">
+    <section class="map-tile" aria-hidden="false">
+      <img class="map-img" src="mapa.png" alt="Mapa del mundo">
 
-    <!-- Marcador: Madrid -->
-    <button class="marker" id="mk-madrid" aria-label="Madrid">
-      <span class="dot" aria-hidden="true">
-      <img src="eamlogo.png" alt="Logo marcador" class="dot-logo">
-      </span>
-      <span class="tip">
-        <img src="eam2021.png" alt="EAM logo" class="tip-logo">
-        <strong>EAM 2021</strong><br>
-        Oral communication<br>
-        <em>Range restriction</em>
-      </span>
-    </button>
+      <button class="marker" aria-label="Madrid" data-lat="33.4168" data-lon="-25.7038">
+        <span class="dot" aria-hidden="true">
+          <img src="eamlogo.png" alt="Logo marcador" class="dot-logo">
+        </span>
+        <span class="tip">
+          <img src="eam2021.png" alt="EAM logo" class="tip-logo">
+          <strong>EAM 2021</strong><br>
+          Oral communication<br>
+          <em>Range restriction</em>
+        </span>
+      </button>
+    </section>
+
+    <section class="map-tile" aria-hidden="true">
+      <img class="map-img" src="mapa.png" alt="">
+
+      <button class="marker" aria-label="Madrid" data-lat="33.4168" data-lon="-25.7038">
+        <span class="dot" aria-hidden="true">
+          <img src="eamlogo.png" alt="Logo marcador" class="dot-logo">
+        </span>
+        <span class="tip">
+          <img src="eam2021.png" alt="EAM logo" class="tip-logo">
+          <strong>EAM 2021</strong><br>
+          Oral communication<br>
+          <em>Range restriction</em>
+        </span>
+      </button>
+    </section>
   </div>
 </div>
 
 <script>
 (() => {
   const stage = document.getElementById('map-stage');
-  const pan   = document.getElementById('map-pan');
-  const img   = document.getElementById('map-img');
+  const pan = document.getElementById('map-pan');
 
-  let dragging = false, startX = 0, lastX = 0;
+  let dragging = false;
+  let startX = 0;
+  let x = 0;
 
-  function setX(x){
-    const stageW = stage.clientWidth;
-    const panW   = pan.getBoundingClientRect().width;
-    const min    = -(panW - stageW);
-    const clamped = Math.max(Math.min(x, 0), min);
-    pan.style.setProperty('--x', clamped + 'px');
-    lastX = clamped;
+  function getClientX(e) {
+    return e.touches ? e.touches[0].clientX : e.clientX;
   }
 
-  function getClientX(e){ return e.touches ? e.touches[0].clientX : e.clientX; }
+  function wrap(value, mod) {
+    return ((value % mod) + mod) % mod;
+  }
 
-  function onDown(e){
+  function tileWidth() {
+    const tile = pan.querySelector('.map-tile');
+    return tile ? tile.getBoundingClientRect().width : 1;
+  }
+
+  function render() {
+    const w = tileWidth();
+    const wrapped = wrap(x, w) - w; // keep translate in [-w, 0)
+    pan.style.transform = `translate(${wrapped}px, -50%)`;
+  }
+
+  function onDown(e) {
     dragging = true;
     pan.style.cursor = 'grabbing';
-    startX = getClientX(e) - lastX;
+    startX = getClientX(e) - x;
   }
-  function onMove(e){
-    if(!dragging) return;
-    setX(getClientX(e) - startX);
-  }
-  function onUp(){ dragging = false; pan.style.cursor = 'grab'; }
 
-  // Drag handlers
+  function onMove(e) {
+    if (!dragging) return;
+    x = getClientX(e) - startX;
+    render();
+  }
+
+  function onUp() {
+    dragging = false;
+    pan.style.cursor = 'grab';
+  }
+
   pan.addEventListener('mousedown', onDown);
   window.addEventListener('mousemove', onMove);
   window.addEventListener('mouseup', onUp);
@@ -67,39 +98,29 @@ format:
   window.addEventListener('touchmove', onMove, { passive: true });
   window.addEventListener('touchend', onUp);
 
-  // Centrar al cargar
-  function center(){ 
-    const stageW = stage.clientWidth;
-    const panW   = pan.getBoundingClientRect().width;
-    setX((stageW - panW)/2);
-  }
-  window.addEventListener('load', center);
-  window.addEventListener('resize', () => setX(lastX));
-
-  // ─────────────────────────────────────────────
-  // UTILIDADES PARA MARCADORES
-  // ─────────────────────────────────────────────
-
-  // Coloca un marcador por lat/lon (proyección equirectangular: lon -180..180, lat -90..90)
-  function placeMarkerByLatLon(el, lat, lon){
-    const leftPct = (lon + 180) / 360 * 100;   // 0% = -180°, 100% = +180°
-    const topPct  = (90 - lat)  / 180 * 100;   // 0% = 90°N, 100% = 90°S
-    el.style.setProperty('--left', leftPct + '%');
-    el.style.setProperty('--top',  topPct  + '%');
+  function placeMarkerByLatLon(el, lat, lon) {
+    const leftPct = ((lon + 180) / 360) * 100;
+    const topPct = ((90 - lat) / 180) * 100;
+    el.style.setProperty('--left', `${leftPct}%`);
+    el.style.setProperty('--top', `${topPct}%`);
   }
 
-  // Click en móvil: alterna tooltip
-  document.querySelectorAll('.marker').forEach(mk => {
+  document.querySelectorAll('.marker').forEach((mk) => {
+    const lat = Number(mk.dataset.lat);
+    const lon = Number(mk.dataset.lon);
+    if (!Number.isNaN(lat) && !Number.isNaN(lon)) {
+      placeMarkerByLatLon(mk, lat, lon);
+    }
+
     mk.addEventListener('click', () => {
       const open = mk.getAttribute('aria-expanded') === 'true';
       mk.setAttribute('aria-expanded', String(!open));
     });
   });
 
-  // EJEMPLO: Madrid (lat 40.4168, lon -3.7038)
-  const mkMadrid = document.getElementById('mk-madrid');
-  if (mkMadrid) placeMarkerByLatLon(mkMadrid, 33.4168, -25.7038);
-
+  window.addEventListener('load', render);
+  window.addEventListener('resize', render);
+  render();
 })();
 </script>
 

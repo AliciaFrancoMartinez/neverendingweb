@@ -9,37 +9,45 @@ body::before {
   filter: brightness(0.92);
   z-index: -1;
 }
+
 /* Contenedor de pantalla completa que no hace scroll */
-#map-stage{
+#map-stage {
   position: fixed;
   inset: 0;
   overflow: hidden;
   z-index: 0;
 }
 
-/* Capa que se traslada (imagen + marcadores) */
-#map-pan{
+/* Track horizontal infinito (2 mosaicos) */
+#map-pan {
   position: absolute;
   top: 60%;
   left: 0;
-  transform: translate(var(--x, 0px), -50%); /* la mueve el JS */
-  width: 130vw;                 /* mismo ancho que antes (ajusta a gusto) */
+  display: flex;
+  transform: translate(0, -50%);
+  cursor: grab;
+  user-select: none;
+}
+
+.map-tile {
+  position: relative;
+  width: 104vw;
+  flex: 0 0 104vw;
   height: auto;
 }
 
-/* La imagen ocupa todo el ancho del pan */
-#map-img{
+.map-img {
   display: block;
   width: 100%;
   height: auto;
   max-width: none;
   user-select: none;
   -webkit-user-drag: none;
-  pointer-events: none;          /* para que el drag lo capture la capa pan */
+  pointer-events: none;
 }
 
-/* Marcadores posicionados relativos a #map-pan usando porcentajes */
-.marker{
+/* Marcadores posicionados relativos a cada tile */
+.marker {
   position: absolute;
   top: var(--top, 50%);
   left: var(--left, 50%);
@@ -51,60 +59,60 @@ body::before {
   outline: none;
 }
 
-/* Puntito visible */
-.marker .dot{
+.marker .dot {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #e63946;          /* rojo discreto */
-  box-shadow: 0 0 0 2px white, 0 0 10px rgba(0,0,0,.35);
+  background: #e63946;
+  box-shadow: 0 0 0 2px white, 0 0 10px rgba(0, 0, 0, 0.35);
   display: block;
 }
 
-/* Tooltip */
-.marker .tip{
+.marker .tip {
   position: absolute;
   top: -12px;
   left: 18px;
   transform: translateY(-100%);
   min-width: 180px;
   max-width: 260px;
-  padding: .6rem .75rem;
-  font-size: .95rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
   line-height: 1.25rem;
-  background: rgba(255,255,255,.96);
+  background: rgba(255, 255, 255, 0.96);
   color: #111;
-  border-radius: .5rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   pointer-events: none;
   opacity: 0;
-  transition: opacity .15s ease;
+  transition: opacity 0.15s ease;
 }
 
-/* Flechita del tooltip */
-.marker .tip::after{
+.marker .tip::after {
   content: "";
   position: absolute;
   left: -6px;
   bottom: 10px;
   border: 6px solid transparent;
-  border-right-color: rgba(255,255,255,.96);
+  border-right-color: rgba(255, 255, 255, 0.96);
 }
 
-/* Mostrar tooltip al pasar el ratón o al enfocar con teclado */
 .marker:hover .tip,
 .marker:focus-visible .tip,
-.marker[aria-expanded="true"] .tip{
+.marker[aria-expanded="true"] .tip {
   opacity: 1;
 }
 
-/* Que el header quede por encima del mapa */
-header, .site-header, nav{ position: relative; z-index: 2; }
+/* Header por encima del mapa */
+header,
+.site-header,
+nav {
+  position: relative;
+  z-index: 2;
+}
 
-/* Pequeño logo dentro del tooltip */
 .tip-logo {
   display: block;
-  width: 150px;          /* ajusta el tamaño */
+  width: 150px;
   height: auto;
 }
 
@@ -113,20 +121,19 @@ header, .site-header, nav{ position: relative; z-index: 2; }
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
   display: flex;
-  align-items: center;   /* centra verticalmente */
-  justify-content: center; /* centra horizontalmente */
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
 .dot-logo {
   position: absolute;
-  inset: 0;               /* ocupa todo el círculo */
+  inset: 0;
   width: 110%;
   height: 110%;
-  object-fit: contain;     /* no recorta */
+  object-fit: contain;
   border-radius: 50%;
   pointer-events: none;
 }
-
