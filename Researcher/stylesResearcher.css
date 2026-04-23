@@ -5,7 +5,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: url("clouds.jpg") center / cover no-repeat fixed;
+  background: url("assets/clouds.jpg") center / cover no-repeat fixed;
   filter: brightness(0.92);
   z-index: -1;
 }
@@ -44,7 +44,7 @@ body::before {
 /* --- SPACESHIP --- */
 .timeline::before {
   content: "";
-  background: url("../Researcher/cohete.png") center/contain no-repeat;
+  background: url("assets/cohete.png") center/contain no-repeat;
   width: 150px;
   height: 150px;
   position: absolute;

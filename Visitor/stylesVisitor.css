@@ -5,7 +5,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: url("ocean.jpeg") center / cover no-repeat fixed;
+  background: url("assets/ocean.jpeg") center / cover no-repeat fixed;
   filter: brightness(0.92);
   z-index: -1;
 }
