@@ -22,7 +22,7 @@ body::before {
 .timeline::after {
   content: "";
   position: absolute;
-  top: 14px; /* do not go above spacecraft */
+  top: -32px; /* extends into spaceship so line looks like exhaust path */
   bottom: 0;
   left: 50%;
   width: 18px;
@@ -39,6 +39,7 @@ body::before {
   box-shadow:
     0 0 10px rgba(160, 200, 255, 0.8),
     0 0 25px rgba(80, 160, 255, 0.45);
+  z-index: 1;
 }
 
 /* --- SPACESHIP --- */
@@ -53,6 +54,7 @@ body::before {
   filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
   transform: translateX(-50%);
   z-index: 2;
+
 }
 
 /* --- ITEMS --- */
@@ -92,7 +94,7 @@ body::before {
   font-size: 60pt;
   width: 16px;
   height: 16px;
-  z-index: 1;
+  z-index: 3;
   filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
 }
 
