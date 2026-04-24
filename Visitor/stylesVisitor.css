@@ -21,12 +21,56 @@ body::before {
 /* Track horizontal infinito (2 mosaicos) */
 #map-pan {
   position: absolute;
-  top: 60%;
+  top: 0;
   left: 0;
   display: flex;
   transform: translate(0, -50%);
   cursor: grab;
   user-select: none;
+}
+
+#map-controls {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 3;
+  width: min(280px, calc(100vw - 2rem));
+  padding: 0.7rem 0.8rem;
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+.zoom-control {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+  color: #0b3556;
+}
+
+#map-zoom {
+  width: 100%;
+  accent-color: #1b74b8;
+}
+
+.drag-hint {
+  margin-top: 0.55rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  color: #143a5a;
+}
+
+.drag-hint svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex: 0 0 auto;
 }
 
 .map-tile {
@@ -52,29 +96,53 @@ body::before {
   top: var(--top, 50%);
   left: var(--left, 50%);
   transform: translate(-50%, -50%);
+  width: calc(30px * var(--marker-scale, 1));
+  height: calc(30px * var(--marker-scale, 1));
+  font-size: calc(16px * var(--marker-scale, 1));
   background: transparent;
   border: 0;
   padding: 0;
   cursor: pointer;
   outline: none;
+  z-index: 6;
+  display: block;
+  line-height: 0;
+}
+
+.marker:hover,
+.marker:focus-visible,
+.marker[aria-expanded="true"] {
+  z-index: 60;
 }
 
 .marker .dot {
-  width: 14px;
-  height: 14px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background: #e63946;
-  box-shadow: 0 0 0 2px white, 0 0 10px rgba(0, 0, 0, 0.35);
-  display: block;
+  background: rgba(198, 40, 40, 0.5);
+  border: max(1px, calc(2px * var(--marker-scale, 1))) solid rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 calc(2px * var(--marker-scale, 1))
+    calc(8px * var(--marker-scale, 1))
+    rgba(0, 0, 0, 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+  box-sizing: border-box;
 }
 
 .marker .tip {
+  --tip-attach-overlap: 0px;
   position: absolute;
-  top: -12px;
-  left: 18px;
-  transform: translateY(-100%);
-  min-width: 180px;
-  max-width: 260px;
+  top: auto;
+  bottom: calc(100% - var(--tip-attach-overlap));
+  left: 0;
+  transform: scale(var(--card-scale, 1));
+  transform-origin: left bottom;
+  min-width: 360px;
+  max-width: 520px;
   padding: 0.6rem 0.75rem;
   font-size: 0.95rem;
   line-height: 1.25rem;
@@ -85,21 +153,38 @@ body::before {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.15s ease;
+  z-index: 1;
 }
 
-.marker .tip::after {
-  content: "";
-  position: absolute;
-  left: -6px;
-  bottom: 10px;
-  border: 6px solid transparent;
-  border-right-color: rgba(255, 255, 255, 0.96);
+.marker[data-tip-v="above"] .tip {
+  top: auto;
+  bottom: calc(100% - var(--tip-attach-overlap));
+  transform: scale(var(--card-scale, 1));
+  transform-origin: left bottom;
+}
+
+.marker[data-tip-v="below"] .tip {
+  top: calc(100% - var(--tip-attach-overlap));
+  bottom: auto;
+  transform: scale(var(--card-scale, 1));
+  transform-origin: left top;
+}
+
+.marker[data-tip-h="right"] .tip {
+  left: auto;
+  right: 0;
+  transform-origin: right bottom;
+}
+
+.marker[data-tip-v="below"][data-tip-h="right"] .tip {
+  transform-origin: right top;
 }
 
 .marker:hover .tip,
 .marker:focus-visible .tip,
 .marker[aria-expanded="true"] .tip {
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* Header por encima del mapa */
@@ -116,24 +201,134 @@ nav {
   height: auto;
 }
 
+.tip-visit {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.7rem;
+  row-gap: 0;
+  align-items: center;
+  text-align: left;
+}
+
+.tip-congress {
+  display: grid;
+  gap: 0.55rem;
+  text-align: left;
+}
+
+.marker .tip.tip-congress {
+  display: grid;
+  gap: 0.55rem;
+  text-align: left;
+}
+
+.tip-congress-entry {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.7rem;
+  row-gap: 0;
+  align-items: start;
+}
+
+.tip-congress-entry + .tip-congress-entry {
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(29, 59, 85, 0.18);
+}
+
+.tip-visit-logo {
+  display: block;
+  width: 72px;
+  height: auto;
+  margin: 0;
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  justify-self: start;
+}
+
+.tip-visit img[src*="logo_uva"] {
+  width: 54px;
+}
+
+.tip-congress-logo {
+  display: block;
+  width: 64px;
+  height: auto;
+  margin: 0;
+}
+
+.marker .tip.tip-congress .tip-congress-entry > .tip-congress-logo {
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  justify-self: start;
+  align-self: center;
+}
+
+.marker .tip.tip-congress .tip-congress-entry > .tip-title,
+.marker .tip.tip-congress .tip-congress-entry > .tip-institution,
+.marker .tip.tip-congress .tip-congress-entry > .tip-supervisor {
+  grid-column: 2;
+  justify-self: start;
+  text-align: left;
+  width: 100%;
+}
+
+.marker .tip.tip-congress > .tip-supervisor {
+  font-family: "Poppins", "Nunito Sans", sans-serif;
+  font-weight: 500;
+}
+
+.tip-title {
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  margin-bottom: 0.28rem;
+  grid-column: 2;
+  text-align: left;
+}
+
+.tip-institution {
+  display: block;
+  font-size: 0.88rem;
+  line-height: 1.2;
+  color: #1d3b55;
+  margin-bottom: 0.28rem;
+  grid-column: 2;
+  text-align: left;
+}
+
+.tip-supervisor {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.83rem;
+  line-height: 1.2;
+  color: #41586b;
+  grid-column: 2;
+  text-align: left;
+}
+
 .dot {
   position: relative;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
-.dot-logo {
-  position: absolute;
-  inset: 0;
-  width: 110%;
-  height: 110%;
-  object-fit: contain;
-  border-radius: 50%;
-  pointer-events: none;
+.marker-letter {
+  font-weight: 700;
+  font-size: 0.9em;
+  line-height: 1;
+  font-family: "DM Serif Display", serif;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.marker.congress .dot {
+  background: rgba(198, 40, 40, 0.5);
+}
+
+.marker.visit .dot {
+  background: rgba(239, 108, 0, 0.5);
 }
