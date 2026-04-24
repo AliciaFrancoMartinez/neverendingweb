@@ -302,6 +302,8 @@ nav {
   font-size: 0.83rem;
   line-height: 1.2;
   color: #41586b;
+  font-family: "Poppins", "Nunito Sans", sans-serif;
+  font-weight: 500;
   grid-column: 2;
   text-align: left;
 }
