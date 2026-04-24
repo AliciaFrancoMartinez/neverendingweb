@@ -2,6 +2,7 @@ project:
   type: website
 resources:
   - assets/**
+  - CV/**
 website:
   title: "Alicia Franco-Martínez"
   open-graph: true # https://quarto.org/docs/websites/website-tools.html#open-graph
@@ -14,6 +15,8 @@ website:
         href: Researcher/Researcher.qmd
       - text: Visitor
         href: Visitor/Visitor.qmd
+      - text: CV
+        href: cv.qmd
       
 format:
   html:
@@ -21,4 +24,3 @@ format:
     mainfont: 'DM Serif Display'
     theme: [cosmo, styles.scss]
     css: styles.scss
-

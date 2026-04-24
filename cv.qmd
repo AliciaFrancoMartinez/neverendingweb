@@ -1,0 +1,16 @@
+---
+title: "CV"
+page-layout: full
+---
+
+```{=html}
+<div style="margin-top: 4.5rem; margin-bottom: 1rem; text-align: center;">
+```
+[Download the shortened CV](CV/CV2026_AliciaFranco-Martinez.pdf){.btn .btn-primary target="_blank" download="CV2026_AliciaFranco-Martinez.pdf"}
+```{=html}
+</div>
+```
+
+```{=html}
+<iframe src="CV/CV2026_AliciaFranco-Martinez.pdf" width="92%" height="820" style="display:block; margin:0 auto; border: 1px solid rgba(150,176,196,.35); border-radius: 12px;"></iframe>
+```
