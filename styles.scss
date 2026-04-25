@@ -370,9 +370,33 @@ main#quarto-document-content > *:first-child {
   filter: saturate(1.2);
 }
 
+.cv-page-actions {
+  margin-top: 4.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.cv-viewer {
+  display: block;
+  width: min(92%, 980px);
+  height: 820px;
+  margin: 0 auto;
+  border: 1px solid rgba(150, 176, 196, 0.35);
+  border-radius: 12px;
+  background: #fff;
+}
+
 @media (max-width: 780px) {
+  .navbar-brand img {
+    max-height: 34px;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.95rem;
+  }
+
   .hero-video {
-    height: 68vh;
+    height: 64vh;
   }
 
   .hero-text {
@@ -448,5 +472,27 @@ main#quarto-document-content > *:first-child {
 
   .person-contact-link span {
     font-size: 0.78rem;
+  }
+
+  .person-contact-link:nth-child(odd),
+  .person-contact-link:nth-child(even) {
+    transform: none;
+  }
+
+  .cv-page-actions {
+    margin-top: 4.9rem;
+    margin-bottom: 0.8rem;
+    padding-inline: 0.5rem;
+  }
+
+  .cv-page-actions .btn {
+    width: min(92vw, 360px);
+  }
+
+  .cv-viewer {
+    width: 96%;
+    height: 66vh;
+    min-height: 460px;
+    border-radius: 8px;
   }
 }

@@ -334,3 +334,75 @@ nav {
 .marker.visit .dot {
   background: rgba(239, 108, 0, 0.5);
 }
+
+@media (max-width: 900px) {
+  #map-controls {
+    left: 0.7rem;
+    right: 0.7rem;
+    bottom: 0.7rem;
+    width: auto;
+    padding: 0.6rem 0.7rem;
+  }
+
+  .zoom-control {
+    font-size: 0.76rem;
+    margin-bottom: 0.28rem;
+  }
+
+  .drag-hint {
+    margin-top: 0.4rem;
+    font-size: 0.74rem;
+  }
+
+  .map-tile {
+    width: 132vw;
+    flex: 0 0 132vw;
+  }
+
+  .marker {
+    width: calc(36px * var(--marker-scale, 1));
+    height: calc(36px * var(--marker-scale, 1));
+  }
+
+  .marker .tip {
+    min-width: min(78vw, 300px);
+    max-width: min(86vw, 340px);
+    padding: 0.55rem 0.65rem;
+    font-size: 0.83rem;
+    line-height: 1.15rem;
+  }
+
+  .tip-logo {
+    width: 110px;
+  }
+
+  .tip-visit {
+    column-gap: 0.55rem;
+  }
+
+  .tip-visit-logo {
+    width: 58px;
+  }
+
+  .tip-congress-logo {
+    width: 52px;
+  }
+
+  .tip-title {
+    font-size: 0.84rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .tip-institution {
+    font-size: 0.78rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .tip-supervisor {
+    font-size: 0.74rem;
+  }
+
+  .marker-letter {
+    font-size: 0.82em;
+  }
+}

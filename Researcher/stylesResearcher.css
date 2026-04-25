@@ -180,3 +180,79 @@ body::before {
 .timeline-content a:hover {
   opacity: 1;
 }
+
+@media (max-width: 900px) {
+  .timeline {
+    max-width: 100%;
+    margin: 3.25rem auto;
+    padding: 0 0.6rem 55vh 0.6rem;
+  }
+
+  .timeline::after {
+    left: 24px;
+    width: 10px;
+    transform: none;
+    border-radius: 10px;
+  }
+
+  .timeline::before {
+    width: 96px;
+    height: 96px;
+    top: -86px;
+    left: 0;
+    transform: none;
+  }
+
+  .timeline-item,
+  .timeline-item.left,
+  .timeline-item.right {
+    width: 100%;
+    left: 0;
+    padding-left: 2.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-item::before {
+    font-size: 40pt;
+    right: auto;
+    left: 3px;
+    top: 0.2rem;
+    transform: none;
+  }
+
+  .timeline-item.left::before,
+  .timeline-item.right::before {
+    right: auto;
+    left: 3px;
+    transform: none;
+  }
+
+  .timeline-item.left .timeline-content,
+  .timeline-item.right .timeline-content {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .timeline-content {
+    padding: 0.85rem 1rem;
+    border-radius: 9px;
+  }
+
+  .timeline-content .short-title {
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .timeline-content .full-text {
+    max-height: none;
+    overflow: visible;
+    opacity: 1;
+    margin-top: 0.45rem;
+    transition: none;
+  }
+
+  .timeline-content:hover .full-text {
+    max-height: none;
+    opacity: 1;
+  }
+}
