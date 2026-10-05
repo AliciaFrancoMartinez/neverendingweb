@@ -1,0 +1,63 @@
+# Copia diaria del archivador de la comunidad ("Community's file drawer").
+#
+# Cada día consulta en Supabase los proyectos APROBADOS (moderation_status = published)
+# y guarda una copia en la web publicada (rama gh-pages):
+#   Researcher/assets/community-drawer.json
+# Así lo que apruebas queda integrado en la web aunque Supabase se pause, y la
+# consulta diaria además mantiene despierto el proyecto gratuito de Supabase.
+#
+# Si un día falla (p. ej. porque Supabase está pausado), GitHub te avisará por correo
+# y la web seguirá mostrando la última copia.
+name: File drawer snapshot
+
+on:
+  schedule:
+    - cron: "17 6 * * *"   # todos los días a las 06:17 UTC
+  workflow_dispatch:         # y a mano desde la pestaña Actions de GitHub
+
+permissions:
+  contents: write
+
+concurrency:
+  group: drawer-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout published site (gh-pages)
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Fetch approved projects from Supabase
+        run: |
+          CONFIG=Researcher/assets/drawer-config.js
+          URL=$(grep -oE 'https://[a-z0-9]+\.supabase\.co' "$CONFIG" | head -1)
+          KEY=$(grep -oE 'sb_publishable_[A-Za-z0-9_-]+|eyJ[A-Za-z0-9._-]+' "$CONFIG" | head -1)
+          QUERY='select=id,title,topic,description,stage,abandoned_year,display_name,created_at&moderation_status=eq.published&order=abandoned_year.desc.nullslast,created_at.desc&limit=1000'
+          curl --fail --silent --show-error --max-time 60 --retry 3 --retry-delay 20 \
+            -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
+            "$URL/rest/v1/drawer_projects?$QUERY" -o /tmp/drawer.json
+          python3 - <<'PY'
+          import json
+          rows = json.load(open("/tmp/drawer.json"))
+          assert isinstance(rows, list), "unexpected response"
+          with open("Researcher/assets/community-drawer.json", "w", encoding="utf-8") as f:
+              json.dump(rows, f, ensure_ascii=False, indent=2)
+              f.write("\n")
+          print(f"{len(rows)} published project(s)")
+          PY
+
+      - name: Commit snapshot if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Researcher/assets/community-drawer.json
+          if git diff --cached --quiet; then
+            echo "Snapshot unchanged"
+          else
+            git commit -m "Update file drawer snapshot"
+            git push
+          fi

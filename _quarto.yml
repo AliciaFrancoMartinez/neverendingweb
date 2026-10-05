@@ -1,8 +1,15 @@
 project:
   type: website
+  pre-render:
+    # Regenera los PDF del CV si han cambiado sus datos
+    - CV/_scripts/build-pdf.R
+    # Guarda en la web los proyectos aprobados del archivador de la comunidad
+    - Researcher/_scripts/drawer-snapshot.R
 resources:
   - assets/**
-  - CV/**
+  - CV/*.pdf
+  - CV/assets/**
+  - Researcher/assets/community-drawer.json
 website:
   title: "Alicia Franco-Martínez"
   open-graph: true # https://quarto.org/docs/websites/website-tools.html#open-graph

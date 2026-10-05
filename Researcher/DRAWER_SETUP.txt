@@ -1,0 +1,65 @@
+ACTIVATING THE UNPUBLISHED DRAWER
+=================================
+
+The page is designed for a static Quarto/GitHub Pages site. Supabase supplies
+the shared database and private moderation dashboard.
+
+1. Create a Supabase project.
+2. Open its SQL Editor and run supabase-setup.sql once.
+3. In Project Settings > API, copy the Project URL and public publishable key
+   (called anon key in older Supabase projects).
+4. Paste those two values into assets/drawer-config.js.
+5. Render and publish the Quarto site.
+
+ADDING THE ABANDONED YEAR TO AN EXISTING PROJECT
+------------------------------------------------
+
+If the drawer_projects table already exists, run
+supabase-add-abandoned-year.sql once in the SQL Editor before using the updated
+form. Existing submissions are preserved; their year can be filled in manually
+from the Table Editor.
+
+MODERATION
+----------
+
+New submissions are stored as pending and are not public immediately. In
+Supabase, open Table Editor > drawer_projects:
+
+- Change moderation_status to published to show a project on the page.
+- Change it to hidden to remove it from the public page without deleting it.
+- Delete a row to remove it permanently.
+
+The public browser key cannot publish, edit, hide, or delete entries. Never put
+the Supabase service_role key in this repository.
+
+TWO DRAWERS: "MY FILE DRAWER" AND "COMMUNITY'S FILE DRAWER"
+-----------------------------------------------------------
+
+The page shows two cabinets. The left one ("My file drawer") is the default
+view and lists your own abandoned projects; the mirrored one on the right
+("Community's file drawer") opens on hover (or tap) and shows the published
+community submissions plus the submission form.
+
+- Your own projects live in assets/my-drawer.js (no Supabase needed): add one
+  { title, topic, stage, abandoned_year, description } block per project.
+- Community projects and the form use Supabase, as described above.
+- Direct link to the community drawer: Drawer.html#community
+
+APPROVED PROJECTS STAY ON THE WEBSITE (EVEN IF SUPABASE PAUSES)
+---------------------------------------------------------------
+
+When you approve a submission (moderation_status = published), it is copied
+into the website itself, in assets/community-drawer.json:
+
+- Every `quarto render` refreshes that copy (Researcher/_scripts/drawer-snapshot.R).
+- Every day, the GitHub workflow .github/workflows/drawer-snapshot.yml refreshes
+  the copy directly in the published site (gh-pages branch). This daily query
+  also keeps the free Supabase project awake. It runs once the workflow file is
+  pushed to the main branch; you can also run it by hand from the Actions tab.
+
+The page shows that copy immediately and replaces it with live data when
+Supabase answers. If Supabase is paused, the copy is still shown. If you hide a
+project in Supabase, it disappears from the copy at the next refresh.
+
+Your own projects (assets/my-drawer.js) carry their Supabase id, so they are
+not repeated in the community drawer.

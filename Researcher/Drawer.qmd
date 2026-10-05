@@ -1,0 +1,130 @@
+---
+title: "Our file drawer"
+format:
+  html:
+    theme:
+      - cosmo
+      - ../styles.scss
+    css:
+      - stylesDrawer.css
+---
+
+```{=html}
+<div class="drawer-page" data-view="mine">
+  <section class="drawer-archive" aria-labelledby="drawer-title">
+    <div class="drawer-heading">
+      <div class="drawer-heading-copy">
+        <h1 id="drawer-title">
+          <span data-for="mine">My file drawer</span>
+          <span data-for="community">Community’s<br>file drawer</span>
+        </h1>
+        <p class="drawer-subtitle" data-for="mine">The projects I started, loved and left behind.</p>
+        <p class="drawer-subtitle" data-for="community">Everyone has one. Add the projects you abandoned, so they are not forgotten.</p>
+      </div>
+      <button class="drawer-refresh" id="drawer-refresh" data-for="community" type="button" aria-label="Refresh archive" title="Refresh archive">↻</button>
+    </div>
+    <div class="drawer-margin-arrow" data-for="community" aria-hidden="true">
+      <svg viewBox="0 0 120 1000" preserveAspectRatio="none" focusable="false">
+        <path class="drawer-margin-arrow-line" d="M109 16 C39 10 25 91 22 190 C18 309 29 405 19 525 C10 642 22 735 25 825 C27 886 36 928 51 958"></path>
+        <path class="drawer-margin-arrow-head" d="M24 925 C33 939 41 950 52 961 C59 944 66 928 74 915"></path>
+      </svg>
+    </div>
+    <div class="drawer-showcase">
+      <div class="drawer-lists">
+        <div class="drawer-projects" id="my-projects" data-for="mine" role="tabpanel" aria-labelledby="cabinet-mine" aria-live="polite"></div>
+        <div class="drawer-projects" id="drawer-projects" data-for="community" role="tabpanel" aria-labelledby="cabinet-community" aria-live="polite" aria-busy="true">
+          <div class="drawer-loading"><span></span><span></span><span></span><p>Opening the drawer…</p></div>
+        </div>
+        <a class="drawer-cta" data-for="community" href="#leave-a-project">Add your abandoned project <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="drawer-side-art">
+        <div class="drawer-cabinets" role="tablist" aria-label="File drawers">
+          <button class="drawer-cabinet drawer-cabinet--mine" id="cabinet-mine" type="button" role="tab" aria-selected="true" aria-controls="my-projects" data-view="mine" aria-label="My file drawer">
+            <img src="assets/drawer-cabinet.png" alt="">
+            <span class="drawer-cabinet-label">My file drawer</span>
+          </button>
+          <button class="drawer-cabinet drawer-cabinet--community" id="cabinet-community" type="button" role="tab" aria-selected="false" aria-controls="drawer-projects" data-view="community" aria-label="Community’s file drawer">
+            <span class="drawer-cabinet-hint" data-for="mine" aria-hidden="true">
+              <span class="drawer-cabinet-hint-text">open me!</span>
+              <svg viewBox="0 0 64 56" focusable="false">
+                <path class="drawer-cabinet-hint-line" d="M50 8 C30 6 15 18 12 46"></path>
+                <path class="drawer-cabinet-hint-head" d="M4 38 C7 42 10 46 12 49 C15 45 18 41 22 38"></path>
+              </svg>
+            </span>
+            <img src="assets/drawer-cabinet.png" alt="">
+            <span class="drawer-cabinet-label">Community’s file drawer</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="drawer-form-section" id="leave-a-project" data-for="community" aria-labelledby="form-title">
+    <div class="drawer-form-intro">
+      <h2 id="form-title">What did you leave in the drawer?</h2>
+      <p>Share as much or as little as feels right. Your name is optional.</p>
+    </div>
+
+    <form class="drawer-form" id="drawer-form" novalidate>
+      <div class="drawer-field drawer-field-wide">
+        <label for="project-title">Project title <span class="required-marker" aria-hidden="true">*</span></label>
+        <input id="project-title" name="title" type="text" maxlength="120" autocomplete="off" required placeholder="What was its short title?">
+      </div>
+
+      <div class="drawer-field">
+        <label for="project-topic">Field or topic <span class="required-marker" aria-hidden="true">*</span></label>
+        <input id="project-topic" name="topic" type="text" maxlength="80" autocomplete="off" required placeholder="e.g. social psychology">
+      </div>
+
+      <div class="drawer-field">
+        <label for="project-stage">Where did it stop? <span class="required-marker" aria-hidden="true">*</span></label>
+        <select id="project-stage" name="stage" required>
+          <option value="">Choose a stage</option>
+          <option value="idea">At the idea</option>
+          <option value="planning">During planning</option>
+          <option value="data">During data collection</option>
+          <option value="analysis">During data analysis</option>
+          <option value="writing">During writing</option>
+          <option value="other">Somewhere else</option>
+        </select>
+      </div>
+
+      <div class="drawer-field drawer-field-year">
+        <label for="project-year">Year abandoned <span class="required-marker" aria-hidden="true">*</span></label>
+        <input id="project-year" name="abandoned_year" type="number" min="1900" inputmode="numeric" required placeholder="e.g. 2024">
+      </div>
+
+      <div class="drawer-field drawer-field-wide">
+        <label for="project-description">Tell us its story <span class="required-marker" aria-hidden="true">*</span></label>
+        <textarea id="project-description" name="description" rows="6" maxlength="1200" required placeholder="What was the question? What happened? What, if anything, stayed with you?"></textarea>
+        <p class="drawer-character-count"><span id="description-count">0</span> / 1200</p>
+      </div>
+
+      <div class="drawer-field drawer-field-wide">
+        <label for="display-name">Your name <span>optional</span></label>
+        <input id="display-name" name="display_name" type="text" maxlength="80" autocomplete="name" placeholder="Leave blank to file it anonymously">
+      </div>
+
+      <div class="drawer-honeypot" aria-hidden="true">
+        <label for="project-website">Website</label>
+        <input id="project-website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <label class="drawer-consent">
+        <input name="consent" type="checkbox" required>
+        <span>I understand that this text may appear publicly after review.</span>
+      </label>
+
+      <div class="drawer-submit-row">
+        <button class="drawer-submit" type="submit">File this project <span aria-hidden="true">→</span></button>
+        <p class="drawer-form-status" id="drawer-form-status" role="status" aria-live="polite"></p>
+      </div>
+      <p class="drawer-privacy-note">Please do not include confidential, identifying or sensitive participant information.</p>
+    </form>
+  </section>
+</div>
+
+<script src="assets/drawer-config.js"></script>
+<script src="assets/my-drawer.js"></script>
+<script src="assets/drawer.js"></script>
+```

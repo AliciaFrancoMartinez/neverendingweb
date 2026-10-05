@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ac85f1db-e414-487c-aece-9d7169cc5aab",
+    "title": "Counterintuitive",
+    "topic": "experimental",
+    "description": "We were interested in the relationship between intuition measured with a questionnaire and a behavioral measure of unconscious processing, but the questionnaire data were a mess and any storyline sounded too weak to be worth telling.",
+    "stage": "analysis",
+    "abandoned_year": 2025,
+    "display_name": null,
+    "created_at": "2026-08-23T15:30:16.193142+00:00"
+  },
+  {
+    "id": "a1eb83d7-9408-43fa-9d2f-7760a4d8ada6",
+    "title": "Bayesian model of awareness",
+    "topic": "experimental",
+    "description": "We planned to adapt a model we had to Bayesian statistics.",
+    "stage": "planning",
+    "abandoned_year": 2024,
+    "display_name": null,
+    "created_at": "2026-08-23T17:36:03.084365+00:00"
+  },
+  {
+    "id": "069c1319-7c36-4e95-8487-23a982fac6e2",
+    "title": "The Seven Wonderings",
+    "topic": "psychometrics",
+    "description": "One of the first works to approach how GPT could aid in psychometrics tasks",
+    "stage": "writing",
+    "abandoned_year": 2023,
+    "display_name": null,
+    "created_at": "2026-08-22T09:43:36.481351+00:00"
+  },
+  {
+    "id": "0ede80b0-cc81-4f46-b6d2-890ddf12cf17",
+    "title": "Bifactor structures",
+    "topic": "psychometrics",
+    "description": "Some simulations about bifactor models",
+    "stage": "planning",
+    "abandoned_year": 2022,
+    "display_name": null,
+    "created_at": "2026-08-23T15:39:53.414393+00:00"
+  },
+  {
+    "id": "af384515-9a3e-458d-a549-27d46e6299a9",
+    "title": "Pears or apples?",
+    "topic": "social psychology",
+    "description": "We designed a situational judgement test to measure sexism and other discriminatory beliefs, but the project got stuck after the piloting.",
+    "stage": "data",
+    "abandoned_year": 2021,
+    "display_name": null,
+    "created_at": "2026-08-23T15:42:34.625649+00:00"
+  }
+]
