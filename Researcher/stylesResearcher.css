@@ -10,6 +10,57 @@ body::before {
   z-index: -1;
 }
 
+/* Entry to the community archive, anchored to the opening video. */
+.drawer-launch {
+  position: absolute;
+  left: clamp(0.85rem, 3vw, 2.75rem);
+  bottom: clamp(0.85rem, 3vw, 2.2rem);
+  z-index: 4;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  max-width: min(310px, 45vw);
+  padding: 0.5rem 0.65rem 0.45rem;
+  color: #3f382c;
+  background: #e5dac2;
+  border: 1px solid #aa9875;
+  border-radius: 4px;
+  box-shadow: none;
+  text-decoration: none;
+  font-family: "Poppins", "Nunito Sans", sans-serif;
+  font-size: clamp(0.72rem, 1.15vw, 0.92rem);
+  font-weight: 500;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.drawer-launch span {
+  order: -1;
+  width: 100%;
+}
+
+.drawer-launch img {
+  width: clamp(52px, 7vw, 76px);
+  height: clamp(52px, 7vw, 76px);
+  object-fit: contain;
+  filter: none;
+}
+
+.drawer-launch:hover,
+.drawer-launch:focus-visible {
+  color: #2f291f;
+  background: #d9c9a9;
+  box-shadow: none;
+  transform: none;
+}
+
+.drawer-launch:focus-visible {
+  outline: 3px solid #ffcf67;
+  outline-offset: 4px;
+}
+
 /* --- CONTENEDOR TIMELINE --- */
 .timeline {
   position: relative;
@@ -90,22 +141,28 @@ body::before {
 .timeline-item::before {
   content: "☁️";
   position: absolute;
-  top: 0;
+  top: -0.55rem;
+  display: grid;
+  place-items: center;
   font-size: 60pt;
-  width: 16px;
-  height: 16px;
+  line-height: 1;
+  width: 96px;
+  height: 90px;
   z-index: 3;
+  pointer-events: none;
   filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
 }
 
 .timeline-item.left::before {
-  right: calc(-1 * var(--gap) / 2 + 1px);
-  transform: scaleX(-1);
-  transform-origin: center;
+  right: auto;
+  left: calc(100% - 16px);
+  transform: translateX(-50%);
 }
 
 .timeline-item.right::before {
-  left: calc(-1 * var(--gap) / 2 + 1px);
+  right: auto;
+  left: 16px;
+  transform: translateX(-50%);
 }
 
 /* --- TARJETA (colapsable) --- */
@@ -182,6 +239,18 @@ body::before {
 }
 
 @media (max-width: 900px) {
+  .drawer-launch {
+    left: 0.7rem;
+    bottom: 0.7rem;
+    max-width: 54vw;
+    padding: 0.4rem 0.55rem 0.35rem;
+  }
+
+  .drawer-launch img {
+    width: 48px;
+    height: 48px;
+  }
+
   .timeline {
     max-width: 100%;
     margin: 3.25rem auto;
@@ -214,9 +283,12 @@ body::before {
 
   .timeline-item::before {
     font-size: 40pt;
+    line-height: 1;
+    width: 42px;
+    height: 58px;
     right: auto;
     left: 3px;
-    top: 0.2rem;
+    top: -0.1rem;
     transform: none;
   }
 
