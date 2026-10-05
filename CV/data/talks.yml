@@ -1,0 +1,92 @@
+# INVITED TALKS & WORKSHOPS
+# Campos:
+#   date      fecha (para dos líneas usa una lista: ["Feb 2025", "& Mar 2024"])
+#   title     p. ej. "Seminar about *creativity*" (lo que va en *cursiva* sale en negrita cursiva)
+#   place     lugar (📍)
+#   org       entidad organizadora
+#   detail    título de la charla (sale en cursiva)
+#   link      enlace (🔗) — opcional
+#   duration  duración, p. ej. "1.5h"
+
+title: "Invited Talks & Workshops"
+web_limit: 6   # en la web se ven las 6 primeras y un botón "Show all"
+
+entries:
+  - date: "Sept 2026"
+    title: "Workshop about *preregistration*"
+    place: "Valencia (Spain)"
+    org: "Spanish Society for Experimental Psychology (SEPEX); XV SEPEX & II Joint SEPEX-BAPS Meeting"
+    detail: "How do I preregister my study? A hands-on workshop"
+    duration: "2h"
+
+  - date: "May 2026"
+    title: "Seminar about *background music on creativity*"
+    place: "Amsterdam (The Netherlands)"
+    org: "Amsterdam Music Cognition Lab"
+    detail: "MuPsiKappa project"
+    duration: "1h"
+
+  - date: "May 2026"
+    title: "Seminar about *creativity*"
+    place: "ONLINE"
+    org: "Mind, Brain and Behavior Research Center (CIMCYC), University of Granada"
+    detail: "Measuring Creativity Process and Product with a Digitized Invented Alien Creatures Task"
+    duration: "1h"
+
+  - date: "Apr 2026"
+    title: "Talk about *multisite coordination*"
+    place: "ONLINE"
+    org: "SEPNECA (Spanish Society for Psychophysiology and Cognitive and Affective Neuroscience)"
+    detail: "Resources and recommendations for surviving (and enjoying) leading a Multisite project"
+    link: "https://www.researchgate.net/publication/403651116_Recursos_y_recomendaciones_para_sobrevivir_y_disfrutar_liderando_un_manylabs_-_Alicia_Franco-Martinez"
+    duration: "1.5h"
+
+  - date: "Jun 2025"
+    title: "Talk about *open science practices*"
+    place: "ONLINE"
+    org: "ReproductibiliTea of Murcia University"
+    detail: "The ultimate open science practices combo"
+    link: "https://www.researchgate.net/publication/393165098_El_combo_definitivo_de_las_practicas_open_science"
+    duration: "1.5h"
+
+  - date: ["Feb 2025", "& Mar 2024"]
+    title: "Workshop about *teaching to blind students*"
+    place: "Madrid (Spain)"
+    org: "Universidad Autónoma de Madrid"
+    detail: "“Blind teaching”"
+    duration: "1.5h"
+
+  - date: "Mar 2024"
+    title: "Workshop about *ChatGPT and Psychometrics*"
+    place: "Madrid (Spain)"
+    org: "Universidad Autónoma de Madrid; MSc in Methodology"
+    detail: "ChatGPT and Psychometrics: optimizing the design, refinement, and data analysis of measurement instruments"
+    duration: "3h"
+
+  - date: "Jun 2023"
+    title: "Video for *data science dissemination*"
+    place: "Valencia (Spain)"
+    org: "1st Conference on Emotions, Design, Data Analysis & Scientific Realities on Gender Equality and Diversity"
+    detail: "From avoiding maths to loving data: being a young psychometrician today"
+    duration: "10min"
+
+  - date: "Mar 2023"
+    title: "Workshop about *ChatGPT and teaching*"
+    place: "ONLINE"
+    org: "University of Costa Rica"
+    detail: "How can we adapt our teaching to the AI and ChatGPT revolution?"
+    duration: "1.5h"
+
+  - date: "Mar 2023"
+    title: "Workshop about *ChatGPT and teaching*"
+    place: "Madrid (Spain)"
+    org: "Universidad Autónoma de Madrid"
+    detail: "How can we adapt our teaching to the AI and ChatGPT revolution?"
+    duration: "1.5h"
+
+  - date: "Mar 2023"
+    title: "Talk about *Statistics dissemination*"
+    place: "Madrid (Spain)"
+    org: "Universidad Complutense de Madrid; Lecture series “Statistics & Data Science: Where Are They Applied?”"
+    detail: "Statistics of the invisible: How can we measure and model psychological variables?"
+    duration: "1.5h"

@@ -1,0 +1,68 @@
+# GRANTS & AWARDS
+# Campos: date, title, org (entidad), project (en cursiva), amount (cuantía), lines (texto libre extra)
+
+title: "Grants & Awards"
+
+entries:
+  - date: "2026"
+    title: "SIPS Commendation"
+    org: "Society for the Improvement of Psychological Science (SIPS)"
+    project: "A gentle push toward leading your first multisite study (with M. A. Vadillo)"
+
+  - date: "2026"
+    title: "SIPS Commendation"
+    org: "Society for the Improvement of Psychological Science (SIPS)"
+    project: "Psicometríes - Science communication project (with R. Rey-Sáez & I. Castillejo)"
+
+  - date: "2025"
+    title: "Participatory Budgeting Funding"
+    org: "Facultad de Psicología, Universidad Autónoma de Madrid"
+    project: "Documentary “Pacience for Science”."
+    amount: "Funding: €140"
+
+  - date: "2024"
+    title: "Young Researchers Award, AEMCCO"
+    org: "Spanish Association of Methodology for the Behavioural Sciences"
+    project: "¿“El aprendizaje probabilístico es inconsciente”? Modelando mucho ruido y poca muestra."
+    amount: "Award: €1,000"
+
+  - date: "2024"
+    title: "AEMCCO Award for Science Communication and Knowledge Transfer in Methodology"
+    org: "Spanish Association of Methodology for the Behavioural Sciences"
+    project: "Ecuación Triunfo - Streaming contest for disseminating psychology research methods"
+    amount: "Award: €700, <small>accommodation, and travel expenses to the 2024 AEMCCO Conference in Seville</small>"
+
+  - date: "2024"
+    title: "Three Minute Thesis Award, Internal UAM Round"
+    org: "Universidad Autónoma de Madrid"
+    project: "Validez de los métodos para inferir consciencia en procesos psicológicos básicos"
+    amount: "Award: €100"
+
+  - date: "2024"
+    title: "Student Activities Grant"
+    org: "Universidad Autónoma de Madrid"
+    project: "Espacio Predoc - A support group for PhD students"
+    amount: "Funding awarded: €500"
+
+  - date: "2023"
+    title: "Student Activities Grant"
+    org: "Universidad Autónoma de Madrid"
+    project: "Ecuación Triunfo - Streaming contest for disseminating psychology research methods"
+    amount: "Funding awarded: €700"
+
+  - date: "2022"
+    title: "XI Isidoro Delclaux Research Award in Psychology for Best MSc Thesis"
+    org: "Faculty of Psychology, Universidad Autónoma de Madrid"
+    project: "La restricción del rango afecta al análisis factorial"
+    amount: "Award: €500"
+
+  - date: "2021"
+    title: "Competitive Predoctoral Fellowship (FPI 2021)"
+    org: "Spanish Ministry of Science and Innovation / State Research Agency (AEI)"
+    project: "Deconstruyendo la automaticidad - REF: PRE2021-097654"
+
+  - date: "2021"
+    title: "Best Poster Award"
+    org: "X Conference of Ibero-American Association for the Study of Individual Differences (AIIDI)"
+    project: "Validando el Big Five: ¿factorial y/o redes psicométricas?"
+    amount: "Award: *Manual of the Matrices Test*, TEA Ediciones"

@@ -1,0 +1,264 @@
+# CONFERENCES
+# Cada congreso:
+#   date, event, place, role (texto a la derecha, p. ej. "Organizer")
+#   tag            etiqueta bajo la fecha si no hay contribuciones (p. ej. "Attend.")
+#   contributions  lista de comunicaciones:
+#       type     Oral · Poster · Symposium · …  (etiqueta oscura a la izquierda)
+#       authors  tu nombre se pone en negrita solo
+#       title
+#       link     enlace (🔗) — opcional
+#       video    enlace a vídeo (📽) — opcional
+#       note     texto tras el título, p. ej. "[Best Oral Communication Award]"
+#   CV corto: los congresos con  short: true  se agrupan por  series  ("ASSC Annual Meetings - Tokyo 2024; …");
+#             short_note añade una nota entre corchetes (p. ej. un premio)
+
+title: "Conferences"
+web_filter: types   # en la web, botones para filtrar por tipo (Oral, Poster…)
+web_limit: 6        # en la web se ven los 6 primeros y un botón "Show all"
+
+entries:
+  - date: "Sept 2026"
+    event: "XV SEPEX & II Joint SEPEX-BAPS Meeting"
+    place: "Valencia, Spain"
+    series: "SEPEX Meetings"
+    short: true
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Ferrer-Mendieta, A., Peiro-Lanchares, C., Vadillo, M. A., & Garre-Frutos, F."
+        title: "What do we mean by “Validity” in experimental measures? An Illustrative Study with the Perceptual Awareness Scale (PAS)"
+      - type: "Oral"
+        authors: "Garre-Frutos, F., Franco-Martínez, A., Vadillo, M. A., & Rey-Sáez, R."
+        title: "A multilevel-signal detection framework for unconscious processing research"
+      - type: "Oral"
+        authors: "Rey-Sáez, R., Franco-Martínez, A., Revuelta, J., & Vadillo, M. A."
+        title: "Don’t Aggregate-then-Correlate, Model! Unleashing the Power of Generalized Hierarchical Factor Models in Experimental Psychology"
+      - type: "Poster"
+        authors: "Franco-Martínez, A., Garre-Frutos, F., & Tomás, G."
+        title: "Measuring Creativity Process and Product with a Digitized Invented Alien Creatures Task"
+
+  # ⚠️ En la ANECA figura como "XIV Congreso", pero por la numeración (XVIII fue Sevilla 2024) debería ser el XIX.
+  - date: "Jul 2026"
+    event: "XIX Congress of Methodology (AEMCCO)"
+    place: "Almería, Spain"
+    series: "AEMCCO Congresses"
+    short: true
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Rey-Sáez, R., Revuelta, J., & Vadillo, M. A."
+        title: "When Factor Analysis Started Answering Questions in Experimental Psychology"
+
+  - date: "May 2026"
+    event: "SIPS Meeting"
+    place: "VIRTUAL"
+    tag: "Attend."
+
+  - date: "Apr 2026"
+    event: "15th International Conference on Multilevel Analysis"
+    place: "Utrecht, The Netherlands"
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Rey-Sáez, R., & Vadillo, M. A."
+        title: "How do I start planning my multisite project? A tutorial on multilevel simulation-based power and sensitivity analysis"
+        link: "https://www.researchgate.net/publication/404356148_How_do_I_start_planning_my_multisite_project_A_tutorial_on_multilevel_simulation-based_power_and_sensitivity_analysis"
+      - type: "Oral"
+        authors: "Rey-Sáez, R., Franco-Martínez, A., & Vadillo, M. A."
+        title: "A Multilevel Psychometric Framework for Experimental Tasks: The Generalized Hierarchical Factor Model"
+
+  - date: "Sept 2025"
+    event: "XIV Meeting of the AIIDI"
+    place: "Madrid, Spain"
+    series: "AIIDI Conferences"
+    short: true
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Rey-Sáez, R., Soto, D., Shanks, D., & Vadillo, M. A."
+        title: "Counterintuitive: Self-Reported Intuition in a Questionnaire Fails to Predict Behavioral Intuition"
+      - type: "Oral"
+        authors: "Rey-Sáez, R., Franco-Martínez, A., & Vadillo, M. A."
+        title: "New Hierarchical Models to Answer Old Psychometric Questions in Experimental Research: Which Task Best Measures Inhibition?"
+        note: "[Best Oral Communication Award]"
+
+  - date: "Jul 2025"
+    event: "XI Conference of the European Association of Methodology"
+    place: "Tenerife, Spain"
+    series: "EAM Congresses"
+    short: true
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Ferrer-Mendieta, A., Peiro-Lanchares, C., Vadillo, M. A. & Garre-Frutos, F."
+        title: "Choose Your Own PAS? Studying the Validity of the Perceptual Awareness Scale"
+        link: "https://www.researchgate.net/publication/394235205_EAM2025_Choose_your_own_PAS_Studying_the_validity_of_the_Perceptual_Awareness_Scale"
+
+  - date: "Jul 2025"
+    event: "28th Annual Meeting of the ASSC"
+    place: "Heraklion, Greece"
+    series: "ASSC Annual Meetings"
+    short: true
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Rey-Sáez, R., Soto, D., Shanks, D., & Vadillo, M. A."
+        title: "Replicating the Unconscious Working Memory Effect: A Multisite Preregistered Study"
+        link: "https://www.researchgate.net/publication/393622938_ASSC28_Replicating_the_unconscious_working_memory_effect_a_multisite_preregistered_study"
+      - type: "Poster"
+        authors: "Rey-Sáez, R., Garre-Frutos, F., Franco-Martínez, A., Castillejo, I., & Vadillo, M. A."
+        title: "Addressing Methodological Challenges in Unconscious Process Research: A Hierarchical Modeling Approach"
+
+  - date: "Apr 2025"
+    event: "14th Scientific Meeting on Attention (RECA)"
+    place: "Madrid, Spain"
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Rey-Sáez, R., Soto, D., Shanks, D., & Vadillo, M. A."
+        title: "Measurement and Sampling Noise Compromise Inferences About Unconsciousness in Probabilistic Learning: A Modeling Approach"
+      - type: "Oral"
+        authors: "Ferrer-Mendieta, A., Peiro-Lanchares, C., & Franco-Martínez, A."
+        title: "What About the PAS?"
+
+  - date: "Sept 2024"
+    event: "XVIII Congress of Methodology (AEMCCO)"
+    place: "Seville, Spain"
+    series: "AEMCCO Congresses"
+    short: true
+    short_note: "Award for Young Researchers"
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Vicente-Conesa, F., Shanks, D. R., & Vadillo, M. A."
+        title: "“Probabilistic Learning is Unconscious”? Modeling High Noise and Small Samples"
+      - type: "Oral"
+        authors: "Rujano, A., & Franco-Martínez, A."
+        title: "How to Explain Psychometrics to a Non-Psychologist Audience?"
+
+  - date: "Jul 2024"
+    event: "27th Annual Meeting of the ASSC"
+    place: "Tokyo, Japan"
+    series: "ASSC Annual Meetings"
+    short: true
+    contributions:
+      - type: "Poster"
+        authors: "Franco-Martínez, A., Rey-Sáez, R., Soto, D., Shanks, D., & Vadillo, M. A."
+        title: "Advances in “Replicating the Unconscious Working Memory Effect: A Multisite Preregistered Study”"
+        link: "https://www.researchgate.net/publication/381999227_Advances_in_Replicating_the_unconscious_working_memory_effect_A_multisite_preregistered_study"
+      - type: "Poster"
+        authors: "Rey-Sáez, R., Franco-Martínez, A., Castillejo, I., & Vadillo, M. A."
+        title: "From Unconscious to Unreliable? Measurement Error Biases Evidence on Studies of Unconscious Processing"
+
+  - date: "Jan 2024"
+    event: "Experimental Psychology Society (EPS) Annual Meeting"
+    place: "London, UK"
+    series: "EPS Annual Meeting"
+    short: true
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Shanks, D., & Vadillo, M. A."
+        title: "Modeling Visual Search and Awareness in the Additional Singleton Task"
+        link: "https://www.researchgate.net/publication/377160502_Modeling_visual_search_and_awareness_in_the_additional_singleton_task"
+
+  - date: "Jul 2023"
+    event: "26th Annual Meeting of the ASSC"
+    place: "New York, USA"
+    series: "ASSC Annual Meetings"
+    short: true
+    contributions:
+      - type: "Poster"
+        authors: "Franco-Martínez, A., Soto, D., Shanks, D., & Vadillo, M. A."
+        title: "Replicating the Unconscious Working Memory Effect: A Preregistered Multisite Study"
+        link: "https://www.researchgate.net/publication/371702553_Replicating_the_unconscious_WM_effect_A_multisite_preregistered_study_-_Poster_for_ASSC26"
+
+  - date: "Jul 2022"
+    event: "XVII Congress of Methodology (AEMCCO)"
+    place: "Teruel, Spain"
+    contributions:
+      - type: "Symposium"
+        authors: "Franco-Martínez, A."
+        title: "I Have Done the Science, Now How Do I Communicate It? From Scientific Conferences to Social Media"
+        link: "https://www.researchgate.net/publication/362234982_Ya_hice_la_ciencia_ahora_como_la_cuento_Desde_los_congresos_cientificos_hasta_las_redes_sociales_-_Simposio_GJIM"
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Vicente-Conesa, F., & Vadillo, M. A."
+        title: "How Can We Measure and Model Awareness in Visual Search Tasks?"
+      - type: "Oral"
+        authors: "García-Castro, G., Franco-Martínez, A., Rodríguez-Prada, C., Castillejo, I., & Sebastián-Gallés, N."
+        title: "Estimating Lexical Acquisition Curves in Childhood with a Bayesian IRT Model"
+
+  - date: "Mar 2022"
+    event: "II Conference of Young Psychology Professionals"
+    place: "Madrid, Spain"
+    role: "Organizer"
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A. & Castillejo, I."
+        title: "What Is Validity and Why Should I Care?"
+        link: "https://www.researchgate.net/publication/359056621_Que_es_eso_de_la_validez_y_a_mi_que_me_importa"
+        video: "https://www.youtube.com/watch?v=YaXwjXlrXw4&list=PLo1jUbMEXqbCERye65qkCbQOfu-wyfomI&index=10"
+
+  - date: "Dec 2021"
+    event: "X Meeting of the AIIDI"
+    place: "Madrid, Spain"
+    series: "AIIDI Conferences"
+    short: true
+    short_note: "Best Poster Award"
+    contributions:
+      - type: "Poster"
+        authors: "Franco-Martínez, A., Sorrel, M. A., & Alvarado, J. M."
+        title: "Validating the Big Five: Factor Analysis and/or Psychometric Networks?"
+        # ⚠️ En el CV de Pages este enlace apuntaba a la charla "¿Qué es eso de la validez…?" (la de Mar 2022).
+        #    Revísalo y cámbialo por el del póster si lo tienes.
+        link: "https://www.researchgate.net/publication/359056621_Que_es_eso_de_la_validez_y_a_mi_que_me_importa"
+
+  - date: "Oct 2021"
+    event: "II International Congress of Interdisciplinary LGTBIQ+ Studies (Maricorners)"
+    place: "Madrid, Spain"
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., & Cables, L."
+        title: "Apples and Oranges? Essentialism as a Pillar of the Sex-Gender System"
+
+  - date: "Jul 2021"
+    event: "IX Conference of the European Association of Methodology"
+    place: "Valencia, Spain"
+    series: "EAM Congresses"
+    short: true
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., & Alvarado, J. M."
+        title: "Loading Recovery and Reliability in Test Data Under Range Restriction"
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Ondé, D., & Alvarado, J. M."
+        title: "On the Nature of Group Factors in Bifactor Structures"
+
+  - date: "Jul 2020"
+    event: "IX Conference of the European Association of Methodology"
+    place: "ONLINE"
+    contributions:
+      - type: "Poster"
+        authors: "Franco-Martínez, A., Revuelta, J., & Ximénez, C."
+        title: "Nominal Factor Analysis of Situational Judgement Tests: Investigating Latent Dimensionality and Multigroup Invariance"
+        link: "https://www.researchgate.net/publication/346317288_Nominal_Factor_Analysis_of_Situational_Judgement_Tests_Investigating_Latent_Dimensionality_and_Multigroup_Invariance"
+      - type: "Poster"
+        authors: "Franco-Martínez, A., & Alvarado, J. M."
+        title: "Evaluation of Multivariate Normality in Test Data Affected by Range Restriction"
+        link: "https://www.researchgate.net/publication/346317534_Evaluation_of_multivariate_normality_in_test-data_affected_by_range_restriction"
+
+  - date: "Jul 2019"
+    event: "XVI Congress of Methodology (AEMCCO)"
+    place: "Madrid, Spain"
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A., Fernández-Regueras, D., & Gregori-Labarta, S."
+        title: "How To Score a Situational Judgement Test Without Correct Options? A Comparative Study of Scoring Methods on CTT and IRT"
+        link: "https://www.researchgate.net/publication/346317646_Como_cuantificar_un_Test_de_Juicio_Situacional_sin_opciones_correctas"
+
+  - date: "May 2019"
+    event: "I Conference of Young Psychology Professionals"
+    place: "Madrid, Spain"
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A. & Igoa, J. M."
+        title: "Cognitive Effects of the Masculine Generic and Alternative Forms in Spanish"
+
+  - date: "Apr 2019"
+    event: "I International Congress of Interdisciplinary LGTBIQ+ Studies"
+    place: "Madrid, Spain"
+    contributions:
+      - type: "Oral"
+        authors: "Franco-Martínez, A. & Igoa, J. M."
+        title: "Cognitive Effects of the Masculine Generic and Alternative Forms in Spanish"

@@ -1,0 +1,47 @@
+# RESEARCH PROJECTS
+# Proyectos de investigación financiados. Campos:
+#   date     periodo
+#   title    título oficial del proyecto
+#   funder   entidad financiadora
+#   ref      referencia (opcional)
+#   role     tu papel (sale en cursiva)
+#   pi       investigador/a principal (opcional)
+#   amount   financiación (opcional)
+#   lines    texto libre adicional (opcional)
+
+title: "Research Projects"
+short: "Team member in 4 competitive research projects (AEI, Madri+d)"   # resumen para el CV corto
+
+entries:
+  - date: "2024–2026"
+    title: "Replicating the unconscious working memory effect: a multisite preregistered study"
+    funder: "Center for Open Science (COS) & Templeton World Charity Foundation"
+    role: "Principal Investigator"
+    amount: "Funding: $37.679,75"
+    lines:
+      - "Multisite Registered Report: 19 labs, 13 countries, 44 collaborators"
+
+  - date: "2024–2027"
+    title: "Let’s ROC: Una generalización de la Teoría de Detección de Señales para el estudio de los procesos mentales inconscientes"
+    funder: "Agencia Estatal de Investigación (AEI)"
+    role: "Research team member"
+    pi: "Miguel A. Vadillo"
+
+  - date: "2023–2025"
+    title: "Meta-sesgos en la investigación psicológica"
+    funder: "Agencia Estatal de Investigación (AEI)"
+    role: "Research staff"
+    pi: "Miguel A. Vadillo"
+
+  - date: "2021–2024"
+    title: "Deconstruyendo la automaticidad"
+    funder: "Agencia Estatal de Investigación (AEI)"
+    ref: "PID2020-118583GB-I00"
+    role: "Research team member (FPI predoctoral contract)"
+    pi: "Miguel A. Vadillo"
+
+  - date: "2021–2022"
+    title: "Problemas metodológicos en la investigación sobre cognición implícita"
+    funder: "Fundación Madri+d · Talent Attraction Programme, Comunidad de Madrid"
+    role: "Research assistant"
+    pi: "Miguel A. Vadillo"

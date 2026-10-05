@@ -1,0 +1,92 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   CV — maquetación del PDF (A4, paginado con Paged.js).
+   Se añade a cv.css solo al generar el PDF (CV/_scripts/build-pdf.R).
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@page {
+  size: A4;
+  margin: 27.4mm 0 15mm 0;
+
+  @top-left {
+    content: element(cvHeader);
+    vertical-align: top;
+    padding: 4.4mm 0 0 11.3mm;
+  }
+  @bottom-center {
+    font-family: "Fraunces", Georgia, serif;
+    font-variation-settings: "opsz" 48, "SOFT" 0, "WONK" 0;
+    font-size: 10.5pt;
+    color: #534441;
+    vertical-align: bottom;
+    padding-bottom: 3.3mm;
+  }
+  @bottom-right {
+    content: counter(page);
+    font-family: "Fraunces", Georgia, serif;
+    font-variation-settings: "opsz" 48, "SOFT" 0, "WONK" 0;
+    font-size: 10.5pt;
+    color: #534441;
+    vertical-align: bottom;
+    text-align: right;
+    padding: 0 17.5mm 3.3mm 0;
+  }
+}
+
+@page :first { margin-top: 15mm; }
+
+html, body { margin: 0; padding: 0; background: var(--cv-bg); }
+
+.cv-running-header {
+  position: running(cvHeader);
+  font-family: var(--cv-serif);
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 48, "SOFT" 0, "WONK" 0;
+  font-size: 10.5pt;
+  color: var(--cv-ink);
+  white-space: nowrap;
+}
+.cv-running-header strong { font-weight: 700; }
+
+/* El bloque .cv ocupa exactamente el panel beige de la página */
+.cv--print {
+  display: flow-root;
+  font-size: 12.1pt;
+  margin: 0 10.9mm 0 9.4mm;
+  background: transparent;
+}
+
+.cv--print .cv-cover { padding-top: 1.2mm; }
+.cv--print .cv-index { margin-top: 19mm; }
+.cv--print .cv-contacts a { width: 1.85em; height: 1.85em; }
+.cv--print .cv-index-page:empty::before { content: "p. –"; }
+
+.cv--print .cv-section { break-before: page; position: relative; }
+.cv--print .cv-sec-education .cv-section-body { padding-top: 3.1em; }
+.cv--print .cv-entry,
+.cv--print .cv-keep,
+.cv--print .cv-bar { break-inside: avoid; }
+.cv--print .cv-section-title,
+.cv--print .cv-bar--group,
+.cv--print .cv-entry--degree .cv-what--bar { break-after: avoid; }
+.cv--print .cv-group { break-before: auto; }
+
+/* Si una sección ocupa varias páginas, se repite su título arriba (lo inserta cv-paged.js) */
+.pagedjs_page.cv-continued .pagedjs_page_content { padding-top: 17.5mm; }
+.cv--print .cv-section-title--repeat { position: absolute; top: -17.5mm; left: 0; right: 0; }
+.pagedjs_page.cv-continued .cv-section-body > .cv-group:first-child { margin-top: 0; }
+.cv--print .cv-section-title--repeat .cv-legend { display: none; }
+
+/* Fondo de cada página: panel beige, rectángulos azul y terracota y línea vertical */
+.pagedjs_page {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 210 297' preserveAspectRatio='none'><rect width='210' height='297' fill='%23f4f2f0'/><rect x='86.4' y='5.3' width='118.6' height='47.8' fill='%23637887'/><rect x='4.8' y='244.1' width='67.6' height='47.7' fill='%23a25842'/><rect x='9.4' y='10.4' width='189.7' height='275.9' fill='%23e4ded0'/><rect x='38.225' y='36.8' width='0.75' height='249.5' fill='%23564542'/></svg>") no-repeat 0 0 / 100% 100%;
+}
+.pagedjs_first_page {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 210 297' preserveAspectRatio='none'><rect width='210' height='297' fill='%23f4f2f0'/><rect x='86.4' y='5.3' width='118.6' height='47.8' fill='%23637887'/><rect x='4.8' y='244.1' width='67.6' height='47.7' fill='%23a25842'/><rect x='9.4' y='10.4' width='189.7' height='275.9' fill='%23e4ded0'/><rect x='38.225' y='77' width='0.75' height='209.3' fill='%23564542'/></svg>");
+}
+
+/* Vista previa en el navegador (abrir CV/cv-print.html): páginas separadas */
+@media screen {
+  body { background: #cfc9c2; }
+  .pagedjs_pages { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 16px 0; }
+  .pagedjs_page { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18); }
+}

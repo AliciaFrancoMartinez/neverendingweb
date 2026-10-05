@@ -1,0 +1,80 @@
+# RESEARCH EXPERIENCE & VISITS
+# Grupos (barras marrones) con entradas. Campos de cada entrada:
+#   date    año(s) a la izquierda
+#   title   título (usa **negrita** para la parte destacada)
+#   lines   líneas de texto libre. Admite *cursiva*, **negrita**, [enlaces](https://…) y emojis (📍 🔗 …)
+#   logos   imágenes a la derecha (archivos de CV/assets/img/)
+#   short   frase para el CV corto (en una entrada o en un grupo entero)
+
+title: "Research Experience & Visits"
+
+groups:
+  - title: "Current Position"
+    entries:
+      - date: "since 2026"
+        title: "**Postdoctoral** researcher"
+        lines:
+          - "📍 Universidad Autónoma de Madrid (Spain)"
+          - "*Cognitive, Attention, and Learning Lab* ([CALL 🔗](https://calluam.wordpress.com))"
+        logos: ["logo-call.png"]
+        short: "Postdoc at the Cognitive, Attention, and Learning Lab ([CALL 🔗](https://calluam.wordpress.com))"
+
+  - title: "Previous Research Experience"
+    entries:
+      - date: "2024–2026"
+        title: "**Principal Investigator (PI)**"
+        lines:
+          - "of a **Center for Open Science** project ($37.679,75): 19 labs, 13 countries"
+          - "[🔗 *Replicating the unconscious Working Memory effect*](https://portalcientifico.uam.es/es/ipublic/item/9938508)"
+        logos: ["logo-cos.png", "logo-uwm.png"]
+        short: ["PI of a Center for Open Science project ($37.679,75)", "[*Replicating the unconscious Working Memory effect* 🔗](https://portalcientifico.uam.es/es/ipublic/item/9938508)"]
+
+      - date: "2022–2026"
+        title: "**FPI Predoctoral Researcher**"
+        lines:
+          - "📍 Universidad Autónoma de Madrid (Spain)"
+          - "*Cognitive, Attention, and Learning Lab* ([CALL 🔗](https://calluam.wordpress.com))"
+        logos: ["logo-call.png"]
+
+      - date: "2022"
+        title: "**Research Assistant**"
+        lines:
+          - "📍 Universidad Autónoma de Madrid (Spain)"
+          - "*Cognitive, Attention, and Learning Lab* ([CALL 🔗](https://calluam.wordpress.com))"
+
+      - date: "2018"
+        title: "Curricular internship"
+        lines:
+          - "Psyma Ibérica, Market Research and Consumer Insights"
+          - "📍 Madrid, Spain"
+        logos: ["logo-psyma.png"]
+
+      - date: "2017"
+        title: "External internship"
+        lines:
+          - "Survey Team, Unit for Quality of Studies"
+          - "📍 UAM, Spain"
+        logos: ["logo-opinion.png"]
+
+      - date: "2016"
+        title: "Research Collaborator"
+        lines:
+          - "📍 Tilburg School of Social and Behavioral Sciences (NL)"
+        logos: ["logo-tilburg.png"]
+
+  - title: "Research International Visits"
+    short: "Research visits at UCL (2024) and UvA (2026)"
+    entries:
+      - date: "2026"
+        title: "**Research visit** – 3 months"
+        lines:
+          - "Supervised by Makiko Sadakata"
+          - "📍 ILLC, Universiteit van Amsterdam (The Netherlands)"
+        logos: ["logo-uva.png"]
+
+      - date: "2024"
+        title: "**PhD visit** – 3 months"
+        lines:
+          - "Supervised by David R. Shanks"
+          - "📍 Psychology & Language Sciences, University College London (UK)"
+        logos: ["logo-ucl.png"]

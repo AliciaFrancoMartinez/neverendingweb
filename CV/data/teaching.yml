@@ -1,0 +1,72 @@
+# TEACHING & SUPERVISING
+# Grupos (barras marrones). Cada entrada tiene un título y una o varias líneas (items),
+# cada una con su propia fecha a la izquierda:
+#   title   asignatura / proyecto / tipo de supervisión
+#   items   lista de { date, place, detail, evaluation }  (evaluation = valoración del alumnado, opcional)
+#   short   cómo aparece en la columna "Teaching" del CV corto
+
+title: "Teaching & Supervising"
+web_filter: groups
+short_note: "Student evaluations: 4.5–4.8/5 (UAM), 9.4–9.6/10 (UN)"   # línea final de "Teaching" en el CV corto
+
+groups:
+  - title: "Teaching"
+    entries:
+      - title: "Psychology of Memory"
+        short: "*Psychology of Memory* (UAM)"
+        items:
+          - { date: "2025–26", place: "Universidad Autónoma de Madrid (Spain)", detail: "Practical sessions (26h)", evaluation: "4.76/5" }
+
+      - title: "Psychology of Language"
+        short: "*Psychology of Language* (UAM)"
+        items:
+          - { date: "2024–25", place: "Universidad Autónoma de Madrid (Spain)", detail: "Practical sessions (43h)", evaluation: "4.49/5" }
+          - { date: "2023–24", place: "Universidad Autónoma de Madrid (Spain)", detail: "Practical sessions (43h)", evaluation: "4.73/5" }
+
+      - title: "Perception and Attention"
+        short: "*Perception and Attention* (UAM)"
+        items:
+          - { date: "2022–23", place: "Universidad Autónoma de Madrid (Spain)", detail: "Practical sessions (60h)", evaluation: "4.84/5" }
+
+      - title: "Research Designs in Psychology"
+        short: "*Research Designs in Psychology* (UN)"
+        items:
+          - { date: "2022–23", place: "Universidad Nebrija (Spain)", detail: "Theoretical and practical sessions (123h)", evaluation: "9.37/10" }
+
+      - title: "Psychometrics"
+        short: "*Psychometrics* (UN)"
+        items:
+          - { date: "2021–22", place: "Universidad Nebrija (Spain)", detail: "Theoretical and practical sessions (123h)", evaluation: "9.59/10" }
+
+  - title: "Educational Innovation Projects"
+    chip: "Innovation projects"
+    entries:
+      - title: "*“Inclusive methodologies for teaching psychology: design and evaluation of accessible support materials for blind students”*"
+        items:
+          - { date: "2025–26", place: "Universidad Autónoma de Madrid (Spain)", detail: "Methodology" }
+
+      - title: "*“The language of ChatGPT: learning with and from it”*"
+        items:
+          - { date: "2024–25", place: "Universidad Autónoma de Madrid (Spain)", detail: "Psychology of Language" }
+
+  - title: "Teaching Materials"
+    chip: "Materials"
+    entries:
+      - title: "*Guía de ayuda a la inclusión de estudiantes con discapacidad visual en el entorno universitario. Versión dinámicas y espacios de convivencia*"
+        items:
+          - { date: "2025", place: "Repositorio UAM (Spain)", detail: "Co-author (with L. Brand Durán et al.) · ISBN 978-84-09-78110-2" }
+
+  - title: "Supervising"
+    entries:
+      - title: "Hired Research Assistants"
+        items:
+          - { date: "2024–25", place: "Universidad Autónoma de Madrid (Spain)", detail: "Alicia Ferrer Mendieta (8 months)" }
+          - { date: "2024", place: "Universidad Autónoma de Madrid (Spain)", detail: "Alejandro Rujano (2 months)" }
+
+      - title: "MSc Research Practices"
+        items:
+          - { date: "2025", place: "Universidad Autónoma de Madrid (Spain)", detail: "Carmen Peiro-Lanchares (4 months)" }
+
+      - title: "Bachelor’s Thesis (TFG) Examination Committee"
+        items:
+          - { date: "2022", place: "Universidad Nebrija (Spain)", detail: "Committee member, Degree in Psychology" }

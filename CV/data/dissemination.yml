@@ -1,0 +1,69 @@
+# DISSEMINATION & COMMUNITY
+# Campos:
+#   date, title
+#   lines   líneas de texto libre (admite *cursiva*, **negrita**, [enlaces](…) y emojis)
+#   links   lista de { label, url } → se muestran como "🔗 YouTube  🔗 Twitch"
+#   image   miniatura a la derecha (archivo de CV/assets/img/)
+#   short   frase para el CV corto
+
+title: "Dissemination & Community"
+
+entries:
+  - date: "2025"
+    title: "“Psicometries” project - Season 3: *Pacience for Science*"
+    lines:
+      - "Documentary Series about the PhDs’ daily life and work"
+    links:
+      - { label: "YouTube", url: "https://www.youtube.com/watch?v=Bq2jfRphg9Y&list=PLo1jUbMEXqbCZoXpHl3Gbr-6wXfH7zPQ6" }
+    image: "dis-paciencia.jpg"
+    short: "“Psicometríes”, a science communication project on Twitch, YouTube and X: AEMCCO Award for Outreach and Knowledge Transfer (2024) and SIPS Commendation (2026)."
+
+  - date: "2023–25"
+    title: "Elected Representative <small>for Predoctoral Researchers and Early-Career Academic Staff</small>"
+    lines:
+      - "Represented predoctoral researchers in faculty- and department-level governance bodies, including quality assurance committee."
+      - "📍 *Faculty of Psychology, Universidad Autónoma de Madrid*"
+    short: "Elected PhD representative in the Faculty of Psychology governance bodies (UAM)."
+
+  - date: "2022–23"
+    title: "“Psicometries” project - Season 2: *Equation Triumph*"
+    lines:
+      - "Streaming contest for Methodology students about psychological research practices and methods"
+    links:
+      - { label: "YouTube", url: "https://www.youtube.com/watch?v=iFsxIZHnOec&list=PLo1jUbMEXqbCjeaesUO-3gBEvIczNMrLz" }
+      - { label: "Twitch", url: "https://www.twitch.tv/psicometries" }
+    image: "dis-ecuacion.jpg"
+
+  # ⚠️ Entrada nueva que estaba en el .pages pero no en el PDF de mayo: revisa el año.
+  - date: "2023"
+    title: "Podcast “Noosfera” with Ignacio Crespo"
+    lines:
+      - "🎙️ “Psicología que se mide” (Invited expert)"
+    links:
+      - { label: "iVoox", url: "https://www.ivoox.com/noosfera-158-psicologia-se-mide-alicia-audios-mp3_rf_109506859_1.html" }
+    image: "dis-noosfera.jpg"
+
+  - date: "2022–24"
+    title: "“Predoc Space” support group"
+    lines:
+      - "Creation of a support group for PhD students"
+      - "📍 *Faculty of Psychology, Universidad Autónoma de Madrid*"
+    image: "dis-predoc.jpg"
+    short: "Founder of “Espacio Predoc”, a support group for PhD students."
+
+  - date: "2021–22"
+    title: "“Psicometries” project - Season 1"
+    lines:
+      - "Series of streamings with interviews, reflections, debates, and masterclasses"
+    links:
+      - { label: "YouTube", url: "https://www.youtube.com/watch?v=HwYfP7IDAVE&list=PLo1jUbMEXqbC454Q21Cm1EwahBtkhKAp9" }
+      - { label: "Twitch", url: "https://www.twitch.tv/psicometries" }
+    image: "dis-psicometries.jpg"
+
+  - date: "2020–21"
+    title: "“The Academic Coffee-maker” support group"
+    lines:
+      - "Co-creation of a support group for young researchers during the pandemic"
+    links:
+      - { label: "Twitter", url: "https://x.com/UnCafe_LCA/status/1329445176486621192" }
+    image: "dis-cafetera.jpg"

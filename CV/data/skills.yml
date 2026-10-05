@@ -1,0 +1,40 @@
+# SKILLS, LANGUAGES & OTHER
+# Grupos con items. Cada item puede ser:
+#   { title, text }   → título en negrita y debajo el texto (text puede ser una lista de líneas)
+#   "texto"           → una línea suelta (admite **negrita**)
+# short: true  → aparece en el CV corto (o una lista [título, texto…] para una versión abreviada)
+
+title: "Skills, Languages & Other"
+
+groups:
+  - title: "Skills"
+    items:
+      - title: "Quant analyses"
+        text: "Linear mixed models, factor analysis, IRT, SDT, non-linear modeling, Bayesian stats..."
+        short: true
+      - title: "Programming"
+        text: "R, Python (PsychoPy), jsPsych, LaTeX, typst, CSS, html…"
+        short: true
+      - title: "Other skills"
+        text:
+          - "Multisite coordination, Open Science"
+          - "Video edition, Photoshop, Graphic Design."
+        short: true
+
+  - title: "Languages"
+    items:
+      - "**Spanish** (mother tongue)"
+      - "**English** (C)"
+      - "**Spanish Sign Language** (A1)"
+
+  - title: "Other"
+    items:
+      - title: "Membership in scientific associations"
+        text:
+          - "Current: SIPS, SEPEX, EAM, AEMCCO, AIIDI."
+          - "Previous: ASSC"
+        short: ["Scientific associations", "SIPS, SEPEX, EAM, AEMCCO, AIIDI."]
+      - title: "Peer review"
+        text: "Ad hoc reviewer for *Mindfulness* (Springer Nature), 2 manuscripts"
+      - title: "Test review"
+        text: "National Tests Commission, Spanish Psychological Association (COP), 2024: psychometric review of the Spanish adaptation of the Copenhagen Psychosocial Questionnaire (CoPsoQ-Istas21)"

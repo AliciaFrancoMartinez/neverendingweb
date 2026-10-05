@@ -1,0 +1,128 @@
+# PUBLICATIONS
+# Grupos (barras marrones) con entradas. Campos de cada publicación:
+#   date         año (o "In press", "Now"…). Puede quedar vacío: ""
+#   authors      tal cual; tu nombre se pone en negrita solo (ver profile.yml → highlight)
+#   title        título del trabajo
+#   venue        revista / libro, con *cursiva* donde toque
+#   doi          solo el doi (sin https://doi.org/)   ← opcional
+#   doi_label    texto antes del doi (por defecto "doi:")
+#   extra        línea adicional (p. ej. editorial e ISBN)
+#   open_access  true → icono naranja de Open Access
+#   icon         emoji delante de la revista (por defecto 📰)
+#   badges       badges de ciencia abierta:  yes = en color · no = negro · na = gris (no aplica)
+#   short        true → aparece en el CV corto (en formato de cita compacta)
+
+title: "Publications"
+legend: true          # muestra la leyenda Open Access + badges junto al título
+web_filter: groups    # en la web, botones para filtrar por grupo (usan el campo "chip" de cada grupo)
+
+groups:
+  - title: "in **JCR**- and **Scopus**-Indexed Journals"
+    chip: "Journal articles"
+    entries:
+      - date: "In press"
+        authors: "Rey-Sáez, R., Franco-Martínez, A., Revuelta, J. & Vadillo, M. A."
+        title: "A Unified Framework for Psychometrics in Experimental Psychology: The Standardized Generalized Hierarchical Factor Model"
+        venue: "*Psychological Methods.*"
+        doi: "10.1037/met0000846"
+        short: true
+        open_access: true
+        badges: { prereg: no, data: yes, materials: yes, code: yes }
+
+      - date: "2026"
+        authors: "Franco-Martínez, A., & Vadillo, M. A."
+        title: "A Gentle Push Toward Leading Your First Multisite Registered Report: Resources and Recommendations from an Early-Career Coordinator."
+        venue: "*Collabra: Psychology*, *12*(1): 159983."
+        doi: "10.1525/collabra.159983"
+        short: true
+        open_access: true
+        badges: { prereg: na, data: na, materials: yes, code: yes }
+
+      - date: "2026"
+        authors: "Franco-Martínez, A., Rey-Sáez, R., [...] Shanks, D., Soto, D., & Vadillo, M. A."
+        title: "Replicating the Unconscious Working Memory Effect: A Multisite Registered Report."
+        venue: "*Neuroscience of Consciousness*, *2026*(1), niaf046."
+        doi: "10.1093/nc/niaf046"
+        short: true
+        open_access: true
+        badges: { prereg: yes, data: yes, materials: yes, code: yes }
+
+      - date: "2025"
+        authors: "Franco-Martínez, A., Vicente-Conesa, F., Shanks, D., & Vadillo, M. A."
+        title: "Measurement and sampling noise undermine inferences about awareness in location probability learning: A modeling approach."
+        venue: "*Journal of Memory and Language*, *143*, 104621."
+        doi: "10.1016/j.jml.2025.104621"
+        short: true
+        open_access: true
+        badges: { prereg: no, data: yes, materials: yes, code: yes }
+
+      - date: "2023"
+        authors: "Franco-Martínez, A., Alvarado, J. M., & Sorrel, M. A."
+        title: "Range Restriction Affects Factor Analysis: Normality, Estimation, Fit, Loadings, and Reliability."
+        venue: "*Educational and Psychological Measurement*, *83*(2), 262–293."
+        doi: "10.1177/00131644221081867"
+        badges: { prereg: no, data: yes, materials: yes, code: yes }
+
+      - date: "2021"
+        authors: "Revuelta, J., Franco-Martínez, A., & Ximénez, C."
+        title: "Nominal factor analysis of situational judgment tests: Evaluation of latent dimensionality and factorial invariance."
+        venue: "*Educational and Psychological Measurement*, *81*(6), 1054–1088."
+        doi: "10.1177/0013164421994321"
+        badges: { prereg: no, data: no, materials: no, code: yes }
+
+  - title: "Under Review"
+    chip: "Under review"
+    entries:
+      - date: ""
+        authors: "Franco-Martínez, A., […] Garre-Frutos, F."
+        title: "Choose your own PAS? Quantitative and Qualitative Validity Evidence for the Perceptual Awareness Scale"
+        venue: "*Behavior Research Methods.* (2nd round)"
+        doi_label: "doi of the preprint:"
+        doi: "10.31234/osf.io/n7zuw_v2"
+        open_access: true
+        badges: { prereg: yes, data: yes, materials: yes, code: yes }
+
+  - title: "Preprints"
+    entries:
+      - date: "2026"
+        authors: "Franco-Martínez, A., Garre-Frutos, F., & Tomás, G."
+        title: "Measuring Creativity Process and Product with a Digitized Invented Alien Creatures Task"
+        venue: "*PsyArXiv*"
+        doi: "10.31234/osf.io/xkaw6_v1"
+        open_access: true
+        badges: { prereg: no, data: yes, materials: yes, code: yes }
+
+      - date: "2023"
+        authors: "Franco-Martínez, A., Rey-Sáez, R., & Castillejo, I."
+        title: "The Seven Wonderings of Large Language Models as Psychometric Designers, Refiners, and Analysts"
+        venue: "*PsyArXiv*"
+        doi: "10.31234/osf.io/kmqy5"
+        open_access: true
+        badges: { prereg: na, data: yes, materials: yes, code: yes }
+
+  - title: "In Preparation"
+    chip: "In preparation"
+    entries:
+      - date: "Now"
+        authors: "Rey-Sáez, R., Franco-Martínez, A., Vadillo, M. A., & Garre-Frutos, F."
+        title: "A multilevel signal detection approach to unconscious processing research."
+        badges: { prereg: na, data: yes, materials: yes, code: yes }
+
+  - title: "Chapters in Books & Proceedings"
+    chip: "Book chapters"
+    entries:
+      - date: "2022"
+        authors: "Franco-Martínez, A., Ondé, D., & Alvarado, J. M."
+        title: "On the nature of group factors in bifactor structures."
+        icon: "📖"
+        venue: "*Proceedings from the 9th European Congress of Methodology* (pp. 154–159). Publicacions de la Universitat de València."
+        doi: "10.7203/PUV-OA-438-5"
+        extra: "ISBN: 978-84-9133-438-5"
+
+      - date: "2019"
+        authors: "Franco Martínez, A."
+        title: "*¿Todos, todos/as, todxs* o *todes?* Efectos cognitivos del uso del genérico masculino y sus formas alternativas en español."
+        icon: "📖"
+        venue: "*Maricorners. Investigaciones queer en la Academia* (pp. 25–56)."
+        extra: "Egales editorial. ISBN: [978-84-17319-76-2](https://www.editorialegales.com/libros/maricorners/9788417319762/)"
+        badges: { prereg: no, data: yes, materials: yes, code: no }

@@ -1,0 +1,71 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  DATOS GENERALES DEL CV
+#  Cada sección del CV tiene su propio archivo en esta carpeta (education.yml,
+#  publications.yml…). Instrucciones completas en CV/data/_LEEME.md
+# ─────────────────────────────────────────────────────────────────────────────
+
+name:
+  first: "Alicia"
+  last: "Franco-Martínez"
+
+role: "Postdoctoral researcher"
+
+tagline:
+  - "Psychometrics · Experimental Psychology"
+  - "Open & Collaborative Science"
+
+# Fecha del pie de página del PDF.
+#   auto          → la fecha del día en que se genera el PDF
+#   "2026-05-01"  → una fecha fija
+date: auto
+
+# Formas de tu nombre que se ponen en negrita automáticamente en las listas de autores
+highlight:
+  - "Franco-Martínez, A."
+  - "Franco Martínez, A."
+
+# Nombre del PDF que se genera (dentro de la carpeta CV/)
+pdf: "CV_AliciaFranco-Martinez.pdf"
+# CV corto de una página (se genera con los méritos marcados con "short:" en cada sección)
+short_pdf: "CV_AliciaFranco-Martinez_short.pdf"
+photo: "photo.png"   # foto del CV corto (en CV/assets/img/)
+
+# Presentación del CV corto. <mark>texto</mark> lo resalta en azul.
+bio:
+  - "As a passionate advocate for psychological measurement, my PhD research focused on the “<mark>Validity</mark> **of Inferences and Measures in Unconscious Processing Research**”."
+  - "For my postdoc, I’m inspired to explore the <mark>creativity</mark> field through rigorous, preregistered, openly accessible and multisite research."
+
+# Contadores de la cabecera de la web. Se calculan solos a partir de los datos:
+#   section  sección que se cuenta
+#   group    (opcional) solo el grupo número N de esa sección
+#   count    (opcional) "contributions" cuenta comunicaciones en vez de congresos
+stats:
+  - { label: "Journal articles",          section: "publications", group: 1 }
+  - { label: "Conference contributions",  section: "conferences", count: "contributions" }
+  - { label: "Invited talks & workshops", section: "talks" }
+  - { label: "Grants & awards",           section: "awards" }
+
+contacts:
+#   handle = texto que se ve junto al icono en el CV corto
+  - { label: "Email",        icon: "icon-mail.png",         handle: "aliciafrancomartinez96@gmail.com", url: "mailto:aliciafrancomartinez96@gmail.com" }
+  - { label: "Bluesky",      icon: "icon-bluesky.png",      handle: "@aliciafrancomnez",                url: "https://bsky.app/profile/aliciafrancomnez.bsky.social" }
+  - { label: "ResearchGate", icon: "icon-researchgate.png", handle: "Alicia Franco-Martínez",           url: "https://www.researchgate.net/profile/Alicia-Franco-Martinez" }
+  - { label: "OSF",          icon: "icon-osf.png",          handle: "Alicia Franco-Martínez",           url: "https://osf.io/fr53n" }
+  - { label: "GitHub",       icon: "icon-github.png",       handle: "AliciaFrancoMartinez",             url: "https://github.com/AliciaFrancoMartinez" }
+  - { label: "ORCID",        icon: "icon-orcid.png",        handle: "0000-0002-9710-1240",              url: "https://orcid.org/0000-0002-9710-1240" }
+  - { label: "Website",      icon: "icon-web.png",          handle: "NeverEnding website",              url: "https://aliciafrancomartinez.github.io/neverendingweb/" }
+
+# Orden de las secciones (cada nombre corresponde a un archivo .yml de esta carpeta).
+# Para quitar una sección del CV, bórrala de esta lista (o ponle un # delante).
+sections:
+  - education
+  - experience
+  - projects
+  - publications
+  - awards
+  - conferences
+  - talks
+  - teaching
+  - dissemination
+  - training
+  - skills

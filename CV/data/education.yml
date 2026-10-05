@@ -1,0 +1,57 @@
+# EDUCATION
+# Cada título es una barra marrón. Campos:
+#   date         año(s) a la izquierda
+#   degree       nombre del título (va en la barra)
+#   degree_note  texto pequeño tras el título, dentro de la barra (opcional)
+#   thesis       { label, title, note }  (opcional)
+#   lines        líneas de texto libre (opcional)
+#   places       lista de lugares (cada uno con 📍)
+#   sub          sub-entradas con su propia fecha (p. ej. un Erasmus)
+#   short        cómo aparece en el CV corto: [línea principal, sublíneas…]
+
+title: "Education"
+short_note: "Universidad Autónoma de Madrid (Spain)"   # línea final del bloque en el CV corto
+
+entries:
+  - date: "2022–2026"
+    degree: "PhD in Psychology"
+    thesis:
+      label: "Title"
+      title: "Be(a)ware of Validity: Inferences and Measures in Unconscious Processing Research"
+    lines:
+      - "**Supervisor:** Miguel A. Vadillo"
+      - "*Sobresaliente Cum Laude* with **International Mention** (June 2026)"
+    short: ["**PhD** in Psychology, *2026*", "Cum Laude, International Mention"]
+    places:
+      - "Department of Basic Psychology, Universidad Autónoma de Madrid (Spain)"
+
+  - date: "2019–2021"
+    degree: "MSc in Methodology"
+    degree_note: "of Behavioral and Health Sciences"
+    thesis:
+      label: "MSc Thesis"
+      title: "Factor Analysis under Range Restriction: A Simulation Study"
+      note: "(10/10 with Honors)"
+    lines:
+      - "**GPA:** 9.72/10"
+    short: ["MSc in **Methodology**, *2021*", "Master thesis with Honors", "Best Master’s Thesis Award (2022)"]
+    places:
+      - "Universidad Autónoma de Madrid (Spain)"
+      - "Universidad Complutense de Madrid (Spain)"
+
+  - date: "2014–2019"
+    degree: "BSc in Psychology"
+    thesis:
+      label: "BSc Thesis"
+      title: "¿Todos, todos/as, todxs o todes?: Effects of masculine and alternative generics on group expectations and self-efficacy perception in Spanish."
+      note: "(10/10 with Honors)"
+    lines:
+      - "**GPA:** 8.55/10"
+    short: ["BSc in **Psychology**, *2019*", "Bachelor’s thesis with Honors"]
+    places:
+      - "Universidad Autónoma de Madrid (Spain)"
+    sub:
+      - date: "2016"
+        title: "Erasmus+ *(4 months)*"
+        places:
+          - "Tilburg School of Social and Behavioral Sciences; Tilburg Universiteit (The Netherlands)"

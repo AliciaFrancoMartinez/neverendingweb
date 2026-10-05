@@ -1,0 +1,287 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   CV — estilos de la versión PDF (réplica de la plantilla de Pages).
+   Las medidas van en em (en el PDF, 1em = 12.1pt); la paginación está en
+   cv-print.css. La pestaña web usa su propia hoja: cv-web.css.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --cv-bg: #f4f2f0;
+  --cv-panel: #e4ded0;
+  --cv-brown: #564542;
+  --cv-ink: #534441;
+  --cv-slate: #637887;
+  --cv-terracotta: #a25842;
+  --cv-link: #3482a6;
+  --cv-serif: "Fraunces", "Canela Deck", Georgia, serif;
+  --cv-sans: "Barlow Semi Condensed", "Avenir Next Condensed", "Arial Narrow",
+             "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+.cv {
+  --gutter: 6.84em;      /* borde del panel → línea vertical */
+  --line: 0.176em;       /* grosor de la línea vertical */
+  --pad: 0.9em;          /* línea vertical → texto */
+  --pad-r: 0.75em;       /* margen derecho del texto */
+  --out-l: 2.2em;        /* lo que sobresalen a la izquierda las barras de sección */
+  --out-r: 0.52em;       /* lo que sobresalen a la derecha las barras */
+
+  position: relative;
+  box-sizing: border-box;
+  padding-right: var(--pad-r);
+  background: var(--cv-panel);
+  color: var(--cv-ink);
+  font-family: var(--cv-sans);
+  font-weight: 400;
+  line-height: 1.17;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  font-kerning: normal;
+}
+
+.cv *, .cv *::before, .cv *::after { box-sizing: border-box; }
+.cv p, .cv h1, .cv h2, .cv h3, .cv ol, .cv li {
+  margin: 0; padding: 0; font: inherit; color: inherit; letter-spacing: normal; border: 0;
+}
+.cv ol { list-style: none; }
+.cv a { color: inherit; text-decoration: none; }
+.cv strong { font-weight: 700; }
+.cv em { font-style: italic; }
+.cv small { font-size: 0.8em; }
+.cv img { max-width: 100%; }
+
+/* ── Portada ─────────────────────────────────────────────────────────────── */
+
+.cv .cv-cover { text-align: center; padding-left: var(--pad-r); }
+.cv .cv-role { text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.2; }
+.cv .cv-name {
+  font-family: var(--cv-serif);
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-size: 2.93em;
+  font-weight: 400;
+  line-height: 1.02;
+  margin-top: 0.06em;
+  color: var(--cv-ink);
+}
+.cv .cv-name-last { font-weight: 700; }
+.cv .cv-tagline { color: var(--cv-slate); font-size: 1.23em; line-height: 1.08; margin-top: 0.12em; }
+.cv .cv-contacts { display: flex; justify-content: center; gap: 0.55em; margin-top: 0.75em; }
+.cv .cv-contacts a { display: block; width: 1.75em; height: 1.75em; transition: transform 0.15s ease; }
+.cv .cv-contacts a:hover { transform: translateY(-2px); }
+.cv .cv-contacts img { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+.cv .cv-index { margin-top: 3.5em; }
+.cv .cv-index li {
+  display: grid;
+  grid-template-columns: var(--gutter) minmax(0, 1fr);
+  align-items: center;
+  margin-bottom: var(--index-gap, 2.09em);
+}
+.cv .cv-index-page {
+  text-align: right;
+  padding-right: 0.55em;
+  color: var(--cv-slate);
+  font-size: 1.23em;
+  font-weight: 200;
+  white-space: nowrap;
+}
+
+/* ── Barras marrones ─────────────────────────────────────────────────────── */
+
+.cv .cv-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-height: 2.67em;
+  padding: 0.25em 0.8em 0.12em 1.37em;
+  background: var(--cv-brown);
+  color: var(--cv-panel);
+  line-height: 1.05;
+}
+.cv .cv-bar-text { font-size: 1.385em; text-transform: uppercase; letter-spacing: 0.22em; }
+.cv .cv-bar-text .cv-cap { font-size: 1.222em; letter-spacing: 0.18em; }
+.cv .cv-bar-text strong { font-weight: 600; }
+.cv .cv-bar-note { font-size: 0.5em; letter-spacing: 0.2em; }
+.cv .cv-bar-note .cv-cap { font-size: 1.25em; }
+
+/* barra de grupo (p. ej. "Previous Research Experience") */
+.cv .cv-bar--group {
+  margin: 0 calc(-1 * (var(--pad-r) + var(--out-r))) 0.95em calc(var(--gutter) - var(--line) / 2);
+}
+.cv .cv-group + .cv-group { margin-top: 1.25em; }
+
+/* barra dentro de una entrada (títulos de Education) */
+.cv .cv-what--bar .cv-bar {
+  margin: 0 calc(-1 * (var(--pad-r) + var(--out-r))) 0.55em calc(-1 * var(--pad) - var(--line) / 2);
+}
+
+/* barras del índice de la portada */
+.cv .cv-bar--index { margin: 0 calc(-1 * (var(--pad-r) + var(--out-r))) 0 calc(var(--line) / -2); }
+.cv a.cv-bar--index { transition: background-color 0.15s ease; }
+.cv a.cv-bar--index:hover { background: #6a5652; color: var(--cv-panel); }
+
+/* título de sección */
+.cv .cv-section-title { display: flex; align-items: center; gap: 1em; margin-bottom: 1.15em; }
+.cv .cv-bar--section {
+  display: inline-flex;
+  min-height: 3.05em;
+  margin-left: calc(-1 * var(--out-l));
+  padding: 0.3em 2.4em 0.12em 3.56em;
+}
+.cv .cv-bar--section .cv-bar-text { font-size: 1.54em; font-weight: 700; letter-spacing: 0.26em; }
+.cv .cv-bar--section .cv-bar-text .cv-cap { font-size: 1.25em; letter-spacing: 0.26em; }
+.cv .cv-bar--section .cv-bar-note { font-size: 0.42em; font-weight: 400; letter-spacing: 0.25em; }
+
+/* leyenda Open Access + badges (Publications) */
+.cv .cv-legend { display: flex; align-items: center; gap: 0.3em; margin-left: auto; }
+.cv .cv-legend-oa { height: 2.5em; width: auto; margin-right: 0.4em; }
+.cv .cv-legend-item { display: flex; flex-direction: column; align-items: center; }
+.cv .cv-legend-item svg { width: 2.7em; height: 2.95em; }
+.cv .cv-legend-item span {
+  font-size: 0.42em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.15em; white-space: nowrap;
+}
+
+/* ── Entradas: [fecha | contenido | logo] ────────────────────────────────── */
+
+.cv .cv-entry {
+  display: grid;
+  grid-template-columns: var(--gutter) minmax(0, 1fr) auto;
+  align-items: baseline;
+  margin-bottom: 0.95em;
+}
+.cv .cv-when { grid-column: 1; text-align: right; padding-right: 0.37em; }
+.cv .cv-what { grid-column: 2; padding-left: var(--pad); min-width: 0; }
+.cv .cv-aside {
+  grid-column: 3;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1em;
+  width: 11.5em;
+  padding-left: 0.6em;
+}
+.cv .cv-date {
+  display: block;
+  color: var(--cv-slate);
+  font-size: 1.23em;
+  font-weight: 200;
+  line-height: 1.05;
+}
+.cv .cv-title { font-size: 1.077em; font-weight: 700; line-height: 1.15; }
+.cv .cv-bullet { margin-right: 0.42em; }
+.cv .cv-line { line-height: 1.15; }
+.cv .cv-light { font-weight: 200; color: var(--cv-ink); }
+.cv .cv-label { font-weight: 500; }
+.cv .cv-line a { text-decoration: underline; text-underline-offset: 0.12em; text-decoration-thickness: 0.06em; }
+.cv .cv-venue a { color: var(--cv-link); }
+.cv .cv-icon-link { font-size: 0.9em; text-decoration: none; }
+.cv .cv-logo { height: 2.3em; width: auto; max-width: 10.5em; object-fit: contain; }
+.cv .cv-thumb { width: auto; max-width: 8.5em; height: auto; max-height: 4.9em; object-fit: contain; display: block; }
+
+.cv .cv-tag {
+  display: inline-block;
+  margin-top: 0.15em;
+  padding: 0.28em 0.9em 0.2em;
+  border-radius: 0.3em;
+  background: var(--cv-brown);
+  color: var(--cv-panel);
+  font-size: 0.5em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+.cv .cv-place-inline { font-size: 0.64em; font-weight: 400; margin-left: 0.4em; }
+.cv .cv-conf-role {
+  float: right;
+  margin-top: 0.1em;
+  padding: 0.3em 0.75em 0.22em;
+  border-radius: 0.3em;
+  background: var(--cv-brown);
+  color: var(--cv-panel);
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* ── Ajustes por sección (tamaños medidos en la plantilla) ───────────────── */
+
+/* Education */
+.cv .cv-entry--degree { margin-bottom: 2.5em; }
+.cv .cv-entry--degree .cv-what--bar .cv-bar { margin-bottom: 0.75em; }
+.cv .cv-entry--degree .cv-place { font-size: 1.077em; margin-top: 0.45em; }
+.cv .cv-entry--degree .cv-place--small { font-size: 0.92em; }
+.cv .cv-entry--degree .cv-sub { font-weight: 500; margin-top: 0.7em; }
+.cv .cv-bar--entry .cv-bar-note { font-size: 0.5em; }
+
+/* Research experience */
+.cv-sec-experience .cv-title { font-size: 1.23em; font-weight: 500; }
+.cv-sec-experience .cv-title strong { font-weight: 700; }
+.cv-sec-experience .cv-line { padding-left: 1.08em; }
+.cv-sec-experience .cv-entry { margin-bottom: 1.15em; }
+
+/* Publications */
+.cv-sec-publications .cv-title { font-weight: 400; }
+.cv-sec-publications .cv-title .cv-me { font-weight: 700; }
+.cv-sec-publications .cv-pub-title { font-size: 1.077em; }
+.cv-sec-publications .cv-venue { font-size: 0.846em; margin-top: 0.25em; }
+.cv-sec-publications .cv-venue-icon { margin-right: 0.35em; font-size: 0.95em; }
+.cv-sec-publications .cv-oa { height: 1.9em; width: auto; vertical-align: -0.62em; margin-left: 0.3em; }
+.cv-sec-publications .cv-entry { margin-bottom: 0.85em; }
+.cv .cv-badges {
+  display: grid;
+  grid-template-columns: repeat(2, 1.1em);
+  gap: 0.1em 0.12em;
+  justify-content: end;
+  margin-top: 0.2em;
+}
+.cv .cv-badges svg { display: block; width: 1.1em; height: 1.19em; }
+
+/* Grants & awards (y secciones genéricas) */
+.cv-sec-awards .cv-line { font-size: 1.077em; }
+.cv .cv-amount { font-weight: 500; }
+
+/* Conferences */
+.cv .cv-contrib-authors { font-size: 0.846em; line-height: 1.15; }
+.cv .cv-contrib-authors .cv-me { font-weight: 600; }
+.cv .cv-contrib-title { font-size: 0.77em; }
+.cv .cv-bullet--sub { margin-right: 0.35em; font-size: 0.9em; }
+.cv .cv-what--contrib { padding-top: 0.3em; }
+.cv .cv-note { font-style: normal; }
+
+/* Invited talks */
+.cv-sec-talks .cv-title em { font-weight: 700; }
+.cv-sec-talks .cv-org { font-size: 0.846em; font-weight: 600; margin-top: 0.1em; }
+.cv-sec-talks .cv-detail { font-size: 0.77em; }
+.cv-sec-talks .cv-duration { font-size: 1.1em; }
+.cv-sec-talks .cv-entry { margin-bottom: 1.25em; }
+
+/* Teaching */
+.cv-sec-teaching .cv-title { font-size: 1.077em; }
+.cv-sec-teaching .cv-item { font-size: 0.85em; margin-top: 0.15em; }
+.cv-sec-teaching .cv-place-small { font-size: 0.85em; }
+.cv-sec-teaching .cv-entry { margin-bottom: 1.5em; }
+
+/* Dissemination */
+.cv-sec-dissemination .cv-desc { font-size: 0.77em; font-weight: 600; }
+.cv-sec-dissemination .cv-desc em { font-weight: 400; }
+.cv-sec-dissemination .cv-links { font-size: 0.846em; }
+.cv-sec-dissemination .cv-links a { margin-right: 0.6em; text-decoration: none; color: inherit; }
+.cv-sec-dissemination .cv-entry { margin-bottom: 1.6em; }
+
+/* Training */
+.cv-sec-training .cv-course { font-weight: 400; }
+.cv-sec-training .cv-org { font-size: 1.077em; font-weight: 500; }
+
+/* Skills */
+.cv-sec-skills .cv-title { font-size: 1.42em; }
+.cv-sec-skills .cv-title--plain { font-weight: 400; }
+.cv-sec-skills .cv-line { font-size: 1.3em; line-height: 1.12; }
+.cv-sec-skills .cv-entry { margin-bottom: 0.6em; }
+.cv-sec-skills .cv-group + .cv-group { margin-top: 1.6em; }
+
+/* Research projects y valoración docente */
+.cv-sec-projects .cv-title { line-height: 1.2; }
+.cv-sec-projects .cv-entry { margin-bottom: 1.25em; }
+.cv .cv-eval { font-weight: 400; }

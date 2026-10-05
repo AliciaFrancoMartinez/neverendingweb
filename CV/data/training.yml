@@ -1,0 +1,41 @@
+# TRAINING & COURSES
+# Campos de cada curso:
+#   date
+#   kind    tipo (por defecto "Workshop")
+#   title   nombre del curso (sale en cursiva)
+#   org     entidad
+#   hours   duración, p. ej. "10h"
+#   place   lugar (📍, en pequeño)
+
+title: "Training & Courses"
+title_note: "(selected)"
+web_filter: groups
+
+groups:
+  - title: "Academic Training"
+    chip: "Academic"
+    entries:
+      - { date: "Jan 2025", title: "The Young Academy Responds: Leading New Research Groups", org: "La Academia Joven", hours: "2h", place: "ONLINE" }
+      - { date: "Mar 2024", title: "Open Science", org: "SEPNECA", hours: "12h", place: "Madrid, Spain" }
+      - { date: "Dec 2023", title: "Open Science for All Audiences: What, How, When, Where, and Why", org: "Doctoral School", hours: "4h", place: "*Universidad Autónoma de Madrid*, Spain" }
+      - { date: "Jul 2023", title: "Communicating consciousness science to funders and general public", org: "Association for the Scientific Study of Consciousness", hours: "3h", place: "New York, USA" }
+      - { date: "Jun 2023", title: "Emotional Management and Planning during the PhD", org: "Doctoral School", hours: "10h", place: "*Universidad Autónoma de Madrid*, Spain" }
+      - { date: "Nov 2022", title: "Scientific Writing Workshop, 3rd Edition", org: "Doctoral School", hours: "10h", place: "*Universidad Autónoma de Madrid*, Spain" }
+
+  - title: "Technical Training"
+    chip: "Technical"
+    entries:
+      - { date: "Jul 2024", title: "Annual JAGS Workshop: Bayesian Modeling for Cognitive Science", org: "The International Society for Bayesian Analysis (ISBA)", hours: "84h", place: "*Universiteit van Amsterdam*, NL" }
+      - { date: "Apr 2024", title: "Bayesian Structural Equation Modeling in R (BSEM)", org: "MSc in Methodology", hours: "1.5h", place: "*Universidad Autónoma de Madrid*, Spain" }
+      - { date: "May–Jun 2023", title: "Eye-movement recording as a research tool: theoretical and practical", org: "Doctoral School", hours: "10h", place: "*Universidad Autónoma de Madrid*, Spain" }
+      - { date: "Apr 2023", title: "Introduction to Python programming", org: "Doctoral School", hours: "8h", place: "*Universidad Autónoma de Madrid*, Spain" }
+      - { date: "Jul 2022", title: "Introduction to Exploratory Graph Analysis (EGA) with R", org: "AEMCCO", hours: "6h", place: "*Universidad de Zaragoza*, Teruel, Spain" }
+      - { date: "May 2020", title: "LaTeX for Students, Engineers, and Scientists", org: "IIT Bombay", hours: "28h", place: "edX" }
+      - { date: "Jul 2019", title: "Exploratory Structural Equation Modeling (ESEM) with Mplus: From Theory to Practice", org: "AEMCCO", hours: "2h", place: "*Universidad Autónoma de Madrid*, Spain" }
+      - { date: "Jul 2019", title: "Introduction to Machine Learning", org: "AEMCCO", hours: "4h", place: "*Universidad Autónoma de Madrid*, Spain" }
+
+  - title: "Teacher Training"
+    chip: "Teaching"
+    entries:
+      - { date: "Jul 2022", title: "Teaching Data Analysis: Beyond the Recipes", org: "AEMCCO", hours: "2h", place: "Teruel, Spain" }
+      - { date: "Feb 2022", title: "Digital teaching tools: Blackboard Ultra, enriched digital content and hybrid teaching", org: "Universidad Nebrija", hours: "6h", place: "Madrid, Spain" }

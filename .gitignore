@@ -5,3 +5,7 @@ _site/
 
 /.quarto/
 **/*.quarto_ipynb
+
+# Generado por CV/_scripts/build-pdf.R
+CV/cv-print.html
+CV/cv-short.html
