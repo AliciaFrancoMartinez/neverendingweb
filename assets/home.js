@@ -1,86 +1,129 @@
-// Inicio: el símbolo de Auryn que gira con el scroll y el bucle infinito al final de la página.
-// Lo usan index.qmd y es/index.qmd.
+// Portada: el bucle NeverEnding. Lo usan index.qmd y es/index.qmd (estilos en styles.scss).
+//
+//  · Auryn gira según lo que bajas, con inercia: si dejas de bajar sigue girando un poco y
+//    frena suave, y mientras está a la vista gira muy despacio por sí solo.
+//  · Debajo de Auryn se añade una copia del principio de la página (vídeo + comienzo de la
+//    presentación). Cuando esa copia llega justo a donde está el principio, la página salta
+//    arriba en el mismo fotograma: como se ve exactamente lo mismo, no se nota y la web
+//    vuelve a empezar, como la historia interminable.
+//  · No se guarda ninguna posición calculada de antemano: todo se mide en el momento, así que
+//    da igual que las fotos o las fuentes tarden en cargar.
+//  · Con "reducir movimiento" activado en el sistema no hay bucle ni giro.
 (() => {
-  const loopSection = document.querySelector('.person-auryn-loop');
-  const auryn = document.querySelector('.auryn-wheel');
-  const storyCard = document.querySelector('.person-story-card');
-  if (!loopSection || !auryn || !storyCard) return;
+  "use strict";
+  const section = document.querySelector(".person-auryn-loop");
+  const zone = section && section.querySelector(".auryn-zone");
+  const stage = section && section.querySelector(".auryn-stage");
+  const wheel = section && section.querySelector(".auryn-wheel");
+  const hero = document.querySelector(".hero-video");
+  const story = document.querySelector(".person-story-wrap");
+  if (!section || !zone || !stage || !wheel || !hero || !story) return;
 
-  const WRAP_MARGIN = 120;
-  const AFTER_TEXT_BLANK = 220;
-  const LOOP_OFFSET_AFTER_APPEAR = 520;
-  const LOOP_SPAN = 2200;
-  const ROTATION_TURNS_PER_LOOP = 3;
-  let bounds = { startY: 0, appearY: 0, tailStartY: 0, tailEndY: 0 };
-  let lastScrollY = window.scrollY;
-  let rafId = null;
-  let wrapping = false;
-  let rotationCarry = 0;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const DEG_PER_PX = 0.3;      // grados de giro por cada píxel que bajas
+  const IDLE_DEG_PER_S = 5;    // giro lento en reposo
+  const INERTIA_S = 0.45;      // cuánto tarda en alcanzar el giro del scroll (más = más inercia)
 
-  function topY(el) {
-    return el.getBoundingClientRect().top + window.scrollY;
+  // ── Aparición: Auryn entra desde abajo, de transparente y algo pequeño a su tamaño ──
+  function updateEntrance() {
+    const r = stage.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const p = Math.min(1, Math.max(0, (vh - (r.top + r.height / 2)) / (vh * 0.45)));
+    stage.style.opacity = (0.96 * p).toFixed(3);
+    stage.style.transform = `scale(${(0.86 + 0.14 * p).toFixed(3)})`;
   }
 
-  function updateBounds() {
-    const startY = topY(loopSection);
-    const storyBottomY = topY(storyCard) + storyCard.offsetHeight;
-    const appearY = Math.max(startY + 280, storyBottomY + AFTER_TEXT_BLANK);
-    const tailStartY = appearY + LOOP_OFFSET_AFTER_APPEAR;
-    const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-    const plannedEndY = tailStartY + LOOP_SPAN;
-    const safeEndY = Math.max(tailStartY + 700, maxY - WRAP_MARGIN);
-    const tailEndY = Math.min(plannedEndY, safeEndY);
-    bounds = { startY, appearY, tailStartY, tailEndY };
+  if (reduceMotion) {
+    // sin bucle ni giro: solo aparece al llegar
+    window.addEventListener("scroll", updateEntrance, { passive: true });
+    updateEntrance();
+    return;
   }
 
-  function maybeWrapDownward(currentY) {
-    const scrollingDown = currentY > lastScrollY;
-    if (!scrollingDown || wrapping) return { y: currentY, carry: 0 };
+  // ── Copia del principio de la página, para volver a él sin costura ──
+  const heroVideo = hero.querySelector("video");
+  const returnBlock = document.createElement("div");
+  returnBlock.className = "neverending-return";
+  returnBlock.setAttribute("aria-hidden", "true");
+  returnBlock.setAttribute("inert", "");
+  const heroCopy = hero.cloneNode(true);
+  returnBlock.append(heroCopy, story.cloneNode(true));
+  section.after(returnBlock);
 
-    if (currentY >= bounds.tailEndY) {
-      const resetY = Math.max(bounds.tailStartY + (bounds.tailEndY - bounds.tailStartY) * 0.5, 0);
-      wrapping = true;
-      loopSection.classList.add('is-wrapping');
-      setTimeout(() => {
-        window.scrollTo(0, resetY);
-        requestAnimationFrame(() => {
-          loopSection.classList.remove('is-wrapping');
-          setTimeout(() => { wrapping = false; }, 60);
-        });
-      }, 110);
-      return { y: resetY, carry: Math.max(0, bounds.tailEndY - resetY) };
+  // el vídeo de la copia solo se reproduce cuando se ve
+  const videoCopy = heroCopy.querySelector("video");
+  if (videoCopy) {
+    videoCopy.muted = true;
+    videoCopy.removeAttribute("autoplay");
+    videoCopy.pause();
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) videoCopy.play().catch(() => {});
+        else videoCopy.pause();
+      }).observe(heroCopy);
     }
-    return { y: currentY, carry: 0 };
   }
 
-  function onScroll() {
-    if (rafId) return;
-    rafId = requestAnimationFrame(() => {
-      rafId = null;
-      const wrapState = maybeWrapDownward(window.scrollY);
-      const y = wrapState.y;
-      rotationCarry += wrapState.carry;
-      lastScrollY = y;
+  // Si la copia ya está donde estaba el principio, salta arriba (mismo encuadre, mismo fotograma)
+  function loopBack() {
+    const period = heroCopy.getBoundingClientRect().top - hero.getBoundingClientRect().top;
+    if (period <= 0 || window.scrollY < period) return false;
+    if (heroVideo && videoCopy) {
+      try { heroVideo.currentTime = videoCopy.currentTime; } catch (e) { /* sin sincronizar */ }
+      heroVideo.play().catch(() => {});
+    }
+    window.scrollTo({ top: window.scrollY - period, behavior: "instant" });
+    return true;
+  }
 
-      const active = y >= bounds.appearY && y <= bounds.tailEndY;
-      loopSection.classList.toggle('is-active', active);
-      loopSection.classList.toggle('show-wheel', y >= bounds.appearY);
+  // ── Giro ──
+  let target = 0;        // giro que pide el scroll (y el reposo)
+  let shown = 0;         // giro que se ve (persigue a target con inercia)
+  let lastY = window.scrollY;
+  let lastT = 0;
+  let running = false;
+  let visible = false;
 
-      if (active) {
-        const loopLen = Math.max(1, bounds.tailEndY - bounds.tailStartY);
-        const relLoop = (y - bounds.tailStartY) + rotationCarry;
-        const phase = ((relLoop % loopLen) + loopLen) % loopLen;
-        const angle = (phase / loopLen) * (360 * ROTATION_TURNS_PER_LOOP);
-        auryn.style.transform = `rotate(${angle}deg)`;
-      } else {
-        const rel = Math.max(0, y - bounds.startY);
-        auryn.style.transform = `rotate(${rel * 0.12}deg)`;
+  function frame(t) {
+    const dt = lastT ? Math.min(0.1, (t - lastT) / 1000) : 0;
+    lastT = t;
+    if (visible) target += IDLE_DEG_PER_S * dt;
+    shown += (target - shown) * (1 - Math.exp(-dt / INERTIA_S));
+    wheel.style.transform = `rotate(${(shown % 360).toFixed(2)}deg)`;
+    updateEntrance();
+    if (visible || Math.abs(target - shown) > 0.05) {
+      requestAnimationFrame(frame);
+    } else {
+      running = false;
+      lastT = 0;
+    }
+  }
+
+  function wake() {
+    if (running) return;
+    running = true;
+    requestAnimationFrame(frame);
+  }
+
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    target += (y - lastY) * DEG_PER_PX;
+    lastY = loopBack() ? window.scrollY : y;   // el salto no cuenta como giro
+    if (visible) wake();
+  }, { passive: true });
+
+  // El bucle de animación solo funciona mientras Auryn está cerca de la pantalla
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && !running) {
+        shown = target;    // fuera de la vista no se ha movido: empieza donde toca, sin acelerón
+        wake();
       }
-    });
+    }, { rootMargin: "25% 0px" }).observe(zone);
+  } else {
+    visible = true;
+    wake();
   }
-
-  updateBounds();
-  onScroll();
-  window.addEventListener('resize', updateBounds);
-  window.addEventListener('scroll', onScroll, { passive: true });
+  updateEntrance();
 })();

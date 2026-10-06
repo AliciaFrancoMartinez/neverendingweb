@@ -13,7 +13,7 @@
   comentario al principio).
 - **CV**: solo se editan los datos de `CV/data/` (traducciones en los campos `*_es` y en `CV/data/es.yml`).
   Instrucciones en `CV/data/_LEEME.md`.
-- **Mi cajón** (*My file drawer*): cada proyecto de `Researcher/assets/my-drawer.js` lleva su traducción en el campo `es`.
+- **Mi archivador** (*My file drawer*): cada proyecto de `Researcher/assets/my-drawer.js` lleva su traducción en el campo `es`.
   Los proyectos de la comunidad se muestran tal como los escribe cada persona.
 - **Scripts y estilos**: son los mismos para los dos idiomas (`assets/home.js`, `Researcher/assets/timeline.js`,
   `Researcher/assets/drawer.js`, `Visitor/assets/map.js` y las hojas `.css`), así que se cambian una sola vez.

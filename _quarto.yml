@@ -14,7 +14,7 @@ website:
   title: "Alicia Franco-Martínez"
   open-graph: true # https://quarto.org/docs/websites/website-tools.html#open-graph
   navbar:
-    logo: assets/logo.png
+    logo: assets/logo-small.webp
     right:
       - text: Person
         href: index.qmd

@@ -1,5 +1,5 @@
 ---
-title: "Nuestro cajón"
+title: "Nuestro archivador"
 format:
   html:
     theme:
@@ -18,8 +18,8 @@ format:
     <div class="drawer-heading">
       <div class="drawer-heading-copy">
         <h1 id="drawer-title">
-          <span data-for="mine">Mi cajón</span>
-          <span data-for="community">El cajón de<br>la comunidad</span>
+          <span data-for="mine">Mi archivador</span>
+          <span data-for="community">El archivador de<br>la comunidad</span>
         </h1>
         <p class="drawer-subtitle" data-for="mine">Los proyectos que empecé, quise y dejé atrás.</p>
         <p class="drawer-subtitle" data-for="community">Todo el mundo tiene uno. Añade los proyectos que abandonaste para que no caigan en el olvido.</p>
@@ -36,17 +36,17 @@ format:
       <div class="drawer-lists">
         <div class="drawer-projects" id="my-projects" data-for="mine" role="tabpanel" aria-labelledby="cabinet-mine" aria-live="polite"></div>
         <div class="drawer-projects" id="drawer-projects" data-for="community" role="tabpanel" aria-labelledby="cabinet-community" aria-live="polite" aria-busy="true">
-          <div class="drawer-loading"><span></span><span></span><span></span><p>Abriendo el cajón…</p></div>
+          <div class="drawer-loading"><span></span><span></span><span></span><p>Abriendo el archivador…</p></div>
         </div>
         <a class="drawer-cta" data-for="community" href="#leave-a-project">Añade tu proyecto abandonado <span aria-hidden="true">↓</span></a>
       </div>
       <div class="drawer-side-art">
-        <div class="drawer-cabinets" role="tablist" aria-label="Cajones">
-          <button class="drawer-cabinet drawer-cabinet--mine" id="cabinet-mine" type="button" role="tab" aria-selected="true" aria-controls="my-projects" data-view="mine" aria-label="Mi cajón">
+        <div class="drawer-cabinets" role="tablist" aria-label="Archivadores">
+          <button class="drawer-cabinet drawer-cabinet--mine" id="cabinet-mine" type="button" role="tab" aria-selected="true" aria-controls="my-projects" data-view="mine" aria-label="Mi archivador">
             <img src="../../Researcher/assets/drawer-cabinet.png" alt="">
-            <span class="drawer-cabinet-label">Mi cajón</span>
+            <span class="drawer-cabinet-label">Mi archivador</span>
           </button>
-          <button class="drawer-cabinet drawer-cabinet--community" id="cabinet-community" type="button" role="tab" aria-selected="false" aria-controls="drawer-projects" data-view="community" aria-label="El cajón de la comunidad">
+          <button class="drawer-cabinet drawer-cabinet--community" id="cabinet-community" type="button" role="tab" aria-selected="false" aria-controls="drawer-projects" data-view="community" aria-label="El archivador de la comunidad">
             <span class="drawer-cabinet-hint" data-for="mine" aria-hidden="true">
               <span class="drawer-cabinet-hint-text">¡ábreme!</span>
               <svg viewBox="0 0 64 56" focusable="false">
@@ -55,7 +55,7 @@ format:
               </svg>
             </span>
             <img src="../../Researcher/assets/drawer-cabinet.png" alt="">
-            <span class="drawer-cabinet-label">El cajón de la comunidad</span>
+            <span class="drawer-cabinet-label">El archivador de la comunidad</span>
           </button>
         </div>
       </div>
@@ -64,7 +64,7 @@ format:
 
   <section class="drawer-form-section" id="leave-a-project" data-for="community" aria-labelledby="form-title">
     <div class="drawer-form-intro">
-      <h2 id="form-title">¿Qué dejaste en el cajón?</h2>
+      <h2 id="form-title">¿Qué dejaste en el archivador?</h2>
       <p>Cuenta tanto o tan poco como quieras. Tu nombre es opcional.</p>
     </div>
 
