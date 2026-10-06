@@ -370,47 +370,74 @@ main#quarto-document-content > *:first-child {
   filter: saturate(1.2);
 }
 
+/* === BUCLE NEVERENDING (portada) ===
+   El comportamiento está en assets/home.js:
+   · Tras la presentación, una pista "sigue bajando" y la zona de Auryn: Auryn sube,
+     se queda en el centro (sticky) girando con el scroll y, al final, se va hacia arriba.
+   · Debajo, home.js añade una copia del principio de la página (.neverending-return):
+     cuando llega arriba, la web salta al principio de verdad sin que se note. */
 .person-auryn-loop {
+  --auryn-size: min(72vw, 760px);
   position: relative;
   width: min(1100px, 96vw);
-  margin: clamp(34vh, 44vh, 56vh) auto clamp(2rem, 6vw, 4rem);
-  padding: 1rem 0 620vh;
+  margin: 0 auto 30vh;   /* hueco antes de la copia del principio: Auryn sale del todo */
+}
+
+.auryn-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+  color: rgba(18, 50, 75, .55);
+  font: 500 .72rem/1 "Poppins", "Nunito Sans", sans-serif;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.auryn-hint svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  animation: auryn-hint-bob 2.2s ease-in-out infinite;
+}
+@keyframes auryn-hint-bob {
+  0%, 100% { transform: translateY(0); opacity: .55; }
+  50% { transform: translateY(.45rem); opacity: 1; }
+}
+
+/* Zona en la que Auryn está a la vista: entra desde abajo, se queda centrado y sale por arriba */
+.auryn-zone {
+  height: 340vh;
+  padding-top: 38vh;
 }
 
 .auryn-stage {
   position: sticky;
-  top: 18vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: calc(50vh - var(--auryn-size) / 2);
+  width: var(--auryn-size);
+  height: var(--auryn-size);
+  margin: 0 auto;
   pointer-events: none;
-}
-
-.person-auryn-loop.is-active .auryn-stage {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  z-index: 4;
+  /* la sombra va en el contenedor, que no gira: la luz viene siempre de arriba */
+  filter: drop-shadow(0 18px 34px rgba(22, 54, 83, .2));
+  will-change: opacity, transform;
 }
 
 .auryn-wheel {
-  width: min(72vw, 760px);
-  max-width: 100%;
-  height: auto;
-  opacity: 0;
-  filter: drop-shadow(0 18px 34px rgba(22, 54, 83, 0.2));
+  display: block;
+  width: 100%;
+  height: 100%;
   will-change: transform;
-  transition: opacity 0.28s ease;
 }
 
-.person-auryn-loop.show-wheel .auryn-wheel {
-  opacity: 0.96;
+/* Copia del principio de la página para volver a él sin costura (la crea home.js) */
+.neverending-return {
+  height: 160vh;
+  overflow-y: clip;     /* solo en vertical: el vídeo ocupa todo el ancho, como el original */
 }
 
-.person-auryn-loop.is-wrapping .auryn-wheel {
-  opacity: 0;
+@media (prefers-reduced-motion: reduce) {
+  .auryn-hint svg { animation: none; }
+  .auryn-zone { height: 200vh; }
 }
 
 .cv-page-actions {
@@ -534,17 +561,13 @@ main#quarto-document-content > *:first-child {
   }
 
   .person-auryn-loop {
+    --auryn-size: min(88vw, 520px);
     width: 98vw;
-    margin-top: 28vh;
-    padding-bottom: 430vh;
   }
 
-  .auryn-stage {
-    top: 14vh;
-  }
-
-  .auryn-wheel {
-    width: min(88vw, 520px);
+  .auryn-zone {
+    height: 280vh;
+    padding-top: 30vh;
   }
 
   .cv-page-actions .btn {
@@ -653,6 +676,8 @@ html[data-theme="dark"] .person-story-logo,
 html[data-theme="dark"] .border-logo,
 html[data-theme="dark"] .auryn-wheel { filter: invert(1) hue-rotate(180deg) brightness(.92); }
 html[data-theme="dark"] .border-logo { opacity: .1; }
+html[data-theme="dark"] .auryn-stage { filter: drop-shadow(0 0 30px rgba(140, 190, 255, .22)); }
+html[data-theme="dark"] .auryn-hint { color: rgba(214, 226, 238, .6); }
 
 /* Portada (Person) */
 html[data-theme="dark"] .person-story-wrap::before {
