@@ -1,0 +1,58 @@
+<!--
+  Modo oscuro (se añade a la cabecera de todas las páginas desde _quarto.yml).
+  · El botón ☾ / ☀ de la barra de menú cambia entre modo claro y oscuro, y cada visitante
+    lo encuentra como lo dejó (se guarda en su navegador).
+  · El modo claro es el de siempre y el de por defecto.
+  · Los colores del modo oscuro están al final de cada hoja de estilos, en los bloques
+    "MODO OSCURO" (styles.scss, Researcher/*.css, Visitor/stylesVisitor.css, CV/assets/cv-web.css).
+-->
+<script>
+(() => {
+  "use strict";
+  const KEY = "theme";
+  const root = document.documentElement;
+
+  // Antes de pintar la página, para que no se vea un destello en claro
+  try {
+    if (localStorage.getItem(KEY) === "dark") root.dataset.theme = "dark";
+  } catch (e) { /* sin acceso al almacenamiento: modo claro */ }
+
+  const ICONS =
+    '<svg class="theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>' +
+    '<svg class="theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("#quarto-header .navbar-container");
+    if (!header) return;
+    const es = root.lang.startsWith("es");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "theme-toggle";
+    button.innerHTML = ICONS;
+
+    const update = () => {
+      const dark = root.dataset.theme === "dark";
+      const label = es
+        ? (dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro")
+        : (dark ? "Switch to light mode" : "Switch to dark mode");
+      button.setAttribute("aria-pressed", String(dark));
+      button.setAttribute("aria-label", label);
+      button.title = label;
+    };
+
+    button.addEventListener("click", () => {
+      const dark = root.dataset.theme !== "dark";
+      if (dark) root.dataset.theme = "dark";
+      else delete root.dataset.theme;
+      try { localStorage.setItem(KEY, dark ? "dark" : "light"); } catch (e) { /* no se recuerda */ }
+      update();
+    });
+    update();
+
+    // junto al buscador, que se ve también con el menú plegado (móvil)
+    const search = header.querySelector("#quarto-search");
+    if (search) search.before(button);
+    else header.appendChild(button);
+  });
+})();
+</script>

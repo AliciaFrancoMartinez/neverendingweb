@@ -11,14 +11,18 @@
 #       note     texto tras el título, p. ej. "[Best Oral Communication Award]"
 #   CV corto: los congresos con  short: true  se agrupan por  series  ("ASSC Annual Meetings - Tokyo 2024; …");
 #             short_note añade una nota entre corchetes (p. ej. un premio)
+# Versión en español: el mismo campo con _es (event_es, title_es…). Los tipos, lugares
+# y series que se repiten se traducen en es.yml. Ver _LEEME.md
 
 title: "Conferences"
+title_es: "Congresos"
 web_filter: types   # en la web, botones para filtrar por tipo (Oral, Poster…)
 web_limit: 6        # en la web se ven los 6 primeros y un botón "Show all"
 
 entries:
   - date: "Sept 2026"
     event: "XV SEPEX & II Joint SEPEX-BAPS Meeting"
+    event_es: "XV Congreso SEPEX y II Reunión conjunta SEPEX-BAPS"
     place: "Valencia, Spain"
     series: "SEPEX Meetings"
     short: true
@@ -39,6 +43,7 @@ entries:
   # ⚠️ En la ANECA figura como "XIV Congreso", pero por la numeración (XVIII fue Sevilla 2024) debería ser el XIX.
   - date: "Jul 2026"
     event: "XIX Congress of Methodology (AEMCCO)"
+    event_es: "XIX Congreso de Metodología (AEMCCO)"
     place: "Almería, Spain"
     series: "AEMCCO Congresses"
     short: true
@@ -46,9 +51,11 @@ entries:
       - type: "Oral"
         authors: "Franco-Martínez, A., Rey-Sáez, R., Revuelta, J., & Vadillo, M. A."
         title: "When Factor Analysis Started Answering Questions in Experimental Psychology"
+        title_es: "Cuando el análisis factorial empezó a contestar preguntas de psicología experimental"
 
   - date: "May 2026"
     event: "SIPS Meeting"
+    event_es: "Congreso de la SIPS"
     place: "VIRTUAL"
     tag: "Attend."
 
@@ -66,6 +73,7 @@ entries:
 
   - date: "Sept 2025"
     event: "XIV Meeting of the AIIDI"
+    event_es: "XIV Jornadas de la AIIDI"
     place: "Madrid, Spain"
     series: "AIIDI Conferences"
     short: true
@@ -77,6 +85,7 @@ entries:
         authors: "Rey-Sáez, R., Franco-Martínez, A., & Vadillo, M. A."
         title: "New Hierarchical Models to Answer Old Psychometric Questions in Experimental Research: Which Task Best Measures Inhibition?"
         note: "[Best Oral Communication Award]"
+        note_es: "[Premio a la mejor comunicación oral]"
 
   - date: "Jul 2025"
     event: "XI Conference of the European Association of Methodology"
@@ -105,28 +114,35 @@ entries:
 
   - date: "Apr 2025"
     event: "14th Scientific Meeting on Attention (RECA)"
+    event_es: "14.ª Reunión Científica de Atención (RECA)"
     place: "Madrid, Spain"
     contributions:
       - type: "Oral"
         authors: "Franco-Martínez, A., Rey-Sáez, R., Soto, D., Shanks, D., & Vadillo, M. A."
         title: "Measurement and Sampling Noise Compromise Inferences About Unconsciousness in Probabilistic Learning: A Modeling Approach"
+        title_es: "Los ruidos de medida y de muestreo comprometen las inferencias de inconsciencia en el aprendizaje probabilístico: Un enfoque desde el modelado"
       - type: "Oral"
         authors: "Ferrer-Mendieta, A., Peiro-Lanchares, C., & Franco-Martínez, A."
         title: "What About the PAS?"
+        title_es: "¿Qué pasa con la PAS?"
 
   - date: "Sept 2024"
     event: "XVIII Congress of Methodology (AEMCCO)"
+    event_es: "XVIII Congreso de Metodología (AEMCCO)"
     place: "Seville, Spain"
     series: "AEMCCO Congresses"
     short: true
     short_note: "Award for Young Researchers"
+    short_note_es: "Premio a Jóvenes Investigadores"
     contributions:
       - type: "Oral"
         authors: "Franco-Martínez, A., Vicente-Conesa, F., Shanks, D. R., & Vadillo, M. A."
         title: "“Probabilistic Learning is Unconscious”? Modeling High Noise and Small Samples"
+        title_es: "¿“El aprendizaje probabilístico es inconsciente”? Modelando mucho ruido y poca muestra"
       - type: "Oral"
         authors: "Rujano, A., & Franco-Martínez, A."
         title: "How to Explain Psychometrics to a Non-Psychologist Audience?"
+        title_es: "¿Cómo explicar la psicometría a un público no psicólogo?"
 
   - date: "Jul 2024"
     event: "27th Annual Meeting of the ASSC"
@@ -166,32 +182,39 @@ entries:
 
   - date: "Jul 2022"
     event: "XVII Congress of Methodology (AEMCCO)"
+    event_es: "XVII Congreso de Metodología (AEMCCO)"
     place: "Teruel, Spain"
     contributions:
       - type: "Symposium"
         authors: "Franco-Martínez, A."
         title: "I Have Done the Science, Now How Do I Communicate It? From Scientific Conferences to Social Media"
+        title_es: "Ya hice la ciencia, ¿ahora cómo la cuento?: desde los congresos científicos hasta las redes sociales"
         link: "https://www.researchgate.net/publication/362234982_Ya_hice_la_ciencia_ahora_como_la_cuento_Desde_los_congresos_cientificos_hasta_las_redes_sociales_-_Simposio_GJIM"
       - type: "Oral"
         authors: "Franco-Martínez, A., Vicente-Conesa, F., & Vadillo, M. A."
         title: "How Can We Measure and Model Awareness in Visual Search Tasks?"
+        title_es: "¿Cómo medir y modelar la consciencia en tareas de búsqueda visual?"
       - type: "Oral"
         authors: "García-Castro, G., Franco-Martínez, A., Rodríguez-Prada, C., Castillejo, I., & Sebastián-Gallés, N."
         title: "Estimating Lexical Acquisition Curves in Childhood with a Bayesian IRT Model"
+        title_es: "Estimando curvas de adquisición léxica en la infancia mediante un modelo bayesiano de TRI"
 
   - date: "Mar 2022"
     event: "II Conference of Young Psychology Professionals"
+    event_es: "II Jornadas de Jóvenes Profesionales de la Psicología"
     place: "Madrid, Spain"
     role: "Organizer"
     contributions:
       - type: "Oral"
         authors: "Franco-Martínez, A. & Castillejo, I."
         title: "What Is Validity and Why Should I Care?"
+        title_es: "¿Qué es eso de la validez y a mí qué me importa?"
         link: "https://www.researchgate.net/publication/359056621_Que_es_eso_de_la_validez_y_a_mi_que_me_importa"
         video: "https://www.youtube.com/watch?v=YaXwjXlrXw4&list=PLo1jUbMEXqbCERye65qkCbQOfu-wyfomI&index=10"
 
   - date: "Dec 2021"
     event: "X Meeting of the AIIDI"
+    event_es: "X Jornadas de la AIIDI"
     place: "Madrid, Spain"
     series: "AIIDI Conferences"
     short: true
@@ -200,17 +223,20 @@ entries:
       - type: "Poster"
         authors: "Franco-Martínez, A., Sorrel, M. A., & Alvarado, J. M."
         title: "Validating the Big Five: Factor Analysis and/or Psychometric Networks?"
+        title_es: "Validando el Big Five: ¿factorial y/o redes psicométricas?"
         # ⚠️ En el CV de Pages este enlace apuntaba a la charla "¿Qué es eso de la validez…?" (la de Mar 2022).
         #    Revísalo y cámbialo por el del póster si lo tienes.
         link: "https://www.researchgate.net/publication/359056621_Que_es_eso_de_la_validez_y_a_mi_que_me_importa"
 
   - date: "Oct 2021"
     event: "II International Congress of Interdisciplinary LGTBIQ+ Studies (Maricorners)"
+    event_es: "Maricorners: II Congreso Internacional de Estudios Interdisciplinares LGTBIQ+ en español"
     place: "Madrid, Spain"
     contributions:
       - type: "Oral"
         authors: "Franco-Martínez, A., & Cables, L."
         title: "Apples and Oranges? Essentialism as a Pillar of the Sex-Gender System"
+        title_es: "¿Peras y manzanas?: El esencialismo como sostén del sistema sexo-género"
 
   - date: "Jul 2021"
     event: "IX Conference of the European Association of Methodology"
@@ -240,25 +266,31 @@ entries:
 
   - date: "Jul 2019"
     event: "XVI Congress of Methodology (AEMCCO)"
+    event_es: "XVI Congreso de Metodología (AEMCCO)"
     place: "Madrid, Spain"
     contributions:
       - type: "Oral"
         authors: "Franco-Martínez, A., Fernández-Regueras, D., & Gregori-Labarta, S."
         title: "How To Score a Situational Judgement Test Without Correct Options? A Comparative Study of Scoring Methods on CTT and IRT"
+        title_es: "¿Cómo cuantificar un test de juicio situacional sin opciones correctas? Estudio comparativo de cuantificaciones basadas en TCT y TRI"
         link: "https://www.researchgate.net/publication/346317646_Como_cuantificar_un_Test_de_Juicio_Situacional_sin_opciones_correctas"
 
   - date: "May 2019"
     event: "I Conference of Young Psychology Professionals"
+    event_es: "I Jornadas de Jóvenes Profesionales de la Psicología"
     place: "Madrid, Spain"
     contributions:
       - type: "Oral"
         authors: "Franco-Martínez, A. & Igoa, J. M."
         title: "Cognitive Effects of the Masculine Generic and Alternative Forms in Spanish"
+        title_es: "¿Todos, todos/as, todxs o todes? Efectos cognitivos del uso del genérico masculino y sus formas alternativas en español"
 
   - date: "Apr 2019"
     event: "I International Congress of Interdisciplinary LGTBIQ+ Studies"
+    event_es: "I Congreso Internacional de Estudios Interdisciplinares LGTBIQ+ en español"
     place: "Madrid, Spain"
     contributions:
       - type: "Oral"
         authors: "Franco-Martínez, A. & Igoa, J. M."
         title: "Cognitive Effects of the Masculine Generic and Alternative Forms in Spanish"
+        title_es: "¿Todos, todos/as, todxs o todes? Efectos del genérico masculino y formas alternativas en las expectativas grupales y la percepción de autoeficacia en español"

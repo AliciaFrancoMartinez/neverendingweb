@@ -1,0 +1,3 @@
+# Versión en español de la web: todas las páginas de esta carpeta van en español
+# (<html lang="es"> y textos de Quarto en español). Ver _includes/lang-switch.html
+lang: es

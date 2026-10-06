@@ -63,3 +63,11 @@ project in Supabase, it disappears from the copy at the next refresh.
 
 Your own projects (assets/my-drawer.js) carry their Supabase id, so they are
 not repeated in the community drawer.
+
+VERSIÓN EN ESPAÑOL
+------------------
+La página en español es es/Researcher/Drawer.qmd y usa los mismos scripts (Researcher/assets/).
+· drawer.js elige los textos según el idioma de la página (<html lang="es">).
+· Tus proyectos de my-drawer.js llevan su traducción en el campo es: { title, topic, description }.
+· Los envíos desde la página en español van a la misma tabla de Supabase, y la copia guardada
+  (assets/community-drawer.json) sirve para las dos páginas.

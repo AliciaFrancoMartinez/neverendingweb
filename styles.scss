@@ -558,3 +558,128 @@ main#quarto-document-content > *:first-child {
     border-radius: 8px;
   }
 }
+
+/* === SELECTOR DE IDIOMA (EN / ES) en el menú; lo crea _includes/lang-switch.html === */
+.navbar-nav .lang-switch {
+  display: flex;
+  align-items: center;
+  margin-left: .5rem;
+}
+.navbar-nav .lang-switch .lang-switch-link {
+  padding-left: .3rem !important;
+  padding-right: .3rem !important;
+  font-size: .8em;
+  letter-spacing: .08em;
+  opacity: .55;
+  transition: opacity .2s ease;
+}
+.navbar-nav .lang-switch .lang-switch-link:hover,
+.navbar-nav .lang-switch .lang-switch-link:focus-visible { opacity: 1; }
+.navbar-nav .lang-switch .lang-switch-link[aria-current] {
+  opacity: 1;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .3em;
+  text-decoration-thickness: 2px;
+}
+.navbar-nav .lang-switch-sep {
+  font-size: .8em;
+  opacity: .4;
+}
+@media (max-width: 991.98px) {
+  .navbar-nav .lang-switch { margin-left: 0; }
+  /* en el menú plegado, alineado con el resto de opciones */
+  .navbar-nav .lang-switch .lang-switch-link:first-child { padding-left: .6rem !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MODO OSCURO — se activa con el botón ☾ del menú (_includes/theme.html), que
+   pone <html data-theme="dark">. Aquí: menú, botón y portada (Person).
+   El resto de páginas tienen su bloque al final de su propio .css.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Botón ☾ / ☀ */
+.theme-toggle {
+  order: 998;            /* justo antes del buscador (que Quarto coloca con order: 999) */
+  display: inline-grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  margin: 0 .2rem;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  color: var(--bs-navbar-color);
+  opacity: .8;
+  transition: opacity .2s ease, background-color .2s ease, transform .3s ease;
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible { opacity: 1; background: rgba(127, 127, 127, .14); }
+.theme-toggle:active { transform: rotate(-20deg); }
+.theme-toggle svg { width: 1.15rem; height: 1.15rem; }
+.theme-toggle .theme-toggle-sun,
+html[data-theme="dark"] .theme-toggle .theme-toggle-moon { display: none; }
+html[data-theme="dark"] .theme-toggle .theme-toggle-sun { display: block; }
+
+html[data-theme="dark"] { color-scheme: dark; }
+html[data-theme="dark"] body {
+  background-color: #10161d;
+  color: #d6dde4;
+}
+
+/* Menú */
+html[data-theme="dark"] header#quarto-header {
+  background: rgba(13, 18, 25, .62) !important;
+}
+html[data-theme="dark"] #quarto-header .navbar {
+  --bs-navbar-color: #d9e0e7;
+  --bs-navbar-hover-color: #9cc4ff;
+  --bs-navbar-active-color: #8ab8ff;
+  --bs-navbar-brand-color: #e9eef3;
+  --bs-navbar-brand-hover-color: #9cc4ff;
+}
+html[data-theme="dark"] #quarto-header .navbar-toggler-icon {
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb%28217, 224, 231%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+html[data-theme="dark"] #quarto-header .navbar-title,
+html[data-theme="dark"] #quarto-header .nav-link,
+html[data-theme="dark"] #quarto-header .aa-DetachedSearchButton .aa-DetachedSearchButtonIcon { color: var(--bs-navbar-color); }
+html[data-theme="dark"] #quarto-header .nav-link.active { color: var(--bs-navbar-active-color); }
+
+/* El símbolo de Auryn es oscuro: en modo oscuro se aclara */
+html[data-theme="dark"] .navbar-logo,
+html[data-theme="dark"] .person-story-logo,
+html[data-theme="dark"] .border-logo,
+html[data-theme="dark"] .auryn-wheel { filter: invert(1) hue-rotate(180deg) brightness(.92); }
+html[data-theme="dark"] .border-logo { opacity: .1; }
+
+/* Portada (Person) */
+html[data-theme="dark"] .person-story-wrap::before {
+  background: radial-gradient(120% 120% at 0% 0%, rgba(54, 104, 150, .35) 0%, rgba(16, 22, 29, 0) 55%),
+              radial-gradient(120% 130% at 100% 100%, rgba(150, 82, 52, .3) 0%, rgba(16, 22, 29, 0) 60%);
+}
+html[data-theme="dark"] .person-story-card {
+  background: linear-gradient(150deg, rgba(24, 33, 43, .97), rgba(29, 31, 38, .96));
+  border-color: rgba(120, 150, 180, .22);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .45);
+}
+html[data-theme="dark"] .person-story-card h2 { color: #eef3f8; }
+html[data-theme="dark"] .person-story-card p { color: #c8d2db; }
+html[data-theme="dark"] .person-story-card a { color: #7fbcf0; }
+html[data-theme="dark"] .person-story-card a:hover { color: #b0d6f8; }
+html[data-theme="dark"] .story-side-image,
+html[data-theme="dark"] .story-top-image {
+  border-color: rgba(120, 150, 180, .2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+}
+html[data-theme="dark"] .person-contact-panel { border-top-color: rgba(120, 150, 180, .35); }
+html[data-theme="dark"] .person-contact-email { border-bottom-color: rgba(127, 188, 240, .4); }
+html[data-theme="dark"] .person-contact-email a { color: #dbe7f2; }
+html[data-theme="dark"] .person-contact-link,
+html[data-theme="dark"] .person-contact-link:hover { color: #cfe0ee; }
+/* los iconos de contacto son negros: en modo oscuro se aclaran */
+html[data-theme="dark"] .person-contact-email img,
+html[data-theme="dark"] .person-contact-link img { filter: invert(1) hue-rotate(180deg); }
+html[data-theme="dark"] .person-contact-link svg { color: #e8e8e8 !important; }
+

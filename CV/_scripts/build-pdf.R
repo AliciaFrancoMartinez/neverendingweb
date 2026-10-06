@@ -1,7 +1,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
-#  build-pdf.R — genera los PDF del CV a partir de CV/data:
-#    · CV largo  → CV/cv-print.html → CV/<pdf de profile.yml>
-#    · CV corto  → CV/cv-short.html → CV/<short_pdf de profile.yml>
+#  build-pdf.R — genera los PDF del CV a partir de CV/data, en inglés y en español:
+#    · CV largo  → CV/cv-print.html → CV/<pdf de profile.yml>        (español: pdf_es)
+#    · CV corto  → CV/cv-short.html → CV/<short_pdf de profile.yml>  (español: short_pdf_es)
 #
 #  Se ejecuta solo antes de cada `quarto render` (pre-render en _quarto.yml) y
 #  únicamente rehace cada PDF si has cambiado algún dato o estilo.
@@ -72,12 +72,23 @@ build_pdf <- function(label, html_fn, html_file, pdf, exclude, force = FALSE, ch
 
 build_all <- function(force = FALSE) {
   profile <- read_yaml(file.path(CV_ROOT, "data", "profile.yml"))
-  # los estilos y el JS de la web no afectan a los PDF
-  build_pdf("largo", cv_print_html, file.path(CV_ROOT, "cv-print.html"), file.path(CV_ROOT, profile$pdf),
-            exclude = "cv-web\\.|cv-short\\.|_LEEME|photo\\.", force = force)
-  if (length(profile$short_pdf)) {
-    build_pdf("corto", cv_short_html, file.path(CV_ROOT, "cv-short.html"), file.path(CV_ROOT, profile$short_pdf),
-              exclude = "cv-web\\.|cv-print\\.|cv-paged\\.|_LEEME", force = force, check_fit = TRUE)
+  # Un juego de PDF por idioma: inglés (pdf, short_pdf) y español (pdf_es, short_pdf_es)
+  for (lang in c("en", "es")) {
+    field <- function(f) profile[[if (lang == "en") f else paste0(f, "_", lang)]]
+    sfx <- if (lang == "en") "" else paste0("-", lang)
+    # el diccionario es.yml solo afecta al CV en español
+    other_dict <- if (lang == "en") "|data/es\\.yml" else ""
+    # los estilos y el JS de la web no afectan a los PDF
+    if (length(field("pdf"))) {
+      build_pdf(paste("largo", lang), function() cv_print_html(lang = lang), file.path(CV_ROOT, paste0("cv-print", sfx, ".html")),
+                file.path(CV_ROOT, field("pdf")),
+                exclude = paste0("cv-web\\.|cv-short\\.|_LEEME|photo\\.", other_dict), force = force)
+    }
+    if (length(field("short_pdf"))) {
+      build_pdf(paste("corto", lang), function() cv_short_html(lang = lang), file.path(CV_ROOT, paste0("cv-short", sfx, ".html")),
+                file.path(CV_ROOT, field("short_pdf")),
+                exclude = paste0("cv-web\\.|cv-print\\.|cv-paged\\.|_LEEME", other_dict), force = force, check_fit = TRUE)
+    }
   }
 }
 

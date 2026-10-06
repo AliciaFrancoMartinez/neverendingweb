@@ -5,32 +5,44 @@
 #   lines   líneas de texto libre. Admite *cursiva*, **negrita**, [enlaces](https://…) y emojis (📍 🔗 …)
 #   logos   imágenes a la derecha (archivos de CV/assets/img/)
 #   short   frase para el CV corto (en una entrada o en un grupo entero)
+# Versión en español: el mismo campo con _es (title_es, lines_es…). Ver _LEEME.md
 
 title: "Research Experience & Visits"
+title_es: "Experiencia investigadora"
 
 groups:
   - title: "Current Position"
+    title_es: "Puesto actual"
     entries:
       - date: "since 2026"
         title: "**Postdoctoral** researcher"
+        title_es: "Investigadora **posdoctoral**"
         lines:
           - "📍 Universidad Autónoma de Madrid (Spain)"
           - "*Cognitive, Attention, and Learning Lab* ([CALL 🔗](https://calluam.wordpress.com))"
         logos: ["logo-call.png"]
         short: "Postdoc at the Cognitive, Attention, and Learning Lab ([CALL 🔗](https://calluam.wordpress.com))"
+        short_es: "Investigadora posdoctoral en el Cognitive, Attention, and Learning Lab ([CALL 🔗](https://calluam.wordpress.com))"
 
   - title: "Previous Research Experience"
+    title_es: "Experiencia investigadora previa"
     entries:
       - date: "2024–2026"
         title: "**Principal Investigator (PI)**"
+        title_es: "**Investigadora principal (IP)**"
         lines:
           - "of a **Center for Open Science** project ($37.679,75): 19 labs, 13 countries"
           - "[🔗 *Replicating the unconscious Working Memory effect*](https://portalcientifico.uam.es/es/ipublic/item/9938508)"
+        lines_es:
+          - "de un proyecto del **Center for Open Science** (37.679,75 $): 19 laboratorios, 13 países"
+          - "[🔗 *Replicating the unconscious Working Memory effect*](https://portalcientifico.uam.es/es/ipublic/item/9938508)"
         logos: ["logo-cos.png", "logo-uwm.png"]
         short: ["PI of a Center for Open Science project ($37.679,75)", "[*Replicating the unconscious Working Memory effect* 🔗](https://portalcientifico.uam.es/es/ipublic/item/9938508)"]
+        short_es: ["IP de un proyecto del Center for Open Science (37.679,75 $)", "[*Replicating the unconscious Working Memory effect* 🔗](https://portalcientifico.uam.es/es/ipublic/item/9938508)"]
 
       - date: "2022–2026"
         title: "**FPI Predoctoral Researcher**"
+        title_es: "**Investigadora predoctoral FPI**"
         lines:
           - "📍 Universidad Autónoma de Madrid (Spain)"
           - "*Cognitive, Attention, and Learning Lab* ([CALL 🔗](https://calluam.wordpress.com))"
@@ -38,12 +50,14 @@ groups:
 
       - date: "2022"
         title: "**Research Assistant**"
+        title_es: "**Ayudante de investigación**"
         lines:
           - "📍 Universidad Autónoma de Madrid (Spain)"
           - "*Cognitive, Attention, and Learning Lab* ([CALL 🔗](https://calluam.wordpress.com))"
 
       - date: "2018"
         title: "Curricular internship"
+        title_es: "Prácticas curriculares"
         lines:
           - "Psyma Ibérica, Market Research and Consumer Insights"
           - "📍 Madrid, Spain"
@@ -51,30 +65,45 @@ groups:
 
       - date: "2017"
         title: "External internship"
+        title_es: "Prácticas externas"
         lines:
           - "Survey Team, Unit for Quality of Studies"
           - "📍 UAM, Spain"
+        lines_es:
+          - "Equipo de Encuestas, Unidad de Calidad de los Estudios"
+          - "📍 UAM, España"
         logos: ["logo-opinion.png"]
 
       - date: "2016"
         title: "Research Collaborator"
+        title_es: "Colaboradora de investigación"
         lines:
           - "📍 Tilburg School of Social and Behavioral Sciences (NL)"
         logos: ["logo-tilburg.png"]
 
   - title: "Research International Visits"
+    title_es: "Estancias internacionales"
     short: "Research visits at UCL (2024) and UvA (2026)"
+    short_es: "Estancias de investigación en la UCL (2024) y la UvA (2026)"
     entries:
       - date: "2026"
         title: "**Research visit** – 3 months"
+        title_es: "**Estancia de investigación** – 3 meses"
         lines:
           - "Supervised by Makiko Sadakata"
           - "📍 ILLC, Universiteit van Amsterdam (The Netherlands)"
+        lines_es:
+          - "Supervisada por Makiko Sadakata"
+          - "📍 ILLC, Universiteit van Amsterdam (Países Bajos)"
         logos: ["logo-uva.png"]
 
       - date: "2024"
         title: "**PhD visit** – 3 months"
+        title_es: "**Estancia predoctoral** – 3 meses"
         lines:
           - "Supervised by David R. Shanks"
           - "📍 Psychology & Language Sciences, University College London (UK)"
+        lines_es:
+          - "Supervisada por David R. Shanks"
+          - "📍 Psychology & Language Sciences, University College London (Reino Unido)"
         logos: ["logo-ucl.png"]

@@ -1,0 +1,89 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  TRADUCCIONES AL ESPAÑOL (versión en español de la web y PDF en español)
+#
+#  Lo normal es poner la traducción junto al dato, en el mismo YAML, con el
+#  sufijo _es:
+#      title: "Best Poster Award"
+#      title_es: "Premio al mejor póster"
+#
+#  Este archivo es solo para lo que se repite muchas veces (lugares, tipos de
+#  comunicación, entidades…), para traducirlo una sola vez.
+#  Si algo no tiene traducción, en la versión en español sale tal cual (en inglés).
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Textos completos: si un campo coincide EXACTAMENTE con el de la izquierda,
+# se cambia por el de la derecha (en cualquier sección).
+textos:
+  # fechas especiales
+  "In press": "En prensa"
+  "Now": "Actualidad"
+
+  # congresos: tipos de comunicación y papeles
+  "Poster": "Póster"
+  "Symposium": "Simposio"
+  "Attend.": "Asist."
+  "Organizer": "Organizadora"
+  "Best Poster Award": "Premio al mejor póster"
+
+  # congresos: nombre de cada serie en el CV corto (campo series)
+  "SEPEX Meetings": "Congresos SEPEX"
+  "AEMCCO Congresses": "Congresos AEMCCO"
+  "AIIDI Conferences": "Jornadas AIIDI"
+  "EAM Congresses": "Congresos EAM"
+  "ASSC Annual Meetings": "Congresos anuales de la ASSC"
+  "EPS Annual Meeting": "Congreso anual de la EPS"
+
+  # lugares que no se traducen palabra a palabra
+  "Seville, Spain": "Sevilla, España"
+  "London, UK": "Londres, Reino Unido"
+  "New York, USA": "Nueva York, EE. UU."
+  "Tokyo, Japan": "Tokio, Japón"
+  "Heraklion, Greece": "Heraclión, Grecia"
+  "Amsterdam (The Netherlands)": "Ámsterdam (Países Bajos)"
+
+  # entidades
+  "Doctoral School": "Escuela de Doctorado"
+  "MSc in Methodology": "Máster en Metodología"
+  "Spanish Association of Methodology for the Behavioural Sciences": "Asociación Española de Metodología de las Ciencias del Comportamiento"
+  "Faculty of Psychology, Universidad Autónoma de Madrid": "Facultad de Psicología, Universidad Autónoma de Madrid"
+  "📍 *Faculty of Psychology, Universidad Autónoma de Madrid*": "📍 *Facultad de Psicología, Universidad Autónoma de Madrid*"
+
+  # premios y charlas que se repiten
+  "Student Activities Grant": "Ayuda para Actividades del Estudiantado"
+  "Ecuación Triunfo - Streaming contest for disseminating psychology research methods": "Ecuación Triunfo - Concurso en streaming para divulgar los métodos de investigación en psicología"
+  "Workshop about *ChatGPT and teaching*": "Taller sobre *ChatGPT y docencia*"
+  "How can we adapt our teaching to the AI and ChatGPT revolution?": "¿Cómo adaptar nuestra docencia a la revolución de las IAs y ChatGPT?"
+
+  # docencia: asignaturas y tipo de clases
+  "Psychology of Memory": "Psicología de la Memoria"
+  "Psychology of Language": "Psicología del Lenguaje"
+  "Perception and Attention": "Percepción y Atención"
+  "Research Designs in Psychology": "Diseños de Investigación en Psicología"
+  "Psychometrics": "Psicometría"
+  "Methodology": "Metodología"
+  "Practical sessions (26h)": "Clases prácticas (26 h)"
+  "Practical sessions (43h)": "Clases prácticas (43 h)"
+  "Practical sessions (60h)": "Clases prácticas (60 h)"
+  "Theoretical and practical sessions (123h)": "Clases teóricas y prácticas (123 h)"
+
+  # idiomas
+  "**Spanish** (mother tongue)": "**Español** (lengua materna)"
+  "**English** (C)": "**Inglés** (C)"
+  "**Spanish Sign Language** (A1)": "**Lengua de signos española** (A1)"
+
+# Palabras sueltas que se traducen dentro de las FECHAS (campo date)
+fechas:
+  "Jan": "Ene"
+  "Apr": "Abr"
+  "Aug": "Ago"
+  "Dec": "Dic"
+  "since": "desde"
+  "&": "y"
+
+# Palabras sueltas que se traducen dentro de LUGARES y textos libres
+# (campos date, place, places, lines, org, short y short_note)
+lugares:
+  "Spain": "España"
+  "The Netherlands": "Países Bajos"
+  "UK": "Reino Unido"
+  "ONLINE": "EN LÍNEA"

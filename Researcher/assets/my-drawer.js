@@ -8,6 +8,7 @@
     abandoned_year  año en que lo dejaste
     description     su historia (puedes usar saltos de línea con \n)
     id              (opcional) id de la fila en Supabase, para que no salga también en el de la comunidad
+    es              (opcional) traducción para la web en español: { title, topic, description }
 */
 window.MY_DRAWER = [
   {
@@ -17,6 +18,10 @@ window.MY_DRAWER = [
     stage: "analysis",
     abandoned_year: 2025,
     description: "We were interested in the relationship between intuition measured with a questionnaire and a behavioral measure of unconscious processing, but the questionnaire data were a mess and any storyline sounded too weak to be worth telling.",
+    es: {
+      title: "Contraintuitivo",
+      description: "Nos interesaba la relación entre la intuición medida con un cuestionario y una medida conductual del procesamiento inconsciente, pero los datos del cuestionario eran un desastre y cualquier historia que contar sonaba demasiado floja.",
+    },
   },
   {
     id: "a1eb83d7-9408-43fa-9d2f-7760a4d8ada6",
@@ -25,6 +30,10 @@ window.MY_DRAWER = [
     stage: "planning",
     abandoned_year: 2024,
     description: "We planned to adapt a model we had to Bayesian statistics.",
+    es: {
+      title: "Modelo bayesiano de la consciencia",
+      description: "Queríamos adaptar a la estadística bayesiana un modelo que ya teníamos.",
+    },
   },
   {
     id: "069c1319-7c36-4e95-8487-23a982fac6e2",
@@ -33,6 +42,10 @@ window.MY_DRAWER = [
     stage: "writing",
     abandoned_year: 2023,
     description: "One of the first works to approach how GPT could aid in psychometrics tasks",
+    es: {
+      topic: "psicometría",
+      description: "Uno de los primeros trabajos en explorar cómo GPT podía ayudar en tareas de psicometría",
+    },
   },
   {
     id: "0ede80b0-cc81-4f46-b6d2-890ddf12cf17",
@@ -41,6 +54,11 @@ window.MY_DRAWER = [
     stage: "planning",
     abandoned_year: 2022,
     description: "Some simulations about bifactor models",
+    es: {
+      title: "Estructuras bifactoriales",
+      topic: "psicometría",
+      description: "Unas simulaciones sobre modelos bifactoriales",
+    },
   },
   {
     id: "af384515-9a3e-458d-a549-27d46e6299a9",
@@ -49,5 +67,10 @@ window.MY_DRAWER = [
     stage: "data",
     abandoned_year: 2021,
     description: "We designed a situational judgement test to measure sexism and other discriminatory beliefs, but the project got stuck after the piloting.",
+    es: {
+      title: "¿Peras o manzanas?",
+      topic: "psicología social",
+      description: "Diseñamos un test de juicio situacional para medir el sexismo y otras creencias discriminatorias, pero el proyecto se atascó después del pilotaje.",
+    },
   },
 ];

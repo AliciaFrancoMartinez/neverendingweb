@@ -1,0 +1,83 @@
+<!--
+  Selector de idioma EN / ES de la barra de menú (se añade a todas las páginas desde _quarto.yml).
+  · La web en inglés está en la raíz y la española en es/, con las mismas rutas:
+      Researcher/Researcher.html  ⇄  es/Researcher/Researcher.html
+  · En las páginas de es/ traduce los textos del menú y hace que sus enlaces lleven a es/.
+  · El inglés es siempre el idioma por defecto: no se redirige a nadie automáticamente.
+-->
+<script>
+(() => {
+  "use strict";
+  // Textos del menú en español (clave = página en inglés)
+  const MENU_ES = {
+    "index.html": "Persona",
+    "Researcher/Researcher.html": "Investigadora",
+    "Visitor/Visitor.html": "Visitante",
+    "cv.html": "CV",
+  };
+
+  const nav = document.querySelector("#quarto-header .navbar-nav");
+  if (!nav) return;
+  const offset = document.querySelector('meta[name="quarto:offset"]');
+  const root = new URL(offset ? offset.content : "./", window.location.href);
+
+  // Ruta de una página respecto a la raíz de la web ("" o "x/" → "x/index.html")
+  const pagePath = (url) => {
+    let path = decodeURI(url.pathname).slice(decodeURI(root.pathname).length);
+    if (path === "" || path.endsWith("/")) path += "index.html";
+    return path;
+  };
+  const toUrl = (path) => new URL(path, root).href;
+
+  const here = pagePath(window.location);
+  const isEs = here.startsWith("es/");
+  const page = isEs ? here.slice(3) : here;   // la misma página, en inglés
+
+  if (isEs) {
+    document.querySelectorAll("#quarto-header a.nav-link, #quarto-header a.navbar-brand").forEach((a) => {
+      const url = new URL(a.getAttribute("href"), window.location.href);
+      if (url.origin !== window.location.origin) return;
+      const target = pagePath(url);
+      if (target.startsWith("es/")) return;
+      a.href = toUrl("es/" + target) + url.hash;
+      const text = a.querySelector(".menu-text");
+      if (text && MENU_ES[target]) text.textContent = MENU_ES[target];
+      if (a.classList.contains("nav-link")) {
+        const current = target === page;
+        a.classList.toggle("active", current);
+        if (current) a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  // Botón EN / ES: lleva a la misma página (y a la misma sección, si la hay) en el otro idioma
+  const item = document.createElement("li");
+  item.className = "nav-item lang-switch";
+  item.setAttribute("role", "group");
+  item.setAttribute("aria-label", isEs ? "Idioma" : "Language");
+  [["en", "EN", "English", page], ["es", "ES", "Español", "es/" + page]].forEach(([lang, label, name, path], i) => {
+    if (i) {
+      const sep = document.createElement("span");
+      sep.className = "lang-switch-sep";
+      sep.setAttribute("aria-hidden", "true");
+      sep.textContent = "/";
+      item.appendChild(sep);
+    }
+    const a = document.createElement("a");
+    a.className = "nav-link lang-switch-link";
+    a.href = toUrl(path);
+    a.lang = lang;
+    a.hreflang = lang;
+    a.textContent = label;
+    a.title = name;
+    if ((lang === "es") === isEs) {
+      a.setAttribute("aria-current", "true");
+    } else {
+      a.addEventListener("click", () => { a.href = toUrl(path) + window.location.hash; });
+    }
+    item.appendChild(a);
+  });
+  nav.appendChild(item);
+})();
+</script>

@@ -1,0 +1,133 @@
+---
+title: "Nuestro cajón"
+format:
+  html:
+    theme:
+      - cosmo
+      - ../../styles.scss
+    css:
+      - ../../Researcher/stylesDrawer.css
+---
+
+<!-- Versión en español de Researcher/Drawer.qmd. Si cambias algo allí, cámbialo también aquí. -->
+
+
+```{=html}
+<div class="drawer-page" data-view="mine">
+  <section class="drawer-archive" aria-labelledby="drawer-title">
+    <div class="drawer-heading">
+      <div class="drawer-heading-copy">
+        <h1 id="drawer-title">
+          <span data-for="mine">Mi cajón</span>
+          <span data-for="community">El cajón de<br>la comunidad</span>
+        </h1>
+        <p class="drawer-subtitle" data-for="mine">Los proyectos que empecé, quise y dejé atrás.</p>
+        <p class="drawer-subtitle" data-for="community">Todo el mundo tiene uno. Añade los proyectos que abandonaste para que no caigan en el olvido.</p>
+      </div>
+      <button class="drawer-refresh" id="drawer-refresh" data-for="community" type="button" aria-label="Actualizar el archivo" title="Actualizar el archivo">↻</button>
+    </div>
+    <div class="drawer-margin-arrow" data-for="community" aria-hidden="true">
+      <svg viewBox="0 0 120 1000" preserveAspectRatio="none" focusable="false">
+        <path class="drawer-margin-arrow-line" d="M109 16 C39 10 25 91 22 190 C18 309 29 405 19 525 C10 642 22 735 25 825 C27 886 36 928 51 958"></path>
+        <path class="drawer-margin-arrow-head" d="M24 925 C33 939 41 950 52 961 C59 944 66 928 74 915"></path>
+      </svg>
+    </div>
+    <div class="drawer-showcase">
+      <div class="drawer-lists">
+        <div class="drawer-projects" id="my-projects" data-for="mine" role="tabpanel" aria-labelledby="cabinet-mine" aria-live="polite"></div>
+        <div class="drawer-projects" id="drawer-projects" data-for="community" role="tabpanel" aria-labelledby="cabinet-community" aria-live="polite" aria-busy="true">
+          <div class="drawer-loading"><span></span><span></span><span></span><p>Abriendo el cajón…</p></div>
+        </div>
+        <a class="drawer-cta" data-for="community" href="#leave-a-project">Añade tu proyecto abandonado <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="drawer-side-art">
+        <div class="drawer-cabinets" role="tablist" aria-label="Cajones">
+          <button class="drawer-cabinet drawer-cabinet--mine" id="cabinet-mine" type="button" role="tab" aria-selected="true" aria-controls="my-projects" data-view="mine" aria-label="Mi cajón">
+            <img src="../../Researcher/assets/drawer-cabinet.png" alt="">
+            <span class="drawer-cabinet-label">Mi cajón</span>
+          </button>
+          <button class="drawer-cabinet drawer-cabinet--community" id="cabinet-community" type="button" role="tab" aria-selected="false" aria-controls="drawer-projects" data-view="community" aria-label="El cajón de la comunidad">
+            <span class="drawer-cabinet-hint" data-for="mine" aria-hidden="true">
+              <span class="drawer-cabinet-hint-text">¡ábreme!</span>
+              <svg viewBox="0 0 64 56" focusable="false">
+                <path class="drawer-cabinet-hint-line" d="M50 8 C30 6 15 18 12 46"></path>
+                <path class="drawer-cabinet-hint-head" d="M4 38 C7 42 10 46 12 49 C15 45 18 41 22 38"></path>
+              </svg>
+            </span>
+            <img src="../../Researcher/assets/drawer-cabinet.png" alt="">
+            <span class="drawer-cabinet-label">El cajón de la comunidad</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="drawer-form-section" id="leave-a-project" data-for="community" aria-labelledby="form-title">
+    <div class="drawer-form-intro">
+      <h2 id="form-title">¿Qué dejaste en el cajón?</h2>
+      <p>Cuenta tanto o tan poco como quieras. Tu nombre es opcional.</p>
+    </div>
+
+    <form class="drawer-form" id="drawer-form" novalidate>
+      <div class="drawer-field drawer-field-wide">
+        <label for="project-title">Título del proyecto <span class="required-marker" aria-hidden="true">*</span></label>
+        <input id="project-title" name="title" type="text" maxlength="120" autocomplete="off" required placeholder="¿Cuál era su título corto?">
+      </div>
+
+      <div class="drawer-field">
+        <label for="project-topic">Campo o tema <span class="required-marker" aria-hidden="true">*</span></label>
+        <input id="project-topic" name="topic" type="text" maxlength="80" autocomplete="off" required placeholder="p. ej., psicología social">
+      </div>
+
+      <div class="drawer-field">
+        <label for="project-stage">¿Dónde se quedó? <span class="required-marker" aria-hidden="true">*</span></label>
+        <select id="project-stage" name="stage" required>
+          <option value="">Elige una fase</option>
+          <option value="idea">En la idea</option>
+          <option value="planning">Durante la planificación</option>
+          <option value="data">Durante la recogida de datos</option>
+          <option value="analysis">Durante el análisis de datos</option>
+          <option value="writing">Durante la escritura</option>
+          <option value="other">En otro momento</option>
+        </select>
+      </div>
+
+      <div class="drawer-field drawer-field-year">
+        <label for="project-year">Año en que lo dejaste <span class="required-marker" aria-hidden="true">*</span></label>
+        <input id="project-year" name="abandoned_year" type="number" min="1900" inputmode="numeric" required placeholder="p. ej., 2024">
+      </div>
+
+      <div class="drawer-field drawer-field-wide">
+        <label for="project-description">Cuéntanos su historia <span class="required-marker" aria-hidden="true">*</span></label>
+        <textarea id="project-description" name="description" rows="6" maxlength="1200" required placeholder="¿Cuál era la pregunta? ¿Qué pasó? ¿Qué te quedó de él, si es que te quedó algo?"></textarea>
+        <p class="drawer-character-count"><span id="description-count">0</span> / 1200</p>
+      </div>
+
+      <div class="drawer-field drawer-field-wide">
+        <label for="display-name">Tu nombre <span>opcional</span></label>
+        <input id="display-name" name="display_name" type="text" maxlength="80" autocomplete="name" placeholder="Déjalo en blanco para archivarlo de forma anónima">
+      </div>
+
+      <div class="drawer-honeypot" aria-hidden="true">
+        <label for="project-website">Website</label>
+        <input id="project-website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <label class="drawer-consent">
+        <input name="consent" type="checkbox" required>
+        <span>Entiendo que este texto puede publicarse tras su revisión.</span>
+      </label>
+
+      <div class="drawer-submit-row">
+        <button class="drawer-submit" type="submit">Archivar este proyecto <span aria-hidden="true">→</span></button>
+        <p class="drawer-form-status" id="drawer-form-status" role="status" aria-live="polite"></p>
+      </div>
+      <p class="drawer-privacy-note">Por favor, no incluyas información confidencial, identificativa o sensible sobre participantes.</p>
+    </form>
+  </section>
+</div>
+
+<script src="../../Researcher/assets/drawer-config.js"></script>
+<script src="../../Researcher/assets/my-drawer.js"></script>
+<script src="../../Researcher/assets/drawer.js"></script>
+```

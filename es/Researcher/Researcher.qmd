@@ -1,26 +1,29 @@
 ---
-title: "Researcher"
+title: "Investigadora"
 format:
   html:
     theme:
       - cosmo
-      - ../styles.scss
+      - ../../styles.scss
     css: 
-      - stylesResearcher.css
+      - ../../Researcher/stylesResearcher.css
 ---
+
+<!-- Versión en español de Researcher/Researcher.qmd. Si cambias algo allí, cámbialo también aquí. -->
+
 ```{=html}
-<!-- Video header -->
+<!-- Cabecera con vídeo -->
 <div class="hero-video">
   <video autoplay muted loop playsinline>
-    <source src="assets/publications.mp4" type="video/mp4">
+    <source src="../../Researcher/assets/publications.mp4" type="video/mp4">
   </video>
   <div class="hero-text">
-  <h1>Researcher</h1>
-    <p>What I’ve studied so far…</p>
+  <h1>Investigadora</h1>
+    <p>Mi recorrido hasta ahora…</p>
   </div>
-  <a class="drawer-launch" href="Drawer.html" aria-label="Open Our drawer">
-    <img src="assets/drawer.png" alt="" aria-hidden="true">
-    <span>Our drawer</span>
+  <a class="drawer-launch" href="Drawer.html" aria-label="Abrir nuestro cajón">
+    <img src="../../Researcher/assets/drawer.png" alt="" aria-hidden="true">
+    <span>Nuestro cajón</span>
   </a>
 </div>
 
@@ -29,15 +32,15 @@ format:
   <div class="timeline-item left">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/work-in-progress.png" alt="paper icon" class="icon-paper">
+      <img src="../../Researcher/assets/work-in-progress.png" alt="icono de artículo" class="icon-paper">
   Creative Creature Creator</span>
       <div class="full-text">
-      <img src="assets/demotitle.png" alt="article" class="icon-paper">
-        <h3>In progress...</h3>
+      <img src="../../Researcher/assets/demotitle.png" alt="artículo" class="icon-paper">
+        <h3>En curso...</h3>
         <p><strong>Franco-Martínez et al. </strong><br>
         <a href="https://osf.io/preprints/psyarxiv/xkaw6_v1"
      target="_blank"
-     title="Open paper">
+     title="Abrir artículo">
      🔗</a> 
      Measuring Creativity Process and Product with a Digitized Invented Alien Creatures Task.</p>
     </div>
@@ -48,15 +51,15 @@ format:
   <div class="timeline-item right">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/book.png" alt="book icon" class="icon-book">
-  PhD Dissertation</span>
+      <img src="../../Researcher/assets/book.png" alt="icono de libro" class="icon-book">
+  Tesis doctoral</span>
       <div class="full-text">
-      <img src="assets/tesis.png" alt="portada" class="icon-tesis">
+      <img src="../../Researcher/assets/tesis.png" alt="portada" class="icon-tesis">
         <h3>2022-2026</h3>
         <p><strong>Alicia Franco-Martínez</strong><br>
         <a href=""
      target="_blank"
-     title="Open paper">
+     title="Abrir artículo">
      🔗</a> 
      Be(a)ware of Validity: Inferences and Measures in Unconscious Processing Research.</p>
     </div>
@@ -66,15 +69,15 @@ format:
   <div class="timeline-item left">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/submit.png" alt="submitted" class="icon-paper">
-  Validity of the PAS</span>
+      <img src="../../Researcher/assets/submit.png" alt="enviado" class="icon-paper">
+  Validez de la PAS</span>
       <div class="full-text">
-      <img src="assets/PASs.png" alt="article" class="icon-paper">
-        <h3>Under review...</h3>
+      <img src="../../Researcher/assets/PASs.png" alt="artículo" class="icon-paper">
+        <h3>En revisión...</h3>
         <p><strong>Franco-Martínez et al. </strong><br>
         <a href="https://osf.io/jd7ak/overview"
      target="_blank"
-     title="Open paper">
+     title="Abrir artículo">
      🔗</a> 
      Choose your own PAS? Quantitative and qualitative validity evidence for the Perceptual Awareness Scale.</p>
     </div>
@@ -84,15 +87,15 @@ format:
   <div class="timeline-item right">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/reporting.png" alt="paper" class="icon-paper">
-      Resources for multisite studies</span>
+      <img src="../../Researcher/assets/reporting.png" alt="artículo" class="icon-paper">
+      Recursos para estudios multicéntricos</span>
       <div class="full-text">
-      <img src="assets/ReRe.png" alt="article" class="icon-paper">
+      <img src="../../Researcher/assets/ReRe.png" alt="artículo" class="icon-paper">
       <h3>2026</h3>
       <p><strong>Franco-Martínez & Vadillo </strong><br> 
       <a href="https://doi.org/10.1525/collabra.159983"
      target="_blank"
-     title="Open paper">
+     title="Abrir artículo">
      🔗</a> A gentle push toward leading your first multisite Registered Report: Resources and recommendations from an early-career coordinator</p>
     </div>
   </div>
@@ -102,15 +105,15 @@ format:
   <div class="timeline-item left">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/reporting.png" alt="article" class="icon-paper">
-       Replicating unconscious WM effect</span>
+      <img src="../../Researcher/assets/reporting.png" alt="artículo" class="icon-paper">
+       Replicando el efecto de MT inconsciente</span>
       <div class="full-text">
-      <img src="assets/uWM.png" alt="article" class="icon-paper">
+      <img src="../../Researcher/assets/uWM.png" alt="artículo" class="icon-paper">
       <h3>2026</h3>
       <p><strong>Franco-Martínez et al. </strong><br>
       <a href="https://academic.oup.com/nc/article-abstract/2026/1/niaf046/8429939"
      target="_blank"
-     title="Open paper">
+     title="Abrir artículo">
      🔗</a> Replicating the unconscious Working Memory effect: A multisite Registered Report</p>
       <p><em>Neuroscience of Consciousness</em></p>
     </div>
@@ -120,20 +123,20 @@ format:
   <div class="timeline-item right">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/experts.png" alt="article" class="icon-paper">
-      COS project</span>
+      <img src="../../Researcher/assets/experts.png" alt="artículo" class="icon-paper">
+      Proyecto COS</span>
       <div class="full-text">
-      <img src="assets/uWM logo.png" alt="article" class="icon-paper">
+      <img src="../../Researcher/assets/uWM logo.png" alt="artículo" class="icon-paper">
       <h3>2022-2026</h3>
-      <p><strong>Principal Investigator</strong> $36.813<br>
+      <p><strong>Investigadora principal</strong> $36.813<br>
       <a href="https://osf.io/nz6m5/overview"
      target="_blank"
-     title="Open link">
+     title="Abrir enlace">
      🔗</a> Replicating the unconscious Working Memory effect: A multisite Registered Report</p>
       <p><a href="https://www.cos.io/consciousness"
      target="_blank"
-     title="Open paper">
-     <img src="assets/osf.png" alt="project" class="icon-paper">
+     title="Abrir artículo">
+     <img src="../../Researcher/assets/osf.png" alt="proyecto" class="icon-paper">
      </a> <em>Center for Open Science</em></p>
     </div>
   </div>
@@ -142,15 +145,15 @@ format:
   <div class="timeline-item left">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/reporting.png" alt="article" class="icon-paper">
-      Modeling measurement and sampling noise</span>
+      <img src="../../Researcher/assets/reporting.png" alt="artículo" class="icon-paper">
+      Modelando el ruido de medida y de muestreo</span>
       <div class="full-text">
-      <img src="assets/msN.png" alt="article" class="icon-paper">
+      <img src="../../Researcher/assets/msN.png" alt="artículo" class="icon-paper">
       <h3>2025</h3>
       <p><strong>Franco-Martínez et al. </strong><br>
         <a href="https://www.sciencedirect.com/science/article/pii/S0749596X25000142"
      target="_blank"
-     title="Open paper">
+     title="Abrir artículo">
      🔗</a> Measurement and sampling noise undermine inferences about awareness in location probability learning
       <p><em>Journal of Memory and Language</em></p>
     </div>
@@ -160,14 +163,14 @@ format:
   <div class="timeline-item right">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/graduate.png" alt="article" class="icon-paper">
-      My PhD starts...</span>
+      <img src="../../Researcher/assets/graduate.png" alt="artículo" class="icon-paper">
+      Empieza mi doctorado...</span>
       <div class="full-text">
-      <img src="assets/phd.jpg" alt="article" class="icon-paper">
+      <img src="../../Researcher/assets/phd.jpg" alt="artículo" class="icon-paper">
       <h3>2022-2026</h3>
       <p><strong>FPI-MINECO</strong><br>
-       </a>Validity of the methods to infer unconsciousness in psychological processes
-      <p><em>Autonomous University of Madrid</em></p>
+       </a>Validez de los métodos para inferir inconsciencia en procesos psicológicos
+      <p><em>Universidad Autónoma de Madrid</em></p>
     </div>
   </div>
 </div>
@@ -175,15 +178,15 @@ format:
   <div class="timeline-item left">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/reporting.png" alt="article" class="icon-paper">
-      Range restriction affects Factor Analysis</span>
+      <img src="../../Researcher/assets/reporting.png" alt="artículo" class="icon-paper">
+      La restricción del rango afecta al análisis factorial</span>
       <div class="full-text">
-      <img src="assets/RR.png" alt="article" class="icon-paper">
+      <img src="../../Researcher/assets/RR.png" alt="artículo" class="icon-paper">
       <h3>2023</h3>
       <p><strong>Franco-Martínez et al. </strong><br> 
         <a href="https://pubmed.ncbi.nlm.nih.gov/36866065/"
      target="_blank"
-     title="Open paper">
+     title="Abrir artículo">
      🔗</a>Range Restriction affects Factor Analysis: Normality, estimation, fit, loadings, and reliability</p>
       <p><em>Educational and Psychological Measurement</em></p>
     </div>
@@ -193,15 +196,15 @@ format:
   <div class="timeline-item right">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/reporting.png" alt="article" class="icon-paper">
-      Nominal Factor Analysis</span>
+      <img src="../../Researcher/assets/reporting.png" alt="artículo" class="icon-paper">
+      Análisis factorial nominal</span>
       <div class="full-text">
-      <img src="assets/NFA.png" alt="article" class="icon-paper">
+      <img src="../../Researcher/assets/NFA.png" alt="artículo" class="icon-paper">
       <h3>2021</h3>
       <p><strong>Revuelta et al. </strong><br> 
         <a href="https://pubmed.ncbi.nlm.nih.gov/34565816/"
      target="_blank"
-     title="Open paper">
+     title="Abrir artículo">
      🔗</a>Nominal Factor Analysis of Situational Judgment Tests: Evaluation of Latent Dimensionality and Factorial Invariance</p>
       <p><em>Educational and Psychological Measurement</em></p>
     </div>
@@ -212,12 +215,12 @@ format:
   <div class="timeline-item left">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/university.svg" alt="article" class="icon-paper">
-      Master's in Methodology of Behavoural Sciences (UAM)</span>
+      <img src="../../Researcher/assets/university.svg" alt="artículo" class="icon-paper">
+      Máster en Metodología de las Ciencias del Comportamiento (UAM)</span>
       <div class="full-text">
-      <img src="assets/master.png" alt="article" class="icon-paper">
+      <img src="../../Researcher/assets/master.png" alt="artículo" class="icon-paper">
       <h3>2014-2019</h3>
-      <p><strong>Autonomous University of Madrid </strong><br>
+      <p><strong>Universidad Autónoma de Madrid </strong><br>
     </div>
   </div>
 </div>
@@ -226,17 +229,17 @@ format:
   <div class="timeline-item right">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/book.png" alt="article" class="icon-paper">
-      Masculine generic</span>
+      <img src="../../Researcher/assets/book.png" alt="artículo" class="icon-paper">
+      Genérico masculino</span>
       <div class="full-text">
-      <img src="assets/mari.png" alt="article" class="icon-paper">
+      <img src="../../Researcher/assets/mari.png" alt="artículo" class="icon-paper">
       <h3>2019</h3>
       <p><strong>Franco-Martínez </strong><br>
         <a href="https://osf.io/7azfg/overview"
      target="_blank"
-     title="Open paper">
+     title="Abrir artículo">
      🔗</a> ¿Todos, todos/as, todxs o todes? Efectos cognitivos del uso del genérico masculino y sus formas alternativas en español.</p>
-      <p><em>Book chapter: Egales</em></p>
+      <p><em>Capítulo de libro: Egales</em></p>
     </div>
   </div>
 </div>
@@ -244,18 +247,18 @@ format:
   <div class="timeline-item left">
     <div class="timeline-content">
       <span class="short-title">
-      <img src="assets/university.svg" alt="article" class="icon-paper">
-      Bachelor in Psychology (UAM)</span>
+      <img src="../../Researcher/assets/university.svg" alt="artículo" class="icon-paper">
+      Grado en Psicología (UAM)</span>
       <div class="full-text">
-      <img src="assets/uam.png" alt="article" class="icon-paper">
+      <img src="../../Researcher/assets/uam.png" alt="artículo" class="icon-paper">
       <h3>2014-2019</h3>
-      <p><strong>Autonomous University of Madrid </strong><br>
+      <p><strong>Universidad Autónoma de Madrid </strong><br>
     </div>
   </div>
 </div>
 </div>
 
-<script src="assets/timeline.js"></script>
+<script src="../../Researcher/assets/timeline.js"></script>
 
 
 

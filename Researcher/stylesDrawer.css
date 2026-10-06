@@ -926,3 +926,45 @@ body::before {
   .drawer-side-art .drawer-cabinet img { animation: none !important; }
   .drawer-cabinet { transition: none; }
 }
+
+/* ═══ MODO OSCURO (botón ☾ del menú; ver _includes/theme.html) ═══
+   Las carpetas, los archivadores y el formulario de papel conservan sus colores
+   (son "objetos"); se oscurece la habitación. */
+html[data-theme="dark"] {
+  --drawer-ink: #e4ebf2;
+  --drawer-sky: #0e151d;
+}
+html[data-theme="dark"] body { background: var(--drawer-sky); }
+html[data-theme="dark"] body::before {
+  background:
+    radial-gradient(circle at 12% 10%, rgba(90, 120, 150, .22), transparent 38%),
+    linear-gradient(145deg, #131c26 0%, #0c1218 100%);
+}
+html[data-theme="dark"] .drawer-archive {
+  background:
+    linear-gradient(rgba(12, 18, 25, .55), rgba(12, 18, 25, .55)),
+    repeating-linear-gradient(90deg, #1d2a37 0, #1d2a37 1px, transparent 1px, transparent 52px),
+    #141e29;
+}
+html[data-theme="dark"] .drawer-heading h1 { text-shadow: 0 2px 0 rgba(0, 0, 0, .5); }
+html[data-theme="dark"] .drawer-subtitle { color: #98abbd; }
+html[data-theme="dark"] .drawer-margin-arrow svg,
+html[data-theme="dark"] .drawer-cabinet-hint { color: #b4a6ff; stroke: #b4a6ff; }
+html[data-theme="dark"] .drawer-refresh { color: #b6c6d5; background: rgba(255, 255, 255, .06); border-color: #4f6275; }
+html[data-theme="dark"] .drawer-refresh:hover,
+html[data-theme="dark"] .drawer-refresh:focus-visible { color: #fff; background: rgba(255, 255, 255, .14); border-color: #b6c6d5; }
+html[data-theme="dark"] .drawer-projects { filter: drop-shadow(10px 16px 14px rgba(0, 0, 0, .45)); }
+html[data-theme="dark"] .drawer-project { filter: brightness(.93); }
+html[data-theme="dark"] .drawer-project:focus-visible,
+html[data-theme="dark"] .drawer-cabinet:focus-visible { outline-color: #8ab8ff; }
+html[data-theme="dark"] .drawer-empty { color: #a3b3c3; border-color: #3d5063; }
+html[data-theme="dark"] .drawer-empty span { color: #5f7487; }
+html[data-theme="dark"] .drawer-loading span { background: #8aa2b8; }
+html[data-theme="dark"] .drawer-side-art .drawer-cabinet img { filter: drop-shadow(-16px 24px 18px rgba(0, 0, 0, .5)); }
+html[data-theme="dark"] .drawer-side-art .drawer-cabinet--community img { filter: drop-shadow(16px 24px 18px rgba(0, 0, 0, .5)); }
+html[data-theme="dark"] .drawer-cabinet-label { color: #17293d; box-shadow: 2px 3px 0 rgba(0, 0, 0, .35); }
+html[data-theme="dark"] .drawer-cta { color: #17283a; background: var(--drawer-folder); }
+html[data-theme="dark"] .drawer-cta:hover,
+html[data-theme="dark"] .drawer-cta:focus-visible { color: #17283a; background: #ffdc84; }
+html[data-theme="dark"] .drawer-form-section { background: linear-gradient(135deg, #0f1a26 0%, #1a2b3c 100%); }
+html[data-theme="dark"] .drawer-form { color-scheme: light; box-shadow: 18px 20px 0 rgba(0, 0, 0, .4); }

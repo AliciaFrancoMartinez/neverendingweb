@@ -11,19 +11,67 @@
 
   if (!form || !projectsRoot || !formStatus) return;
 
+  // Idioma de la página (<html lang="es"> en la versión en español de la web)
+  const isEs = document.documentElement.lang.startsWith("es");
+  const T = isEs
+    ? {
+        stages: {
+          idea: "En la idea",
+          planning: "Durante la planificación",
+          data: "Durante la recogida de datos",
+          analysis: "Durante el análisis de datos",
+          writing: "Durante la escritura",
+          other: "En otro momento",
+        },
+        unfinished: "Sin terminar",
+        open: "Abrir los detalles del proyecto",
+        filedIn: (year, stage) => `Archivado en ${year} · ${stage}`,
+        filedBy: (name) => `Archivado por ${name}`,
+        anonymous: "Archivado de forma anónima",
+        quiet: "El cajón está tranquilo por ahora. El primer proyecto sin terminar podría ser el tuyo.",
+        preparing: "El cajón compartido se está preparando. Vuelve pronto.",
+        waiting: "El cajón de la comunidad espera sus primeros proyectos. Archiva el tuyo aquí abajo y aparecerá tras revisarlo.",
+        mineEmpty: "Todavía estoy ordenando mi propio cajón. Pronto archivaré aquí mis proyectos abandonados.",
+        thanks: "¡Gracias! Tu proyecto se ha archivado y está pendiente de revisión.",
+        notConnected: "El cajón compartido aún no está conectado. Inténtalo de nuevo más tarde.",
+        wait: "Espera un momento antes de archivar otro proyecto.",
+        filing: "Archivando tu proyecto…",
+        failed: "No se ha podido archivar el proyecto. Inténtalo de nuevo.",
+      }
+    : {
+        stages: {
+          idea: "At the idea",
+          planning: "During planning",
+          data: "During data collection",
+          analysis: "During data analysis",
+          writing: "During writing",
+          other: "Somewhere else",
+        },
+        unfinished: "Unfinished",
+        open: "Open project details",
+        filedIn: (year, stage) => `Filed in ${year} · ${stage}`,
+        filedBy: (name) => `Filed by ${name}`,
+        anonymous: "Filed anonymously",
+        quiet: "The drawer is quiet for now. The first unfinished project could be yours.",
+        preparing: "The shared drawer is being prepared. Please come back soon.",
+        waiting: "The community’s drawer is waiting for its first projects. File yours below, and it will appear here after review.",
+        mineEmpty: "I am still sorting through my own drawer. My abandoned projects will be filed here soon.",
+        thanks: "Thank you. Your project has been filed for review.",
+        notConnected: "The shared drawer is not connected yet. Please try again soon.",
+        wait: "Please wait a moment before filing another project.",
+        filing: "Filing your project…",
+        failed: "The project could not be filed. Please try again.",
+      };
+
+  // La copia guardada está junto a este script (sirve igual para la página en inglés y en español)
+  const snapshotUrl = new URL("community-drawer.json", document.currentScript.src);
+
   const config = window.DRAWER_CONFIG || {};
   const baseUrl = String(config.supabaseUrl || "").replace(/\/$/, "");
   const anonKey = String(config.supabaseAnonKey || "");
   const isConfigured = /^https:\/\/.+\.supabase\.co$/i.test(baseUrl) &&
     anonKey.length > 40;
-  const stageLabels = {
-    idea: "At the idea",
-    planning: "During planning",
-    data: "During data collection",
-    analysis: "During data analysis",
-    writing: "During writing",
-    other: "Somewhere else",
-  };
+  const stageLabels = T.stages;
 
   if (yearInput) yearInput.max = String(new Date().getFullYear());
 
@@ -46,11 +94,7 @@
     ...extra,
   });
 
-  function renderEmpty(
-    message =
-      "The drawer is quiet for now. The first unfinished project could be yours.",
-    root = projectsRoot,
-  ) {
+  function renderEmpty(message = T.quiet, root = projectsRoot) {
     root.replaceChildren();
     const empty = document.createElement("div");
     empty.className = "drawer-empty";
@@ -77,7 +121,7 @@
       article.setAttribute("aria-expanded", "false");
       article.setAttribute(
         "aria-label",
-        `${project.title}. Open project details`,
+        `${project.title}. ${T.open}`,
       );
 
       const setExpanded = (expanded) => {
@@ -128,9 +172,9 @@
 
       const meta = document.createElement("div");
       meta.className = "drawer-project-meta";
-      const stageLabel = stageLabels[project.stage] || "Unfinished";
+      const stageLabel = stageLabels[project.stage] || T.unfinished;
       const filingLabel = project.abandoned_year
-        ? `Filed in ${project.abandoned_year} · ${stageLabel}`
+        ? T.filedIn(project.abandoned_year, stageLabel)
         : stageLabel;
       addText(meta, "span", "drawer-project-filing", filingLabel);
       article.appendChild(meta);
@@ -139,7 +183,7 @@
       addText(article, "p", "drawer-project-story", project.description);
 
       const name = owner || project.display_name;
-      const byline = name ? `Filed by ${name}` : "Filed anonymously";
+      const byline = name ? T.filedBy(name) : T.anonymous;
       addText(article, "p", "drawer-project-byline", byline);
       root.appendChild(article);
     });
@@ -155,7 +199,7 @@
 
   async function loadSnapshot() {
     try {
-      const response = await fetch("assets/community-drawer.json", { cache: "no-cache" });
+      const response = await fetch(snapshotUrl, { cache: "no-cache" });
       if (!response.ok) return;
       const data = await response.json();
       if (Array.isArray(data)) {
@@ -170,7 +214,7 @@
   async function loadProjects() {
     if (!isConfigured) {
       if (!snapshot.length) {
-        renderEmpty("The shared drawer is being prepared. Please come back soon.");
+        renderEmpty(T.preparing);
       }
       return;
     }
@@ -202,9 +246,7 @@
       if (snapshot.length) {
         renderProjects(snapshot);
       } else {
-        renderEmpty(
-          "The community’s drawer is waiting for its first projects. File yours below, and it will appear here after review.",
-        );
+        renderEmpty(T.waiting);
       }
     } finally {
       if (refreshButton) refreshButton.disabled = false;
@@ -226,18 +268,12 @@
     const data = new FormData(form);
     if (String(data.get("website") || "").trim()) {
       form.reset();
-      setStatus(
-        "Thank you. Your project has been filed for review.",
-        "success",
-      );
+      setStatus(T.thanks, "success");
       return;
     }
 
     if (!isConfigured) {
-      setStatus(
-        "The shared drawer is not connected yet. Please try again soon.",
-        "error",
-      );
+      setStatus(T.notConnected, "error");
       return;
     }
 
@@ -245,7 +281,7 @@
       window.localStorage.getItem("drawer-last-submission") || 0,
     );
     if (Date.now() - lastSubmission < 45000) {
-      setStatus("Please wait a moment before filing another project.", "error");
+      setStatus(T.wait, "error");
       return;
     }
 
@@ -261,7 +297,7 @@
     const submitButton = form.querySelector("button[type='submit']");
     submitButton.disabled = true;
     submitButton.dataset.loading = "true";
-    setStatus("Filing your project…");
+    setStatus(T.filing);
 
     try {
       const response = await fetch(`${baseUrl}/rest/v1/drawer_projects`, {
@@ -279,13 +315,10 @@
       window.localStorage.setItem("drawer-last-submission", String(Date.now()));
       form.reset();
       if (descriptionCount) descriptionCount.textContent = "0";
-      setStatus(
-        "Thank you. Your project has been filed for review.",
-        "success",
-      );
+      setStatus(T.thanks, "success");
     } catch (error) {
       console.error(error);
-      setStatus("The project could not be filed. Please try again.", "error");
+      setStatus(T.failed, "error");
     } finally {
       submitButton.disabled = false;
       submitButton.dataset.loading = "false";
@@ -300,11 +333,10 @@
   if (myRoot) {
     const mine = (Array.isArray(window.MY_DRAWER) ? window.MY_DRAWER : [])
       .filter((p) => p && p.title)
+      // en español, cada proyecto usa su traducción (campo es) si la tiene
+      .map((p) => (isEs && p.es ? { ...p, ...p.es } : p))
       .sort((a, b) => (b.abandoned_year || 0) - (a.abandoned_year || 0));
-    renderProjects(mine, myRoot, {
-      owner: "Alicia",
-      emptyMessage: "I am still sorting through my own drawer. My abandoned projects will be filed here soon.",
-    });
+    renderProjects(mine, myRoot, { owner: "Alicia", emptyMessage: T.mineEmpty });
   }
 
   // ── Dos archivadores: "My file drawer" y "Community's file drawer" ──

@@ -9,3 +9,5 @@ _site/
 # Generado por CV/_scripts/build-pdf.R
 CV/cv-print.html
 CV/cv-short.html
+CV/cv-print-es.html
+CV/cv-short-es.html

@@ -23,7 +23,109 @@ CV_FONTS <- paste0(
   if (is.null(a) || length(a) == 0 || identical(a, "") || (length(a) == 1 && is.na(a))) b else a
 }
 
-cv <- new.env()  # estado de la generación actual (perfil, ruta de imágenes…)
+cv <- new.env()  # estado de la generación actual (perfil, ruta de imágenes, idioma…)
+cv$lang <- "en"
+
+# ── Idiomas ──────────────────────────────────────────────────────────────────
+# El CV se genera en inglés (lang = "en") o en español (lang = "es"):
+#  · Cualquier campo de los YAML admite su versión en español con el sufijo _es
+#    (title_es, lines_es, short_es…). Si no la tiene, se usa la inglesa.
+#  · Los textos que se repiten (lugares, tipos de comunicación, meses…) se traducen
+#    una sola vez en CV/data/es.yml.
+#  · Los textos fijos de la plantilla (botones, rótulos…) están aquí abajo.
+
+UI <- list(
+  en = list(
+    thesis = "Thesis", workshop = "Workshop", pi = "PI", student_eval = "Student evaluation",
+    link = "link", video = "video", open_access = "Open Access",
+    badge_prereg = "Preregistered", badge_data = "Open data", badge_materials = "Open materials", badge_code = "Open code",
+    yes = "yes", no = "no", na = "not applicable",
+    cv_sections = "CV sections", filter = "Filter %s", all = "All",
+    download = "Download CV (PDF)", short_cv = "Short CV", updated = "Updated %s",
+    search = "Search the CV…", empty = "Nothing found. Try another word.",
+    short_title = "short", nd = "n.d.",
+    s_contact = "Contact", s_skills = "Skills", s_teaching = "Teaching", s_education = "Education",
+    s_experience = "Experience", s_research = "Research", s_publications = "Publications",
+    s_conferences = "Conferences", s_dissemination = "Dissemination &amp; community"
+  ),
+  es = list(
+    thesis = "Tesis", workshop = "Taller", pi = "IP", student_eval = "Valoración del alumnado",
+    link = "enlace", video = "vídeo", open_access = "Acceso abierto",
+    badge_prereg = "Prerregistrado", badge_data = "Datos abiertos", badge_materials = "Materiales abiertos", badge_code = "Código abierto",
+    yes = "sí", no = "no", na = "no aplica",
+    cv_sections = "Secciones del CV", filter = "Filtrar %s", all = "Todo",
+    download = "Descargar CV (PDF)", short_cv = "CV corto", updated = "Actualizado: %s",
+    search = "Buscar en el CV…", empty = "No hay resultados. Prueba con otra palabra.",
+    short_title = "corto", nd = "s.f.",
+    s_contact = "Contacto", s_skills = "Habilidades", s_teaching = "Docencia", s_education = "Formación",
+    s_experience = "Experiencia", s_research = "Investigación", s_publications = "Publicaciones",
+    s_conferences = "Congresos", s_dissemination = "Divulgación y comunidad"
+  )
+)
+
+ui <- function(key) UI[[cv$lang]][[key]] %||% UI$en[[key]]
+
+MONTHS_ES <- c("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
+               "agosto", "septiembre", "octubre", "noviembre", "diciembre")
+
+month_year <- function(d) {
+  if (cv$lang == "es") paste(MONTHS_ES[as.integer(format(d, "%m"))], "de", format(d, "%Y")) else format(d, "%B %Y")
+}
+
+# Diccionario de CV/data/<lang>.yml (textos exactos y palabras sueltas)
+cv_dict <- function(root, lang) {
+  f <- file.path(root, "data", paste0(lang, ".yml"))
+  if (lang == "en" || !file.exists(f)) return(NULL)
+  d <- read_yaml(f)
+  words <- function(x) {
+    x <- unlist(x %||% list())
+    x[order(-nchar(names(x)))]   # las expresiones largas antes ("The Netherlands" antes que "Netherlands")
+  }
+  list(textos = unlist(d$textos %||% list()), fechas = words(d$fechas), lugares = words(d$lugares))
+}
+
+# Campos en los que se traducen las palabras sueltas de es.yml
+DICT_FIELDS <- list(fechas = "date", lugares = c("date", "place", "places", "lines", "org", "short", "short_note"))
+
+replace_words <- function(s, words) {
+  for (w in names(words)) {
+    pat <- paste0("(?<![\\p{L}])", gsub("([][{}()+*^$|\\\\?.])", "\\\\\\1", w), "(?![\\p{L}])")
+    s <- gsub(pat, words[[w]], s, perl = TRUE)
+  }
+  s
+}
+
+translate <- function(x, dict, field) {
+  vapply(x, function(s) {
+    if (is.na(s)) return(s)
+    if (s %in% names(dict$textos)) return(dict$textos[[s]])
+    if (field %in% DICT_FIELDS$fechas) s <- replace_words(s, dict$fechas)
+    if (field %in% DICT_FIELDS$lugares) s <- replace_words(s, dict$lugares)
+    s
+  }, "", USE.NAMES = FALSE)
+}
+
+# Aplica el idioma a los datos leídos de un YAML: usa los campos *_es y el diccionario
+localize <- function(x, lang, dict = NULL, field = "") {
+  if (is.list(x)) {
+    nm <- names(x)
+    if (is.null(nm)) return(lapply(x, localize, lang = lang, dict = dict, field = field))
+    if (lang != "en") {
+      for (k in nm[endsWith(nm, paste0("_", lang))]) {
+        if (!is.null(x[[k]])) x[[sub("_[a-z]{2}$", "", k)]] <- x[[k]]
+      }
+    }
+    x <- x[!grepl("_(en|es)$", names(x))]
+    out <- lapply(names(x), function(k) localize(x[[k]], lang, dict, k))
+    names(out) <- names(x)
+    return(out)
+  }
+  if (is.character(x) && length(dict)) translate(x, dict, field) else x
+}
+
+read_data <- function(root, id, lang = cv$lang, dict = cv$dict) {
+  localize(read_yaml(file.path(root, "data", paste0(id, ".yml"))), lang, dict)
+}
 
 # ── Utilidades de texto ──────────────────────────────────────────────────────
 
@@ -62,7 +164,7 @@ img <- function(file, alt = "", cls = NULL) {
           if (is.null(cls)) "" else sprintf(" class=\"%s\"", cls), cv$img, esc(file), esc(alt))
 }
 
-link_icon <- function(url, icon = "🔗", label = "link") {
+link_icon <- function(url, icon = "🔗", label = ui("link")) {
   if (is.null(url) || identical(url, "")) return("")
   sprintf(" <a class=\"cv-icon-link\" href=\"%s\" target=\"_blank\" rel=\"noopener\" aria-label=\"%s\">%s</a>",
           esc(url), esc(label), icon)
@@ -76,6 +178,9 @@ slug <- function(x) {
   x <- iconv(strip_md(x), "UTF-8", "ASCII//TRANSLIT", sub = "")
   gsub("^-+|-+$", "", tolower(gsub("[^A-Za-z0-9]+", "-", x)))
 }
+
+# En español, coma decimal (4.76/5 → 4,76/5)
+decimal <- function(x) if (cv$lang == "es") gsub("([0-9])\\.([0-9])", "\\1,\\2", x) else x
 
 fmt_date <- function(d) {
   if (is.null(d) || length(d) == 0) return("")
@@ -139,13 +244,13 @@ groups_html <- function(s, render_entry) {
 # ── Badges de ciencia abierta ────────────────────────────────────────────────
 
 BADGES <- list(
-  prereg    = list(label = "Preregistered",  col = "#e8473e",
+  prereg    = list(col = "#e8473e",
                    icon = "<path d=\"M7.4 13.3l3.1 3 6.2-6.5\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"),
-  data      = list(label = "Open data",      col = "#0b89cc",
+  data      = list(col = "#0b89cc",
                    icon = "<path d=\"M8.2 17.6v-4.4M12 17.6V8.6M15.8 17.6v-6.2\" stroke=\"#fff\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>"),
-  materials = list(label = "Open materials", col = "#f5991f",
+  materials = list(col = "#f5991f",
                    icon = "<path d=\"M6.8 10.8 12 8.2l5.2 2.6v5.6L12 19l-5.2-2.6z\" fill=\"#fff\"/><path d=\"M6.8 10.8 12 13.4l5.2-2.6M12 13.4V19\" fill=\"none\" stroke=\"%COL%\" stroke-width=\"1.2\"/>"),
-  code      = list(label = "Open code",      col = "#72a43f",
+  code      = list(col = "#72a43f",
                    icon = "<path d=\"M9.3 9.6 6.4 13l2.9 3.4M14.7 9.6l2.9 3.4-2.9 3.4M13.1 8.6l-2.2 8.8\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>")
 )
 
@@ -163,20 +268,22 @@ badge_svg <- function(kind, state) {
           col, col, gsub("%COL%", col, b$icon, fixed = TRUE))
 }
 
+badge_label <- function(kind) ui(paste0("badge_", kind))
+
 badges_html <- function(badges) {
   if (is.null(badges)) return("")
   states <- vapply(names(BADGES), function(k) badge_state(badges[[k]]), "")
-  title <- paste(sprintf("%s: %s", vapply(BADGES, `[[`, "", "label"),
-                         c(yes = "yes", no = "no", na = "not applicable")[states]), collapse = " · ")
+  title <- paste(sprintf("%s: %s", vapply(names(BADGES), badge_label, ""),
+                         vapply(states, ui, "")), collapse = " · ")
   sprintf("<span class=\"cv-badges\" title=\"%s\">%s</span>", esc(title),
           paste(mapply(badge_svg, names(BADGES), states), collapse = ""))
 }
 
 badges_legend <- function() {
   items <- vapply(names(BADGES), function(k) {
-    sprintf("<span class=\"cv-legend-item\">%s<span>%s</span></span>", badge_svg(k, "yes"), BADGES[[k]]$label)
+    sprintf("<span class=\"cv-legend-item\">%s<span>%s</span></span>", badge_svg(k, "yes"), badge_label(k))
   }, "")
-  sprintf("<span class=\"cv-legend\">%s%s</span>", img("logo-open-access.png", "Open Access", "cv-legend-oa"), paste(items, collapse = ""))
+  sprintf("<span class=\"cv-legend\">%s%s</span>", img("logo-open-access.png", ui("open_access"), "cv-legend-oa"), paste(items, collapse = ""))
 }
 
 # ── Secciones ────────────────────────────────────────────────────────────────
@@ -186,7 +293,7 @@ render_education <- function(s) {
     rows <- c(row(date_cell(e$date), bar(e$degree, "cv-bar--entry", e$degree_note), "cv-what--bar"))
     if (!is.null(e$thesis)) {
       t <- e$thesis
-      rows <- c(rows, row("", p(sprintf("<span class=\"cv-label\">%s:</span> <em>%s</em>%s", md(t$label %||% "Thesis"), md(t$title),
+      rows <- c(rows, row("", p(sprintf("<span class=\"cv-label\">%s:</span> <em>%s</em>%s", md(t$label %||% ui("thesis")), md(t$title),
                                          if (length(t$note)) sprintf(" <span class=\"cv-light\">%s</span>", md(t$note)) else ""))))
     }
     rows <- c(rows, row("", lines_html(e$lines)), row("", places_html(e$places)))
@@ -214,7 +321,7 @@ render_publications <- function(s) {
         sprintf(" %s <a class=\"cv-doi\" href=\"https://doi.org/%s\" target=\"_blank\" rel=\"noopener\">%s</a>",
                 esc(e$doi_label %||% "doi:"), esc(e$doi), esc(e$doi))
       } else ""
-      oa <- if (isTRUE(e$open_access)) img("icon-open-access.png", "Open Access", "cv-oa") else ""
+      oa <- if (isTRUE(e$open_access)) img("icon-open-access.png", ui("open_access"), "cv-oa") else ""
       venue <- p(sprintf("<span class=\"cv-venue-icon\">%s</span>%s%s%s", e$icon %||% "📰", md(e$venue), doi, oa), "cv-line cv-venue")
     }
     entry(c(row(date_cell(e$date, badges_html(e$badges)),
@@ -249,7 +356,7 @@ render_conferences <- function(s) {
     for (c in contribs) {
       body <- paste0(
         sprintf("<p class=\"cv-contrib-authors\"><span class=\"cv-bullet cv-bullet--sub\">○</span>%s</p>", highlight(md(c$authors))),
-        p(paste0("<em>", md(c$title), "</em>", link_icon(c$link), link_icon(c$video, "📽", "video"),
+        p(paste0("<em>", md(c$title), "</em>", link_icon(c$link), link_icon(c$video, "📽", ui("video")),
                  if (length(c$note)) sprintf(" <span class=\"cv-note\">%s</span>", md(c$note)) else ""), "cv-line cv-contrib-title"))
       rows <- c(rows, row(tag_html(c$type), body, "cv-what--contrib", sprintf("data-type=\"%s\"", slug(c$type))))
     }
@@ -260,7 +367,7 @@ render_conferences <- function(s) {
 render_talks <- function(s) {
   groups_html(s, function(e) {
     detail <- paste0(if (length(e$detail)) sprintf("<em>%s</em>", md(e$detail)) else "", link_icon(e$link),
-                     if (length(e$duration)) sprintf(" <span class=\"cv-duration\">(%s)</span>", esc(e$duration)) else "")
+                     if (length(e$duration)) sprintf(" <span class=\"cv-duration\">(%s)</span>", esc(decimal(e$duration))) else "")
     entry(c(row(date_cell(e$date),
                 paste0(title_line(paste0(md(e$title), place_inline(e$place))),
                        p(md(e$org), "cv-line cv-org"), p(detail, "cv-line cv-detail"), lines_html(e$lines)))))
@@ -273,7 +380,7 @@ render_projects <- function(s) {
   groups_html(s, function(e) {
     funder <- paste0(md(e$funder), if (length(e$ref)) sprintf(" · %s", esc(e$ref)) else "")
     role <- paste0(if (length(e$role)) sprintf("<em>%s</em>", md(e$role)) else "",
-                   if (length(e$pi)) sprintf(" · PI: %s", md(e$pi)) else "")
+                   if (length(e$pi)) sprintf(" · %s: %s", ui("pi"), md(e$pi)) else "")
     entry(c(row(date_cell(e$date),
                 paste0(title_line(md(e$title)), p(funder, "cv-line cv-org"), p(role, "cv-line cv-project"),
                        if (length(e$amount)) p(md(e$amount), "cv-line cv-amount") else "", lines_html(e$lines)))))
@@ -285,7 +392,7 @@ render_teaching <- function(s) {
     items <- visible(e$items)
     item_line <- function(it) p(sprintf("📍 <span class=\"cv-place-small\">%s</span>%s%s", md(it$place),
                                         if (length(it$detail)) sprintf(" - <strong>%s</strong>", md(it$detail)) else "",
-                                        if (length(it$evaluation)) sprintf(" <span class=\"cv-eval\">· Student evaluation: %s</span>", esc(it$evaluation)) else ""),
+                                        if (length(it$evaluation)) sprintf(" <span class=\"cv-eval\">· %s: %s</span>", ui("student_eval"), esc(decimal(it$evaluation))) else ""),
                                 "cv-line cv-item")
     if (length(items) == 1) {
       rows <- c(row(date_cell(items[[1]]$date), title_line(md(e$title))), row("", item_line(items[[1]])))
@@ -310,9 +417,9 @@ render_dissemination <- function(s) {
 
 render_training <- function(s) {
   groups_html(s, function(e) {
-    org <- paste0(md(e$org), if (length(e$hours)) sprintf(" (%s)", esc(e$hours)) else "", place_inline(e$place))
+    org <- paste0(md(e$org), if (length(e$hours)) sprintf(" (%s)", esc(decimal(e$hours))) else "", place_inline(e$place))
     entry(c(row(date_cell(e$date),
-                paste0(title_line(sprintf("%s: <em class=\"cv-course\">%s</em>", md(e$kind %||% "Workshop"), md(e$title))),
+                paste0(title_line(sprintf("%s: <em class=\"cv-course\">%s</em>", md(e$kind %||% ui("workshop")), md(e$title))),
                        p(org, "cv-line cv-org")))))
   })
 }
@@ -326,10 +433,12 @@ render_skills <- function(s) {
 
 # ── Documento completo ───────────────────────────────────────────────────────
 
-cv_load <- function(root = CV_ROOT) {
-  profile <- read_yaml(file.path(root, "data", "profile.yml"))
+cv_load <- function(root = CV_ROOT, lang = "en") {
+  cv$lang <- lang
+  cv$dict <- cv_dict(root, lang)
+  profile <- read_data(root, "profile")
   sections <- lapply(profile$sections, function(id) {
-    s <- read_yaml(file.path(root, "data", paste0(id, ".yml")))
+    s <- read_data(root, id)
     s$id <- id
     s
   })
@@ -366,9 +475,9 @@ cover_html <- function(profile, sections) {
                  "<h1 class=\"cv-name\"><span class=\"cv-name-first\">%s</span> <span class=\"cv-name-last\">%s</span></h1>",
                  "<p class=\"cv-tagline\">%s</p>",
                  "<p class=\"cv-contacts\">%s</p>",
-                 "</header><nav class=\"cv-index\" aria-label=\"CV sections\" style=\"--index-gap: %.2fem\"><ol>%s</ol></nav>"),
+                 "</header><nav class=\"cv-index\" aria-label=\"%s\" style=\"--index-gap: %.2fem\"><ol>%s</ol></nav>"),
           esc(profile$role), esc(profile$name$first), esc(profile$name$last),
-          paste(vapply(profile$tagline, esc, ""), collapse = "<br>"), contacts,
+          paste(vapply(profile$tagline, esc, ""), collapse = "<br>"), contacts, ui("cv_sections"),
           # separación entre barras del índice para que quepan todas en la portada (205 mm disponibles)
           (min(20.3, 205 / length(sections)) - 11.4) / 4.27, index)
 }
@@ -417,8 +526,8 @@ web_chips <- function(s) {
     },
     character(0))
   if (!length(chips)) return("")
-  sprintf("<div class=\"cvw-chips\" role=\"group\" aria-label=\"Filter %s\">%s%s</div>",
-          esc(strip_md(s$title)), chip("all", "All"), paste(chips, collapse = ""))
+  sprintf("<div class=\"cvw-chips\" role=\"group\" aria-label=\"%s\">%s%s</div>",
+          esc(sprintf(ui("filter"), strip_md(s$title))), chip("all", ui("all")), paste(chips, collapse = ""))
 }
 
 section_html_web <- function(s) {
@@ -446,10 +555,10 @@ hero_html <- function(profile, sections, root) {
             esc(st$section), n, n, esc(st$label))
   }, ""), collapse = "")
   updated <- max(file.mtime(list.files(file.path(root, "data"), pattern = "\\.yml$", full.names = TRUE)))
-  buttons <- sprintf("<a class=\"cvw-btn cvw-btn--primary\" href=\"%s/%s\" download>%s Download CV (PDF)</a>",
-                     root, esc(profile$pdf), ICON_DOWNLOAD)
+  buttons <- sprintf("<a class=\"cvw-btn cvw-btn--primary\" href=\"%s/%s\" download>%s %s</a>",
+                     root, esc(profile$pdf), ICON_DOWNLOAD, ui("download"))
   if (length(profile$short_pdf)) {
-    buttons <- paste0(buttons, sprintf("<a class=\"cvw-btn\" href=\"%s/%s\" download>Short CV</a>", root, esc(profile$short_pdf)))
+    buttons <- paste0(buttons, sprintf("<a class=\"cvw-btn\" href=\"%s/%s\" download>%s</a>", root, esc(profile$short_pdf), ui("short_cv")))
   }
   sprintf(paste0("<header class=\"cvw-hero\"><div class=\"cvw-hero-card\">",
                  "<div class=\"cvw-hero-main\">",
@@ -457,11 +566,11 @@ hero_html <- function(profile, sections, root) {
                  "<h1 class=\"cvw-name\"><span>%s</span> <strong>%s</strong></h1>",
                  "<p class=\"cvw-tagline\">%s</p>",
                  "<div class=\"cvw-contacts\">%s</div>",
-                 "<div class=\"cvw-actions\">%s<span class=\"cvw-updated\">Updated %s</span></div>",
+                 "<div class=\"cvw-actions\">%s<span class=\"cvw-updated\">%s</span></div>",
                  "</div>%s</div></header>"),
           esc(profile$role), esc(profile$name$first), esc(profile$name$last),
           paste(vapply(profile$tagline, esc, ""), collapse = "<br>"), contacts, buttons,
-          format(updated, "%B %Y"),
+          sprintf(ui("updated"), month_year(updated)),
           if (nzchar(stats)) sprintf("<div class=\"cvw-stats\">%s</div>", stats) else "")
 }
 
@@ -469,34 +578,34 @@ ICON_DOWNLOAD <- "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 
 ICON_SEARCH <- "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"m15.5 15.5 5 5\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>"
 
 # Pestaña CV de la web (se llama desde cv.qmd)
-cv_web <- function(root = CV_ROOT) {
-  data <- cv_load(root)
+cv_web <- function(root = CV_ROOT, lang = "en") {
+  data <- cv_load(root, lang)
   cv$img <- paste0(root, "/assets/img/")
   sections <- Filter(function(s) !isTRUE(s$hide), data$sections)
   nav <- paste(vapply(sections, function(s) {
     sprintf("<a href=\"#cv-%s\"><span>%s</span><span class=\"cvw-nav-n\"></span></a>", s$id, esc(strip_md(s$title)))
   }, ""), collapse = "")
   side <- sprintf(paste0("<div class=\"cvw-side\"><div class=\"cvw-side-inner\">",
-                         "<label class=\"cvw-search\">%s<input type=\"search\" placeholder=\"Search the CV…\" aria-label=\"Search the CV\" autocomplete=\"off\"><kbd>/</kbd></label>",
+                         "<label class=\"cvw-search\">%s<input type=\"search\" placeholder=\"%s\" aria-label=\"%s\" autocomplete=\"off\"><kbd>/</kbd></label>",
                          "<p class=\"cvw-search-status\" aria-live=\"polite\"></p>",
-                         "<nav class=\"cvw-nav\" aria-label=\"CV sections\">%s</nav>",
-                         "</div></div>"), ICON_SEARCH, nav)
+                         "<nav class=\"cvw-nav\" aria-label=\"%s\">%s</nav>",
+                         "</div></div>"), ICON_SEARCH, ui("search"), sub("…$", "", ui("search")), ui("cv_sections"), nav)
   html <- sprintf(paste0("<div class=\"cvw\">%s<div class=\"cvw-layout\">%s<div class=\"cvw-main\">%s",
-                         "<p class=\"cvw-empty\" hidden>Nothing found. Try another word.</p></div></div></div>",
+                         "<p class=\"cvw-empty\" hidden>%s</p></div></div></div>",
                          "<script src=\"%s/assets/cv-web.js\" defer></script>"),
                   hero_html(data$profile, sections, root), side,
-                  paste(vapply(sections, section_html_web, ""), collapse = ""), root)
+                  paste(vapply(sections, section_html_web, ""), collapse = ""), ui("empty"), root)
   cat("```{=html}\n", html, "\n```\n", sep = "")
 }
 
 # Documento independiente para el PDF (Paged.js lo pagina y Chrome lo imprime)
-cv_print_html <- function(root = CV_ROOT) {
-  data <- cv_load(root)
+cv_print_html <- function(root = CV_ROOT, lang = "en") {
+  data <- cv_load(root, lang)
   cv$img <- "assets/img/"
   css <- function(f) paste(readLines(file.path(root, "assets", f), encoding = "UTF-8", warn = FALSE), collapse = "\n")
   name <- paste(data$profile$name$first, data$profile$name$last)
   paste0(
-    "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n",
+    sprintf("<!doctype html>\n<html lang=\"%s\">\n<head>\n<meta charset=\"utf-8\">\n", lang),
     sprintf("<title>CV · %s</title>\n", esc(name)),
     sprintf("<link rel=\"stylesheet\" href=\"%s\">\n", esc(CV_FONTS)),
     "<style>\n", css("cv.css"), "\n", css("cv-print.css"), "\n",
@@ -531,7 +640,7 @@ short_item <- function(v) {
 }
 
 short_pub <- function(e) {
-  year <- if (grepl("^[0-9]{4}$", e$date %||% "")) e$date else tolower(e$date %||% "n.d.")
+  year <- if (grepl("^[0-9]{4}$", e$date %||% "")) e$date else tolower(e$date %||% ui("nd"))
   venue <- e$venue %||% ""
   journal <- regmatches(venue, regexpr("\\*[^*]+\\*", venue))
   journal <- if (length(journal)) sub("[.,:;]\\*$", "*", journal) else ""
@@ -592,13 +701,13 @@ short_list_html <- function(items, cls = "", ordered = FALSE) {
   sprintf("<%s class=\"cvs-list %s\">%s</%s>", tag, cls, paste(lis, collapse = ""), tag)
 }
 
-cv_short_html <- function(root = CV_ROOT) {
-  data <- cv_load(root)
+cv_short_html <- function(root = CV_ROOT, lang = "en") {
+  data <- cv_load(root, lang)
   cv$img <- "assets/img/"
   all_ids <- sub("\\.yml$", "", list.files(file.path(root, "data"), pattern = "\\.yml$"))
   sec <- function(id) {
     if (!(id %in% all_ids)) return(NULL)
-    s <- read_yaml(file.path(root, "data", paste0(id, ".yml"))); s$id <- id; s
+    s <- read_data(root, id); s$id <- id; s
   }
   p_ <- data$profile
   css <- function(f) paste(readLines(file.path(root, "assets", f), encoding = "UTF-8", warn = FALSE), collapse = "\n")
@@ -616,27 +725,27 @@ cv_short_html <- function(root = CV_ROOT) {
     if (length(p_$photo)) img(p_$photo, paste(p_$name$first, p_$name$last), "cvs-photo") else "",
     "<div class=\"cvs-side-body\"><div class=\"cvs-fit\">",
     sprintf("<div class=\"cvs-bio\">%s</div>", paste(sprintf("<p>%s</p>", vapply(p_$bio %||% list(), md, "")), collapse = "")),
-    block("Contact", sprintf("<ul class=\"cvs-contacts\">%s</ul>", contacts)),
-    block("Skills", short_list_html(short_items(sec("skills"), short_skill), "cvs-skills")),
-    block("Teaching", paste0(short_list_html(teach_items, "cvs-star"), note(teaching))),
+    block(ui("s_contact"), sprintf("<ul class=\"cvs-contacts\">%s</ul>", contacts)),
+    block(ui("s_skills"), short_list_html(short_items(sec("skills"), short_skill), "cvs-skills")),
+    block(ui("s_teaching"), paste0(short_list_html(teach_items, "cvs-star"), note(teaching))),
     "</div></div>")
 
   education <- sec("education")
   main <- paste0(
     "<div class=\"cvs-fit\">",
-    sprintf("<h2 class=\"cvs-bar\">%s</h2>", caps("Education")),
+    sprintf("<h2 class=\"cvs-bar\">%s</h2>", caps(ui("s_education"))),
     short_list_html(short_items(education), "cvs-edu"), note(education),
-    sprintf("<h2 class=\"cvs-bar\">%s</h2>", caps("Experience")),
-    block("Research", short_list_html(c(short_items(sec("experience")), short_items(sec("projects"))), "cvs-research")),
-    block("Publications", short_list_html(short_items(sec("publications"), short_pub), "cvs-pubs")),
-    block("Conferences", short_list_html(short_conferences(sec("conferences")), "cvs-confs", ordered = TRUE)),
-    block("Dissemination &amp; community", short_list_html(short_items(sec("dissemination")), "cvs-dissem")),
+    sprintf("<h2 class=\"cvs-bar\">%s</h2>", caps(ui("s_experience"))),
+    block(ui("s_research"), short_list_html(c(short_items(sec("experience")), short_items(sec("projects"))), "cvs-research")),
+    block(ui("s_publications"), short_list_html(short_items(sec("publications"), short_pub), "cvs-pubs")),
+    block(ui("s_conferences"), short_list_html(short_conferences(sec("conferences")), "cvs-confs", ordered = TRUE)),
+    block(ui("s_dissemination"), short_list_html(short_items(sec("dissemination")), "cvs-dissem")),
     "</div>")
 
   name <- paste(p_$name$first, p_$name$last)
   paste0(
-    "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n",
-    sprintf("<title>CV · %s (short)</title>\n", esc(name)),
+    sprintf("<!doctype html>\n<html lang=\"%s\">\n<head>\n<meta charset=\"utf-8\">\n", lang),
+    sprintf("<title>CV · %s (%s)</title>\n", esc(name), ui("short_title")),
     sprintf("<link rel=\"stylesheet\" href=\"%s\">\n", esc(CV_FONTS)),
     "<style>\n", css("cv.css"), "\n", css("cv-short.css"), "\n</style>\n",
     "</head>\n<body>\n<div class=\"cvs-page\">\n",

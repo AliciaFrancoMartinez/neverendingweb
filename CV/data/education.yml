@@ -8,50 +8,76 @@
 #   places       lista de lugares (cada uno con 📍)
 #   sub          sub-entradas con su propia fecha (p. ej. un Erasmus)
 #   short        cómo aparece en el CV corto: [línea principal, sublíneas…]
+# Versión en español: el mismo campo con _es (degree_es, lines_es…). Ver _LEEME.md
 
 title: "Education"
+title_es: "Formación académica"
 short_note: "Universidad Autónoma de Madrid (Spain)"   # línea final del bloque en el CV corto
 
 entries:
   - date: "2022–2026"
     degree: "PhD in Psychology"
+    degree_es: "Doctorado en Psicología"
     thesis:
       label: "Title"
+      label_es: "Título"
       title: "Be(a)ware of Validity: Inferences and Measures in Unconscious Processing Research"
     lines:
       - "**Supervisor:** Miguel A. Vadillo"
       - "*Sobresaliente Cum Laude* with **International Mention** (June 2026)"
+    lines_es:
+      - "**Director:** Miguel A. Vadillo"
+      - "*Sobresaliente Cum Laude* con **Mención Internacional** (junio de 2026)"
     short: ["**PhD** in Psychology, *2026*", "Cum Laude, International Mention"]
+    short_es: ["**Doctorado** en Psicología, *2026*", "Cum Laude, Mención Internacional"]
     places:
       - "Department of Basic Psychology, Universidad Autónoma de Madrid (Spain)"
+    places_es:
+      - "Departamento de Psicología Básica, Universidad Autónoma de Madrid (España)"
 
   - date: "2019–2021"
     degree: "MSc in Methodology"
+    degree_es: "Máster en Metodología"
     degree_note: "of Behavioral and Health Sciences"
+    degree_note_es: "de las Ciencias del Comportamiento y de la Salud"
     thesis:
       label: "MSc Thesis"
+      label_es: "TFM"
       title: "Factor Analysis under Range Restriction: A Simulation Study"
+      title_es: "La restricción del rango afecta al análisis factorial"
       note: "(10/10 with Honors)"
+      note_es: "(10/10, Matrícula de Honor)"
     lines:
       - "**GPA:** 9.72/10"
+    lines_es:
+      - "**Nota media:** 9,72/10"
     short: ["MSc in **Methodology**, *2021*", "Master thesis with Honors", "Best Master’s Thesis Award (2022)"]
+    short_es: ["Máster en **Metodología**, *2021*", "TFM con Matrícula de Honor", "Premio al mejor TFM (2022)"]
     places:
       - "Universidad Autónoma de Madrid (Spain)"
       - "Universidad Complutense de Madrid (Spain)"
 
   - date: "2014–2019"
     degree: "BSc in Psychology"
+    degree_es: "Grado en Psicología"
     thesis:
       label: "BSc Thesis"
+      label_es: "TFG"
       title: "¿Todos, todos/as, todxs o todes?: Effects of masculine and alternative generics on group expectations and self-efficacy perception in Spanish."
+      title_es: "¿Todos, todos/as, todxs o todes? Efectos del genérico masculino y formas alternativas en las expectativas grupales y la percepción de autoeficacia en español."
       note: "(10/10 with Honors)"
+      note_es: "(10/10, Matrícula de Honor)"
     lines:
       - "**GPA:** 8.55/10"
+    lines_es:
+      - "**Nota media:** 8,55/10"
     short: ["BSc in **Psychology**, *2019*", "Bachelor’s thesis with Honors"]
+    short_es: ["Grado en **Psicología**, *2019*", "TFG con Matrícula de Honor"]
     places:
       - "Universidad Autónoma de Madrid (Spain)"
     sub:
       - date: "2016"
         title: "Erasmus+ *(4 months)*"
+        title_es: "Erasmus+ *(4 meses)*"
         places:
           - "Tilburg School of Social and Behavioral Sciences; Tilburg Universiteit (The Netherlands)"

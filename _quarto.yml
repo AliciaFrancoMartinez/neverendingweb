@@ -27,6 +27,10 @@ website:
       
 format:
   html:
+    # selector de idioma EN / ES del menú (la versión en español está en la carpeta es/)
+    include-after-body: _includes/lang-switch.html
+    # modo oscuro: botón ☾ / ☀ del menú (los colores están en los bloques "MODO OSCURO" de cada .css)
+    include-in-header: _includes/theme.html
     anchor-sections: false
     mainfont: 'DM Serif Display'
     theme: [cosmo, styles.scss]

@@ -3,38 +3,60 @@
 #   { title, text }   → título en negrita y debajo el texto (text puede ser una lista de líneas)
 #   "texto"           → una línea suelta (admite **negrita**)
 # short: true  → aparece en el CV corto (o una lista [título, texto…] para una versión abreviada)
+# Versión en español: el mismo campo con _es (title_es, text_es…). Las líneas sueltas
+# ("texto") se traducen en es.yml. Ver _LEEME.md
 
 title: "Skills, Languages & Other"
+title_es: "Habilidades, idiomas y otros"
 
 groups:
   - title: "Skills"
+    title_es: "Habilidades"
     items:
       - title: "Quant analyses"
+        title_es: "Análisis cuantitativos"
         text: "Linear mixed models, factor analysis, IRT, SDT, non-linear modeling, Bayesian stats..."
+        text_es: "Modelos lineales mixtos, análisis factorial, TRI, TDS, modelado no lineal, estadística bayesiana..."
         short: true
       - title: "Programming"
+        title_es: "Programación"
         text: "R, Python (PsychoPy), jsPsych, LaTeX, typst, CSS, html…"
         short: true
       - title: "Other skills"
+        title_es: "Otras habilidades"
         text:
           - "Multisite coordination, Open Science"
           - "Video edition, Photoshop, Graphic Design."
+        text_es:
+          - "Coordinación multicéntrica, ciencia abierta"
+          - "Edición de vídeo, Photoshop, diseño gráfico."
         short: true
 
   - title: "Languages"
+    title_es: "Idiomas"
     items:
       - "**Spanish** (mother tongue)"
       - "**English** (C)"
       - "**Spanish Sign Language** (A1)"
 
   - title: "Other"
+    title_es: "Otros"
     items:
       - title: "Membership in scientific associations"
+        title_es: "Pertenencia a sociedades científicas"
         text:
           - "Current: SIPS, SEPEX, EAM, AEMCCO, AIIDI."
           - "Previous: ASSC"
+        text_es:
+          - "Actualmente: SIPS, SEPEX, EAM, AEMCCO, AIIDI."
+          - "Anteriormente: ASSC"
         short: ["Scientific associations", "SIPS, SEPEX, EAM, AEMCCO, AIIDI."]
+        short_es: ["Sociedades científicas", "SIPS, SEPEX, EAM, AEMCCO, AIIDI."]
       - title: "Peer review"
+        title_es: "Revisión por pares"
         text: "Ad hoc reviewer for *Mindfulness* (Springer Nature), 2 manuscripts"
+        text_es: "Revisora ad hoc para *Mindfulness* (Springer Nature), 2 manuscritos"
       - title: "Test review"
+        title_es: "Revisión de tests"
         text: "National Tests Commission, Spanish Psychological Association (COP), 2024: psychometric review of the Spanish adaptation of the Copenhagen Psychosocial Questionnaire (CoPsoQ-Istas21)"
+        text_es: "Comisión Nacional de Tests, Consejo General de la Psicología (COP), 2024: revisión psicométrica de la adaptación española del Cuestionario Psicosocial de Copenhague (CoPsoQ-Istas21)"

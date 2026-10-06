@@ -2,7 +2,8 @@
 
 Todo el contenido del CV vive en esta carpeta, un archivo `.yml` por sección.
 La pestaña **CV** de la web y el **PDF** se generan a partir de estos archivos con la misma estética,
-así que solo hay que tocar los datos.
+así que solo hay que tocar los datos. Con los mismos archivos se genera también la versión en **español**
+(web `es/cv.html` y PDF `_ES`): mira [Versión en español](#versión-en-español).
 
 | Archivo             | Sección                         |
 |---------------------|---------------------------------|
@@ -17,6 +18,7 @@ así que solo hay que tocar los datos.
 | `dissemination.yml` | Dissemination & Community       |
 | `training.yml`      | Training & Courses              |
 | `skills.yml`        | Skills, Languages & Other       |
+| `es.yml`            | traducciones al español que se repiten (lugares, tipos de comunicación…) |
 
 Al principio de cada archivo hay un comentario con los campos que admite.
 
@@ -61,6 +63,38 @@ Ejemplo: una publicación nueva en `publications.yml` (dentro del grupo que toqu
 ```
 
 Tu nombre se pone en negrita solo (lo controla `highlight` en `profile.yml`).
+
+## Versión en español
+
+Cada campo admite su traducción con el sufijo `_es` justo al lado del original:
+
+```yaml
+  - date: "2026"
+    title: "Best Talk Award, EAM"
+    title_es: "Premio a la mejor charla, EAM"
+    org: "European Association of Methodology"
+    project: "Título de la charla"
+    amount: "Award: €300"
+    amount_es: "Dotación: 300 €"
+```
+
+- Si un campo **no** tiene `_es`, en la versión en español sale tal cual (en inglés). Así nunca se rompe nada:
+  si un día no te apetece traducir, el mérito aparece igualmente.
+- Vale para cualquier campo: `title_es`, `lines_es`, `org_es`, `detail_es`, `short_es` (CV corto), `chip_es` (botón
+  de filtro), `label_es` (contadores de `profile.yml`), `pdf_es` (nombre del PDF en español)…
+  En los campos que son listas (`lines`, `places`, `short`…) la versión `_es` sustituye a la lista entera.
+- Los títulos de publicaciones y comunicaciones se dejan en su idioma original; solo llevan `title_es` las que
+  se presentaron en español.
+- Lo que se repite mucho se traduce una sola vez en **`es.yml`**:
+  - `textos`: textos completos (p. ej. `"Poster": "Póster"`, `"Doctoral School": "Escuela de Doctorado"`).
+  - `fechas`: palabras sueltas dentro de las fechas (`Jan` → `Ene`, `since` → `desde`).
+  - `lugares`: palabras sueltas dentro de lugares y textos libres (`Spain` → `España`).
+- Los textos fijos de la plantilla (botones, rótulos del CV corto…) están en la lista `UI` al principio de
+  `CV/_scripts/cv.R`.
+
+`quarto render` genera los cuatro PDF: `CV_AliciaFranco-Martinez.pdf` y `…_short.pdf` (inglés), y
+`…_ES.pdf` y `…_short_ES.pdf` (español). La vista previa del CV en español está en `CV/cv-print-es.html`
+y `CV/cv-short-es.html`.
 
 ## Reglas de YAML que conviene recordar
 

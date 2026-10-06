@@ -11,14 +11,19 @@
 #   icon         emoji delante de la revista (por defecto 📰)
 #   badges       badges de ciencia abierta:  yes = en color · no = negro · na = gris (no aplica)
 #   short        true → aparece en el CV corto (en formato de cita compacta)
+# Versión en español: el mismo campo con _es (venue_es, extra_es…). Los títulos de
+# los trabajos se dejan en su idioma original. Ver _LEEME.md
 
 title: "Publications"
+title_es: "Publicaciones"
 legend: true          # muestra la leyenda Open Access + badges junto al título
 web_filter: groups    # en la web, botones para filtrar por grupo (usan el campo "chip" de cada grupo)
 
 groups:
   - title: "in **JCR**- and **Scopus**-Indexed Journals"
+    title_es: "en revistas indexadas en **JCR** y **Scopus**"
     chip: "Journal articles"
+    chip_es: "Artículos"
     entries:
       - date: "In press"
         authors: "Rey-Sáez, R., Franco-Martínez, A., Revuelta, J. & Vadillo, M. A."
@@ -71,13 +76,17 @@ groups:
         badges: { prereg: no, data: no, materials: no, code: yes }
 
   - title: "Under Review"
+    title_es: "En revisión"
     chip: "Under review"
+    chip_es: "En revisión"
     entries:
       - date: ""
         authors: "Franco-Martínez, A., […] Garre-Frutos, F."
         title: "Choose your own PAS? Quantitative and Qualitative Validity Evidence for the Perceptual Awareness Scale"
         venue: "*Behavior Research Methods.* (2nd round)"
+        venue_es: "*Behavior Research Methods.* (2.ª ronda)"
         doi_label: "doi of the preprint:"
+        doi_label_es: "doi del preprint:"
         doi: "10.31234/osf.io/n7zuw_v2"
         open_access: true
         badges: { prereg: yes, data: yes, materials: yes, code: yes }
@@ -101,7 +110,9 @@ groups:
         badges: { prereg: na, data: yes, materials: yes, code: yes }
 
   - title: "In Preparation"
+    title_es: "En preparación"
     chip: "In preparation"
+    chip_es: "En preparación"
     entries:
       - date: "Now"
         authors: "Rey-Sáez, R., Franco-Martínez, A., Vadillo, M. A., & Garre-Frutos, F."
@@ -109,7 +120,9 @@ groups:
         badges: { prereg: na, data: yes, materials: yes, code: yes }
 
   - title: "Chapters in Books & Proceedings"
+    title_es: "Capítulos de libro y actas"
     chip: "Book chapters"
+    chip_es: "Capítulos"
     entries:
       - date: "2022"
         authors: "Franco-Martínez, A., Ondé, D., & Alvarado, J. M."
@@ -125,4 +138,5 @@ groups:
         icon: "📖"
         venue: "*Maricorners. Investigaciones queer en la Academia* (pp. 25–56)."
         extra: "Egales editorial. ISBN: [978-84-17319-76-2](https://www.editorialegales.com/libros/maricorners/9788417319762/)"
+        extra_es: "Editorial Egales. ISBN: [978-84-17319-76-2](https://www.editorialegales.com/libros/maricorners/9788417319762/)"
         badges: { prereg: no, data: yes, materials: yes, code: no }

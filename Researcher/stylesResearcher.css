@@ -328,3 +328,18 @@ body::before {
     opacity: 1;
   }
 }
+
+/* ═══ MODO OSCURO (botón ☾ del menú; ver _includes/theme.html) ═══ */
+/* El cielo de nubes se vuelve nocturno */
+html[data-theme="dark"] body::before { filter: brightness(.34) saturate(1.25) hue-rotate(8deg); }
+html[data-theme="dark"] .timeline-content {
+  background-color: rgba(17, 25, 36, .9);
+  color: #d8e1ea;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .45);
+}
+html[data-theme="dark"] .timeline-content:hover { box-shadow: 0 6px 24px rgba(0, 0, 0, .6), 0 0 0 1px rgba(140, 190, 255, .25); }
+html[data-theme="dark"] .timeline-content h3,
+html[data-theme="dark"] .timeline-content strong { color: #f1f5f9; }
+html[data-theme="dark"] .timeline-content a { color: #8cc2ff; }
+/* iconos negros de los títulos cortos */
+html[data-theme="dark"] .timeline-content .short-title img { filter: invert(1) hue-rotate(180deg); }
