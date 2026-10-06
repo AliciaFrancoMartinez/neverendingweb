@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-3de6f4108add57034cca8b7d2d0eec31.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2f1c45e44ac623e255d82b60546dbf90.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,6 +69,64 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<!--
+  Modo oscuro (se añade a la cabecera de todas las páginas desde _quarto.yml).
+  · El botón ☾ / ☀ de la barra de menú cambia entre modo claro y oscuro, y cada visitante
+    lo encuentra como lo dejó (se guarda en su navegador).
+  · El modo claro es el de siempre y el de por defecto.
+  · Los colores del modo oscuro están al final de cada hoja de estilos, en los bloques
+    "MODO OSCURO" (styles.scss, Researcher/*.css, Visitor/stylesVisitor.css, CV/assets/cv-web.css).
+-->
+<script>
+(() => {
+  "use strict";
+  const KEY = "theme";
+  const root = document.documentElement;
+
+  // Antes de pintar la página, para que no se vea un destello en claro
+  try {
+    if (localStorage.getItem(KEY) === "dark") root.dataset.theme = "dark";
+  } catch (e) { /* sin acceso al almacenamiento: modo claro */ }
+
+  const ICONS =
+    '<svg class="theme-toggle-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>' +
+    '<svg class="theme-toggle-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector("#quarto-header .navbar-container");
+    if (!header) return;
+    const es = root.lang.startsWith("es");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "theme-toggle";
+    button.innerHTML = ICONS;
+
+    const update = () => {
+      const dark = root.dataset.theme === "dark";
+      const label = es
+        ? (dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro")
+        : (dark ? "Switch to light mode" : "Switch to dark mode");
+      button.setAttribute("aria-pressed", String(dark));
+      button.setAttribute("aria-label", label);
+      button.title = label;
+    };
+
+    button.addEventListener("click", () => {
+      const dark = root.dataset.theme !== "dark";
+      if (dark) root.dataset.theme = "dark";
+      else delete root.dataset.theme;
+      try { localStorage.setItem(KEY, dark ? "dark" : "light"); } catch (e) { /* no se recuerda */ }
+      update();
+    });
+    update();
+
+    // junto al buscador, que se ve también con el menú plegado (móvil)
+    const search = header.querySelector("#quarto-search");
+    if (search) search.before(button);
+    else header.appendChild(button);
+  });
+})();
+</script>
 
 
 <link rel="stylesheet" href="../styles.scss">
@@ -273,6 +331,89 @@ ul.task-list li input[type="checkbox"] {
 
 
 </main> <!-- /main -->
+<!--
+  Selector de idioma EN / ES de la barra de menú (se añade a todas las páginas desde _quarto.yml).
+  · La web en inglés está en la raíz y la española en es/, con las mismas rutas:
+      Researcher/Researcher.html  ⇄  es/Researcher/Researcher.html
+  · En las páginas de es/ traduce los textos del menú y hace que sus enlaces lleven a es/.
+  · El inglés es siempre el idioma por defecto: no se redirige a nadie automáticamente.
+-->
+<script>
+(() => {
+  "use strict";
+  // Textos del menú en español (clave = página en inglés)
+  const MENU_ES = {
+    "index.html": "Persona",
+    "Researcher/Researcher.html": "Investigadora",
+    "Visitor/Visitor.html": "Visitante",
+    "cv.html": "CV",
+  };
+
+  const nav = document.querySelector("#quarto-header .navbar-nav");
+  if (!nav) return;
+  const offset = document.querySelector('meta[name="quarto:offset"]');
+  const root = new URL(offset ? offset.content : "./", window.location.href);
+
+  // Ruta de una página respecto a la raíz de la web ("" o "x/" → "x/index.html")
+  const pagePath = (url) => {
+    let path = decodeURI(url.pathname).slice(decodeURI(root.pathname).length);
+    if (path === "" || path.endsWith("/")) path += "index.html";
+    return path;
+  };
+  const toUrl = (path) => new URL(path, root).href;
+
+  const here = pagePath(window.location);
+  const isEs = here.startsWith("es/");
+  const page = isEs ? here.slice(3) : here;   // la misma página, en inglés
+
+  if (isEs) {
+    document.querySelectorAll("#quarto-header a.nav-link, #quarto-header a.navbar-brand").forEach((a) => {
+      const url = new URL(a.getAttribute("href"), window.location.href);
+      if (url.origin !== window.location.origin) return;
+      const target = pagePath(url);
+      if (target.startsWith("es/")) return;
+      a.href = toUrl("es/" + target) + url.hash;
+      const text = a.querySelector(".menu-text");
+      if (text && MENU_ES[target]) text.textContent = MENU_ES[target];
+      if (a.classList.contains("nav-link")) {
+        const current = target === page;
+        a.classList.toggle("active", current);
+        if (current) a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  // Botón EN / ES: lleva a la misma página (y a la misma sección, si la hay) en el otro idioma
+  const item = document.createElement("li");
+  item.className = "nav-item lang-switch";
+  item.setAttribute("role", "group");
+  item.setAttribute("aria-label", isEs ? "Idioma" : "Language");
+  [["en", "EN", "English", page], ["es", "ES", "Español", "es/" + page]].forEach(([lang, label, name, path], i) => {
+    if (i) {
+      const sep = document.createElement("span");
+      sep.className = "lang-switch-sep";
+      sep.setAttribute("aria-hidden", "true");
+      sep.textContent = "/";
+      item.appendChild(sep);
+    }
+    const a = document.createElement("a");
+    a.className = "nav-link lang-switch-link";
+    a.href = toUrl(path);
+    a.lang = lang;
+    a.hreflang = lang;
+    a.textContent = label;
+    a.title = name;
+    if ((lang === "es") === isEs) {
+      a.setAttribute("aria-current", "true");
+    } else {
+      a.addEventListener("click", () => { a.href = toUrl(path) + window.location.hash; });
+    }
+    item.appendChild(a);
+  });
+  nav.appendChild(item);
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const isCodeAnnotation = (el) => {

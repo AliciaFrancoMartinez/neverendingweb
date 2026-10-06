@@ -406,3 +406,31 @@ nav {
     font-size: 0.82em;
   }
 }
+
+/* ═══ MODO OSCURO (botón ☾ del menú; ver _includes/theme.html) ═══ */
+/* Mapa nocturno: océano oscuro y continentes en gris azulado */
+html[data-theme="dark"] body::before { filter: brightness(.42) saturate(.9); }
+html[data-theme="dark"] .map-img { filter: brightness(.3) sepia(.25) hue-rotate(170deg) saturate(1.4); }
+html[data-theme="dark"] #map-controls {
+  background: rgba(16, 23, 32, .9);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
+}
+html[data-theme="dark"] .zoom-control { color: #d9e6f2; }
+html[data-theme="dark"] #map-zoom { accent-color: #6fb0ec; }
+html[data-theme="dark"] .drag-hint { color: #b9cde0; }
+html[data-theme="dark"] .marker .dot { border-color: rgba(255, 236, 225, .9); }
+html[data-theme="dark"] .marker .tip {
+  background: rgba(19, 27, 37, .97);
+  color: #e6edf3;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .6);
+}
+html[data-theme="dark"] .tip-congress-entry + .tip-congress-entry { border-top-color: rgba(160, 190, 215, .2); }
+html[data-theme="dark"] .tip-institution { color: #9cc6ea; }
+html[data-theme="dark"] .tip-supervisor { color: #b8c6d2; }
+/* los logos son oscuros: van sobre una tarjetita clara */
+html[data-theme="dark"] .tip-congress-logo,
+html[data-theme="dark"] .tip-visit-logo {
+  background: #eef2f5;
+  border-radius: 6px;
+  padding: 3px;
+}

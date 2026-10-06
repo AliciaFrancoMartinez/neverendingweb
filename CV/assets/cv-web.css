@@ -569,3 +569,39 @@ html:has(.cvw) { scroll-behavior: smooth; }
   .cvw .cv-when .cv-date { display: inline; margin-right: 0.5rem; }
   .cvw .cv-when .cv-badges { display: inline-grid; vertical-align: -0.2rem; margin-top: 0; }
 }
+
+/* ═══ MODO OSCURO (botón ☾ del menú; ver _includes/theme.html) ═══════════════
+   Mismos colores de la identidad, invertidos: fondo y paneles en marrón muy
+   oscuro, y las barras (que usan --cv-brown) pasan a crema con texto oscuro. */
+html[data-theme="dark"] {
+  --cv-bg: #1a1615;
+  --cv-panel: #272120;
+  --cv-panel-2: #2f2826;
+  --cv-brown: #e3d4c6;
+  --cv-ink: #d6cac1;
+  --cv-slate: #9cb0bf;
+  --cv-terracotta: #dc8e72;
+  --cv-link: #7cc2e2;
+  --cv-rule: rgba(227, 212, 198, 0.2);
+}
+html[data-theme="dark"] body:has(.cvw) { background: var(--cv-bg); }
+html[data-theme="dark"] .cvw .cv-section-body::before { background: rgba(227, 212, 198, 0.28); }
+html[data-theme="dark"] .cvw .cv-contrib-title { color: #bcaea4; }
+html[data-theme="dark"] .cvw .cv-line a { text-decoration-color: rgba(227, 212, 198, 0.4); }
+html[data-theme="dark"] .cvw .cv-links a { border-color: rgba(227, 212, 198, 0.3); }
+html[data-theme="dark"] .cvw .cv-thumb { box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5); }
+html[data-theme="dark"] ::highlight(cv-search) { background-color: rgba(220, 142, 114, 0.4); }
+/* iconos y logos pensados para fondo claro: sobre una pastilla clara */
+html[data-theme="dark"] .cvw-contacts a { background: #e9e2d8; }
+html[data-theme="dark"] .cvw .cv-logo {
+  padding: 0.25rem 0.4rem;
+  border-radius: 5px;
+  background: #ece6dc;
+}
+html[data-theme="dark"] .cvw .cv-legend-oa { filter: brightness(1.5); }
+/* badges en "no" (negros): en gris para que se vean */
+html[data-theme="dark"] .cvw .cv-badge path[fill="#3b3634"] { fill: #7a706b; stroke: #7a706b; }
+@media (max-width: 1000px) {
+  html[data-theme="dark"] .cvw-side { background: rgba(26, 22, 21, 0.94); box-shadow: 0 6px 12px -10px rgba(0, 0, 0, 0.8); }
+}
+

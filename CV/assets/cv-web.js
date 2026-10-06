@@ -9,6 +9,11 @@
   if (!root) return;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // textos de la interfaz según el idioma de la página (<html lang="es"> en la versión en español)
+  const es = document.documentElement.lang.startsWith("es");
+  const t = es
+    ? { less: "Ver menos", all: (n) => `Ver todo (${n})`, results: (n) => `${n} resultado${n === 1 ? "" : "s"}`, none: "Sin resultados" }
+    : { less: "Show less", all: (n) => `Show all ${n}`, results: (n) => `${n} result${n === 1 ? "" : "s"}`, none: "No results" };
   const norm = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
   const sections = [...root.querySelectorAll(".cvw-section")];
@@ -86,7 +91,7 @@
 
       if (st.button) {
         st.button.hidden = Boolean(query) || st.filter !== "all" || matching <= st.limit;
-        st.button.textContent = st.expanded ? "Show less" : `Show all ${matching}`;
+        st.button.textContent = st.expanded ? t.less : t.all(matching);
       }
       const link = navLinks.get(sec.id);
       if (link) {
@@ -96,7 +101,7 @@
       total += matching;
     });
 
-    if (status) status.textContent = query ? (total ? `${total} result${total === 1 ? "" : "s"}` : "No results") : "";
+    if (status) status.textContent = query ? (total ? t.results(total) : t.none) : "";
     if (empty) empty.hidden = !query || total > 0;
     highlight();
   }
