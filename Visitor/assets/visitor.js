@@ -19,6 +19,7 @@
   const wide = window.matchMedia('(min-width: 980px)');
   const WORLD_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-50m.json';
   const EARTH_KM = 40075;
+  const ASSETS = new URL('.', document.currentScript ? document.currentScript.src : window.location.href);   // Visitor/assets/
 
   const places = new Map(data.places.map((p) => [p.id, p]));
   const home = data.places.find((p) => p.home) || data.places[0];
@@ -251,6 +252,7 @@
   const dragText = $('.vz-drag-text');
   const rad = Math.PI / 180;
   const wrap180 = (a) => ((((a + 180) % 360) + 360) % 360) - 180;
+  const mod = (a, n) => ((a % n) + n) % n;
   const radius = (n) => (wide.matches ? 8 : 7) + 3 * Math.sqrt(n);
   const worlds = {};
   const loadWorld = (res) => {
@@ -466,7 +468,6 @@
     }, { signal: ac.signal });
 
     // El mundo mide W de ancho a escala 1; en pantalla, W·k, y se repite cada W·k
-    const mod = (a, n) => ((a % n) + n) % n;
     const period = () => W * transform.k;
     // Punto del mapa (coordenadas a escala 1) → pantalla, en la copia del mundo más cercana al centro
     function screen(pt) {
@@ -663,6 +664,15 @@
     const ac = new AbortController();
     let alive = true;
     const { canvas, ctx, svg, gArcs, gPins } = surface();
+    // de fondo, el universo; y el mar de siempre, ahora dentro del globo
+    const sky = document.createElement('canvas');
+    sky.className = 'vz-stars';
+    mapEl.prepend(sky);
+    const skyCtx = sky.getContext('2d');
+    let stars = [];
+    const sea = new Image();
+    sea.onload = () => { if (alive) paint(); };
+    sea.src = new URL('ocean.jpeg', ASSETS).href;
     const front = d3.geoOrthographic().precision(0.6);
     const back = d3.geoOrthographic().precision(0.6).reflectX(true);   // la cara de atrás, vista a través del cristal
     const graticule = d3.geoGraticule10();
@@ -707,10 +717,45 @@
       W = mapEl.clientWidth;
       H = mapEl.clientHeight;
       sizeSurface({ canvas, svg }, W, H);
+      const dpr = window.devicePixelRatio || 1;
+      sky.width = Math.round(W * dpr);
+      sky.height = Math.round(H * dpr);
+      stars = makeStars();
       const [[, y0], [, y1]] = viewBox(W, H);
       R0 = wide.matches ? Math.min(W, H) * 0.4 : Math.min(W * 0.44, (y1 - y0) * 0.48);
       center = centerTarget();
       zoom.extent([[0, 0], [W, H]]);
+    }
+
+    // Estrellas al azar, pero siempre las mismas (semilla fija)
+    function makeStars() {
+      let seed = 7;
+      const rnd = () => {
+        seed = (seed + 0x6d2b79f5) | 0;
+        let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+        t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+      return Array.from({ length: Math.round((W * H) / 1600) }, () => {
+        const big = rnd() > 0.93;
+        return { x: rnd(), y: rnd(), r: big ? 0.9 + rnd() * 0.9 : 0.35 + rnd() * 0.5, a: 0.35 + rnd() * 0.65, tint: rnd() };
+      });
+    }
+
+    // Las estrellas se mueven un poco al girar el globo, como si giraras en el espacio
+    function paintSky() {
+      const dpr = window.devicePixelRatio || 1;
+      skyCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      skyCtx.clearRect(0, 0, W, H);
+      const ox = rot[0] * 1.5, oy = -rot[1] * 1.5;
+      stars.forEach((st) => {
+        skyCtx.globalAlpha = st.a;
+        skyCtx.fillStyle = st.tint > 0.85 ? '#ffe9c4' : st.tint > 0.7 ? '#cfe0ff' : '#fff';
+        skyCtx.beginPath();
+        skyCtx.arc(mod(st.x * W + ox, W), mod(st.y * H + oy, H), st.r, 0, 2 * Math.PI);
+        skyCtx.fill();
+      });
+      skyCtx.globalAlpha = 1;
     }
 
     // Centro del globo: en medio de lo que deja libre la tarjeta de un lugar
@@ -727,6 +772,7 @@
       const s = R0 * k;
       front.scale(s).translate(center).rotate(rot);
       back.scale(s).translate(center).rotate([rot[0] + 180, -rot[1], -rot[2]]);
+      paintSky();
       paint();
       draw();
       zoomInput.value = Math.log(k) / Math.log(K_MAX);
@@ -758,20 +804,29 @@
       const dpr = window.devicePixelRatio || 1;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
-      if (!colors) colors = themeColors(['land', 'coast', 'border', 'globe-sea', 'globe-back', 'globe-grid', 'globe-glow', 'globe-light', 'globe-shade']);
+      if (!colors) colors = themeColors(['land', 'coast', 'border', 'globe-water', 'globe-sea', 'globe-back', 'globe-grid', 'globe-glow', 'globe-light', 'globe-shade']);
       const s = R0 * k;
       const [cx, cy] = center;
-      // halo alrededor del globo
-      const halo = ctx.createRadialGradient(cx, cy, s * 0.96, cx, cy, s * 1.14);
+      // la atmósfera, un halo alrededor del globo
+      const halo = ctx.createRadialGradient(cx, cy, s * 0.96, cx, cy, s * 1.16);
       halo.addColorStop(0, colors['globe-glow']);
       halo.addColorStop(1, 'rgba(255, 255, 255, 0)');
       ctx.fillStyle = halo;
-      circle(cx, cy, s * 1.14);
+      circle(cx, cy, s * 1.16);
       ctx.fill();
-      // el agua
-      ctx.fillStyle = colors['globe-sea'];
+      // el agua: la foto del mar recortada en círculo, con un velo azul encima
+      ctx.save();
       circle(cx, cy, s);
-      ctx.fill();
+      ctx.clip();
+      ctx.fillStyle = colors['globe-water'];
+      ctx.fillRect(cx - s, cy - s, 2 * s, 2 * s);
+      if (sea.complete && sea.naturalWidth) {
+        const side = Math.min(sea.naturalWidth, sea.naturalHeight);
+        ctx.drawImage(sea, (sea.naturalWidth - side) / 2, (sea.naturalHeight - side) / 2, side, side, cx - s, cy - s, 2 * s, 2 * s);
+      }
+      ctx.fillStyle = colors['globe-sea'];
+      ctx.fillRect(cx - s, cy - s, 2 * s, 2 * s);
+      ctx.restore();
       const geo = (moving && shapes['110m']) || shapes['50m'] || shapes['110m'];
       if (geo) {
         const bp = d3.geoPath(back, ctx);
@@ -924,6 +979,7 @@
       clearTimeout(resizeTimer);
       ac.abort();
       observer.disconnect();
+      sky.remove();
       canvas.remove();
       svg.remove();
     }
@@ -944,6 +1000,7 @@
     mapEl.classList.remove('is-ready', 'is-error');
     map = VIEWS[view]();
     root.dataset.view = view;
+    document.documentElement.dataset.vzView = view;   // el fondo de la página: mar (mapa) o universo (globo)
     viewBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
     dragText.textContent = view === 'globe' ? ui.drag_globe : ui.drag;
     try { localStorage.setItem('vz-view', view); } catch (e) { /* no se recuerda */ }

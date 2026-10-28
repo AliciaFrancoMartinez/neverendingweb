@@ -13,6 +13,32 @@ body::before {
   filter: brightness(0.92);
   z-index: -1;
 }
+/* En la vista de globo, el fondo es el universo (las estrellas las dibuja visitor.js) */
+html[data-vz-view="globe"] body::before {
+  background:
+    radial-gradient(ellipse 55% 45% at 16% 24%, rgba(112, 78, 196, .3), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 84% 76%, rgba(36, 112, 196, .28), transparent 70%),
+    radial-gradient(ellipse 90% 70% at 50% 50%, #0c1433 0%, #03050d 78%);
+  filter: none;
+}
+/* …y el menú, oscuro como en el modo oscuro (styles.scss), para que no sea una franja gris */
+html[data-vz-view="globe"] header#quarto-header { background: rgba(13, 18, 25, .55) !important; }
+html[data-vz-view="globe"] #quarto-header .navbar {
+  --bs-navbar-color: #d9e0e7;
+  --bs-navbar-hover-color: #9cc4ff;
+  --bs-navbar-active-color: #8ab8ff;
+  --bs-navbar-brand-color: #e9eef3;
+  --bs-navbar-brand-hover-color: #9cc4ff;
+}
+html[data-vz-view="globe"] #quarto-header .navbar-toggler-icon {
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb%28217, 224, 231%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+html[data-vz-view="globe"] #quarto-header .navbar-title,
+html[data-vz-view="globe"] #quarto-header .nav-link,
+html[data-vz-view="globe"] #quarto-header .theme-toggle,
+html[data-vz-view="globe"] #quarto-header .aa-DetachedSearchButton .aa-DetachedSearchButtonIcon { color: var(--bs-navbar-color); }
+html[data-vz-view="globe"] #quarto-header .nav-link.active { color: var(--bs-navbar-active-color); }
+html[data-vz-view="globe"] .navbar-logo { filter: invert(1) hue-rotate(180deg) brightness(.92); }
 
 .vz {
   --vz-land: rgba(255, 255, 255, .97);
@@ -31,12 +57,13 @@ body::before {
   --vz-accent: #1b74b8;
   --vz-arc: rgba(11, 53, 86, .6);
   --vz-arc-halo: rgba(255, 255, 255, .5);
-  --vz-globe-sea: rgba(12, 58, 92, .5);
+  --vz-globe-water: #1f5f8b;
+  --vz-globe-sea: rgba(10, 52, 92, .25);
   --vz-globe-back: rgba(255, 255, 255, .16);
-  --vz-globe-grid: rgba(255, 255, 255, .14);
-  --vz-globe-glow: rgba(255, 255, 255, .5);
-  --vz-globe-light: rgba(255, 255, 255, .22);
-  --vz-globe-shade: rgba(4, 24, 42, .38);
+  --vz-globe-grid: rgba(255, 255, 255, .12);
+  --vz-globe-glow: rgba(110, 175, 255, .55);
+  --vz-globe-light: rgba(255, 255, 255, .2);
+  --vz-globe-shade: rgba(2, 10, 24, .6);
   --vz-shadow: 0 8px 24px rgba(0, 0, 0, .2);
   --vz-serif: "DM Serif Display", Georgia, serif;
   --vz-sans: "Poppins", "Nunito Sans", system-ui, sans-serif;
@@ -55,7 +82,8 @@ body::before {
   overflow: hidden;
 }
 .vz-map { position: absolute; inset: 0; }
-.vz-canvas, .vz-svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.vz-canvas, .vz-svg, .vz-stars { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.vz-stars { pointer-events: none; }
 .vz-canvas { opacity: 0; transition: opacity .8s ease; }
 .vz-map.is-ready .vz-canvas { opacity: 1; }
 .vz-svg { cursor: grab; user-select: none; touch-action: none; }
@@ -473,12 +501,13 @@ html[data-theme="dark"] .vz {
   --vz-accent: #6fb0ec;
   --vz-arc: rgba(217, 230, 242, .6);
   --vz-arc-halo: rgba(10, 18, 28, .45);
-  --vz-globe-sea: rgba(6, 18, 30, .72);
+  --vz-globe-water: #0c2235;
+  --vz-globe-sea: rgba(4, 14, 26, .55);
   --vz-globe-back: rgba(160, 190, 215, .12);
   --vz-globe-grid: rgba(160, 190, 215, .08);
-  --vz-globe-glow: rgba(111, 176, 236, .28);
+  --vz-globe-glow: rgba(90, 150, 230, .38);
   --vz-globe-light: rgba(255, 255, 255, .07);
-  --vz-globe-shade: rgba(0, 0, 0, .45);
+  --vz-globe-shade: rgba(0, 0, 0, .6);
   --vz-shadow: 0 8px 24px rgba(0, 0, 0, .5);
   color: #e6edf3;
 }
