@@ -116,6 +116,17 @@ Guarda la imagen en `CV/assets/img/` y pon solo el nombre del archivo, por ejemp
 `logos: ["logo-ucl.png"]` en *experience* o `image: "dis-paciencia.jpg"` en *dissemination*.
 Mejor en PNG/JPG de unos 500 px de ancho como máximo.
 
+## El mapa de la pestaña Visitor
+
+La pestaña **Visitor** dibuja en un mapa los congresos (`conferences.yml`), las charlas (`talks.yml`) y las
+estancias de investigación (`experience.yml`) a partir de su lugar (`place`, o la línea con 📍 en las estancias).
+No hay que hacer nada más: al añadir un mérito aparece solo.
+
+- Si el mérito es en una **ciudad nueva**, `quarto render` avisa ("Visitor: no sé dónde está …"): añade la ciudad
+  con sus coordenadas en `Visitor/places.yml`.
+- Lo que tiene como lugar `ONLINE` o `VIRTUAL` no sale en el mapa, solo en el diario de viaje.
+- El logo de cada congreso también se elige en `Visitor/places.yml`.
+
 ## Opciones de la versión web
 
 La pestaña CV de la web usa los mismos datos que el PDF, con algunas opciones solo para la web:

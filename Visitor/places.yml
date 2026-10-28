@@ -1,0 +1,54 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  MAPA DE LA PESTAÑA VISITOR
+#  El mapa se dibuja solo con los datos del CV, así que no hay que copiar nada aquí:
+#    · congresos  → CV/data/conferences.yml (campo place)
+#    · charlas    → CV/data/talks.yml (campo place)
+#    · estancias  → CV/data/experience.yml (el grupo de "visits"; la línea con 📍)
+#
+#  Este archivo solo dice DÓNDE está cada ciudad. Si añades un mérito en una ciudad
+#  nueva, `quarto render` avisa ("Visitor: no sé dónde está …"): añádela a la lista
+#  de abajo con sus coordenadas (en Google Maps, clic derecho sobre la ciudad y se
+#  copian "lat, lon").
+#  Instrucciones de la web en _LEEME.md (raíz) y del CV en CV/data/_LEEME.md
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Grupo de experience.yml que son estancias de investigación (su título en inglés)
+visits: "Research International Visits"
+
+# Lugares que significan "en línea": no salen en el mapa, solo en el diario de viaje
+online: ["ONLINE", "VIRTUAL"]
+
+# Logo de cada congreso (en Visitor/assets/): si el nombre del congreso en inglés
+# contiene el texto de la izquierda, se usa la imagen de la derecha.
+# Las estancias usan el logo que ya tienen en experience.yml.
+logos:
+  "ASSC": "logo_assc.png"
+  "AEMCCO": "logo_aemcco.png"
+  "European Association of Methodology": "logo_eam.png"
+  "AIIDI": "logo_aiidi.png"
+  "RECA": "logo_reca.png"
+  "Experimental Psychology Society": "logo_eps.jpg"
+  "Multilevel": "logo_multilevel.png"
+  "LGTBIQ+": "logo_maricorners.png"
+
+# Ciudades
+#   name / name_es     nombre en el mapa
+#   country / _es      país
+#   lat, lon           coordenadas
+#   match              textos que, si aparecen en el lugar del mérito, lo sitúan aquí
+#                      (si no se pone, se busca el nombre)
+#   home: true         la ciudad desde la que salen las rutas del mapa
+places:
+  - { id: madrid,    name: "Madrid",    country: "Spain", country_es: "España", lat: 40.4168, lon: -3.7038, home: true }
+  - { id: valencia,  name: "Valencia",  country: "Spain", country_es: "España", lat: 39.4699, lon: -0.3763 }
+  - { id: almeria,   name: "Almería",   country: "Spain", country_es: "España", lat: 36.8340, lon: -2.4637 }
+  - { id: seville,   name: "Seville",   name_es: "Sevilla", country: "Spain", country_es: "España", lat: 37.3891, lon: -5.9845 }
+  - { id: teruel,    name: "Teruel",    country: "Spain", country_es: "España", lat: 40.3456, lon: -1.1065 }
+  - { id: zaragoza,  name: "Zaragoza",  country: "Spain", country_es: "España", lat: 41.6488, lon: -0.8891 }
+  - { id: tenerife,  name: "Tenerife",  country: "Spain", country_es: "España", lat: 28.4636, lon: -16.2518 }
+  - { id: london,    name: "London",    name_es: "Londres", country: "United Kingdom", country_es: "Reino Unido", lat: 51.5074, lon: -0.1278 }
+  - { id: amsterdam, name: "Amsterdam", name_es: "Ámsterdam", country: "The Netherlands", country_es: "Países Bajos", lat: 52.3676, lon: 4.9041 }
+  - { id: utrecht,   name: "Utrecht",   country: "The Netherlands", country_es: "Países Bajos", lat: 52.0907, lon: 5.1214 }
+  - { id: heraklion, name: "Heraklion", name_es: "Heraclión", country: "Greece", country_es: "Grecia", lat: 35.3387, lon: 25.1442 }
+  - { id: new-york,  name: "New York",  name_es: "Nueva York", country: "United States", country_es: "Estados Unidos", lat: 40.7128, lon: -74.0060 }
+  - { id: tokyo,     name: "Tokyo",     name_es: "Tokio", country: "Japan", country_es: "Japón", lat: 35.6762, lon: 139.6503 }

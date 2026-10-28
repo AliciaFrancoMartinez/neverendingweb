@@ -1,5 +1,9 @@
 /*---------------------------------------------*
  |                VISITOR PAGE                 |
+ |  Mapa (Visitor/assets/visitor.js) sobre el  |
+ |  mar y diario de viaje. Los colores están   |
+ |  en las variables de .vz; los del modo      |
+ |  oscuro, al final.                          |
  *---------------------------------------------*/
 body::before {
   content: "";
@@ -10,427 +14,482 @@ body::before {
   z-index: -1;
 }
 
-/* Contenedor de pantalla completa que no hace scroll */
-#map-stage {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
-}
+.vz {
+  --vz-land: rgba(255, 255, 255, .97);
+  --vz-coast: rgba(11, 53, 86, .16);
+  --vz-border: rgba(11, 53, 86, .1);
+  --vz-ink: #0b3556;
+  --vz-ink-2: #1d3b55;
+  --vz-muted: #41586b;
+  --vz-line: rgba(29, 59, 85, .16);
+  --vz-card: rgba(255, 255, 255, .92);
+  --vz-card-solid: rgba(255, 255, 255, .97);
+  --vz-pin: #fff;
+  --vz-congress: #c62828;
+  --vz-visit: #ef6c00;
+  --vz-talk: #1b74b8;
+  --vz-accent: #1b74b8;
+  --vz-arc: rgba(11, 53, 86, .6);
+  --vz-arc-halo: rgba(255, 255, 255, .5);
+  --vz-globe-sea: rgba(12, 58, 92, .5);
+  --vz-globe-back: rgba(255, 255, 255, .16);
+  --vz-globe-grid: rgba(255, 255, 255, .14);
+  --vz-globe-glow: rgba(255, 255, 255, .5);
+  --vz-globe-light: rgba(255, 255, 255, .22);
+  --vz-globe-shade: rgba(4, 24, 42, .38);
+  --vz-shadow: 0 8px 24px rgba(0, 0, 0, .2);
+  --vz-serif: "DM Serif Display", Georgia, serif;
+  --vz-sans: "Poppins", "Nunito Sans", system-ui, sans-serif;
 
-/* Track horizontal infinito (2 mosaicos) */
-#map-pan {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  transform: translate(0, -50%);
-  cursor: grab;
-  user-select: none;
-}
-
-#map-controls {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  z-index: 3;
-  width: min(280px, calc(100vw - 2rem));
-  padding: 0.7rem 0.8rem;
-  border-radius: 0.65rem;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(2px);
-}
-
-.zoom-control {
-  display: block;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  margin-bottom: 0.35rem;
-  color: #0b3556;
-}
-
-#map-zoom {
-  width: 100%;
-  accent-color: #1b74b8;
-}
-
-.drag-hint {
-  margin-top: 0.55rem;
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.82rem;
-  color: #143a5a;
-}
-
-.drag-hint svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-  flex: 0 0 auto;
-}
-
-.map-tile {
-  position: relative;
-  width: 104vw;
-  flex: 0 0 104vw;
-  height: auto;
-}
-
-.map-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
-}
-
-/* Marcadores posicionados relativos a cada tile */
-.marker {
-  position: absolute;
-  top: var(--top, 50%);
-  left: var(--left, 50%);
-  transform: translate(-50%, -50%);
-  width: calc(30px * var(--marker-scale, 1));
-  height: calc(30px * var(--marker-scale, 1));
-  font-size: calc(16px * var(--marker-scale, 1));
-  background: transparent;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  outline: none;
-  z-index: 6;
-  display: block;
-  line-height: 0;
-}
-
-.marker:hover,
-.marker:focus-visible,
-.marker[aria-expanded="true"] {
-  z-index: 60;
-}
-
-.marker .dot {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: rgba(198, 40, 40, 0.5);
-  border: max(1px, calc(2px * var(--marker-scale, 1))) solid rgba(255, 255, 255, 0.92);
-  box-shadow:
-    0 calc(2px * var(--marker-scale, 1))
-    calc(8px * var(--marker-scale, 1))
-    rgba(0, 0, 0, 0.32);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 3;
-  box-sizing: border-box;
-}
-
-.marker .tip {
-  --tip-attach-overlap: 0px;
-  position: absolute;
-  top: auto;
-  bottom: calc(100% - var(--tip-attach-overlap));
-  left: 0;
-  transform: scale(var(--card-scale, 1));
-  transform-origin: left bottom;
-  min-width: 360px;
-  max-width: 520px;
-  padding: 0.6rem 0.75rem;
-  font-size: 0.95rem;
-  line-height: 1.25rem;
-  background: rgba(255, 255, 255, 0.96);
+  font-family: var(--vz-serif);
   color: #111;
-  border-radius: 0.5rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+.vz *, .vz *::before, .vz *::after { box-sizing: border-box; }
+
+/* ── El mapa, a pantalla completa ──────────────────────────────────────────── */
+.vz-stage {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+}
+.vz-map { position: absolute; inset: 0; }
+.vz-canvas, .vz-svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.vz-canvas { opacity: 0; transition: opacity .8s ease; }
+.vz-map.is-ready .vz-canvas { opacity: 1; }
+.vz-svg { cursor: grab; user-select: none; touch-action: none; }
+.vz-svg:active { cursor: grabbing; }
+
+.vz-arc, .vz-arc-halo { fill: none; stroke-linecap: round; }
+.vz-arc-halo { stroke: var(--vz-arc-halo); stroke-width: 3.5; }
+.vz-arc { stroke: var(--vz-arc); stroke-width: 1.8; stroke-dasharray: .5 5; }
+.vz-route.is-selected .vz-arc { stroke: var(--vz-congress); stroke-width: 2.4; stroke-dasharray: 6 4; }
+.vz-route.is-selected .vz-arc-halo { stroke-width: 5; }
+.vz-home-dot { fill: var(--vz-ink); stroke: var(--vz-pin); stroke-width: 2; }
+
+/* Marcadores: un anillo con los colores de lo que hice allí y el número en el centro */
+.vz-pin { cursor: pointer; outline: none; }
+.vz-pin-ring { fill: var(--vz-pin); filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .32)); }
+.vz-pin.is-home .vz-pin-ring { stroke: var(--vz-ink); stroke-width: 1.6; }
+.vz-pin.is-cluster .vz-pin-ring { stroke: var(--vz-ink); stroke-width: 1.3; stroke-dasharray: 2 2.6; }
+.vz-pin:hover .vz-pin-ring { stroke: var(--vz-accent); stroke-width: 2.4; stroke-dasharray: none; }
+.vz-pin:focus-visible .vz-pin-ring,
+.vz-pin.is-selected .vz-pin-ring { stroke: var(--vz-congress); stroke-width: 3; stroke-dasharray: none; }
+.vz-pin-pie path { stroke: var(--vz-pin); stroke-width: 1; }
+.vz-fill--congress { fill: var(--vz-congress); }
+.vz-fill--visit { fill: var(--vz-visit); }
+.vz-fill--talk { fill: var(--vz-talk); }
+.vz-pin-core { fill: var(--vz-pin); }
+.vz-pin-n { text-anchor: middle; font-family: var(--vz-serif); fill: var(--vz-ink); pointer-events: none; }
+.vz-pin-label {
+  font-family: var(--vz-serif);
+  font-size: 14px;
+  fill: var(--vz-ink);
+  paint-order: stroke;
+  stroke: var(--vz-pin);
+  stroke-width: 4px;
+  stroke-linejoin: round;
   pointer-events: none;
+}
+.vz-pin.is-label-off .vz-pin-label { visibility: hidden; }
+.vz-pin.is-label-off:hover .vz-pin-label,
+.vz-pin.is-label-off:focus-visible .vz-pin-label { visibility: visible; }
+
+/* Avisos sobre el mapa (zoom con Ctrl, error al cargar) */
+.vz-hint {
+  position: absolute;
+  z-index: 4;
+  top: 45%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  padding: .55rem .9rem;
+  border-radius: .65rem;
+  background: rgba(11, 30, 46, .8);
+  color: #fff;
+  font-family: var(--vz-sans);
+  font-size: .85rem;
   opacity: 0;
-  transition: opacity 0.15s ease;
-  z-index: 1;
+  pointer-events: none;
+  transition: opacity .25s;
+}
+.vz-hint.is-on { opacity: 1; }
+.vz-map.is-error::after {
+  content: attr(data-error);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(320px, 80%);
+  padding: .8rem 1rem;
+  border-radius: .65rem;
+  background: var(--vz-card);
+  color: var(--vz-ink-2);
+  text-align: center;
 }
 
-.marker[data-tip-v="above"] .tip {
-  top: auto;
-  bottom: calc(100% - var(--tip-attach-overlap));
-  transform: scale(var(--card-scale, 1));
-  transform-origin: left bottom;
+/* ── Título, como en el resto de la web ────────────────────────────────────── */
+.vz-hero {
+  position: absolute;
+  z-index: 3;
+  right: 5%;
+  bottom: 1.4rem;
+  max-width: 60%;
+  color: #fff;
+  text-align: right;
+  text-shadow:
+    0 2px 5px rgba(0, 0, 0, .9),
+    0 3px 50px rgba(0, 0, 0, .9),
+    0 6px 25px rgba(0, 0, 0, .6);
+  pointer-events: none;
+  transition: opacity .3s;
 }
-
-.marker[data-tip-v="below"] .tip {
-  top: calc(100% - var(--tip-attach-overlap));
-  bottom: auto;
-  transform: scale(var(--card-scale, 1));
-  transform-origin: left top;
+.vz-hero h1 {
+  margin: 0;
+  font-family: var(--vz-serif);
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #fff;
 }
+.vz-hero-sub { margin: .2rem 0 0; font-family: var(--vz-sans); font-size: 1.7rem; line-height: 1.15; }
+.vz-hero-stats { margin: .55rem 0 0; font-family: var(--vz-sans); font-size: .95rem; letter-spacing: .02em; }
+.vz-n { font-variant-numeric: tabular-nums; pointer-events: auto; }
+.vz-stage.has-panel .vz-hero { opacity: 0; }
 
-.marker[data-tip-h="right"] .tip {
-  left: auto;
-  right: 0;
-  transform-origin: right bottom;
+/* ── Controles (abajo a la izquierda) ──────────────────────────────────────── */
+.vz-controls {
+  position: absolute;
+  z-index: 5;
+  left: 1rem;
+  bottom: 1rem;
+  width: min(300px, calc(100vw - 2rem));
+  padding: .75rem .85rem .7rem;
+  border-radius: .65rem;
+  background: var(--vz-card);
+  box-shadow: var(--vz-shadow);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  color: var(--vz-ink);
 }
-
-.marker[data-tip-v="below"][data-tip-h="right"] .tip {
-  transform-origin: right top;
+/* Mapa / Globo */
+.vz-views {
+  display: flex;
+  margin-bottom: .6rem;
+  padding: 2px;
+  border-radius: 999px;
+  background: var(--vz-line);
 }
-
-.marker:hover .tip,
-.marker:focus-visible .tip,
-.marker[aria-expanded="true"] .tip {
-  opacity: 1;
-  pointer-events: auto;
+.vz-views button {
+  flex: 1;
+  padding: .2rem .6rem;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--vz-ink-2);
+  font: inherit;
+  font-size: .85rem;
+  cursor: pointer;
 }
-
-/* Header por encima del mapa */
-header,
-.site-header,
-nav {
-  position: relative;
-  z-index: 2;
-}
-
-.tip-logo {
-  display: block;
-  width: 150px;
-  height: auto;
-}
-
-.tip-visit {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 0.7rem;
-  row-gap: 0;
+.vz-views button[aria-pressed="true"] { background: var(--vz-card-solid); color: var(--vz-ink); box-shadow: 0 1px 4px rgba(0, 0, 0, .15); }
+.vz-keys { display: flex; flex-wrap: wrap; gap: .25rem .9rem; margin-bottom: .6rem; }
+.vz-key {
+  display: inline-flex;
   align-items: center;
-  text-align: left;
+  gap: .4rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--vz-ink-2);
+  font: inherit;
+  font-size: .9rem;
+  cursor: pointer;
 }
+.vz-key[aria-pressed="false"] { opacity: .45; text-decoration: line-through; }
+.vz-key[aria-pressed="false"] .vz-dot { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
+.vz-dot { display: inline-block; flex: none; width: .7rem; height: .7rem; border-radius: 50%; }
+.vz-dot--congress { background: var(--vz-congress); }
+.vz-dot--visit { background: var(--vz-visit); }
+.vz-dot--talk { background: var(--vz-talk); }
 
-.tip-congress {
+.vz-ctl { margin-top: .45rem; }
+.vz-ctl-head { display: flex; justify-content: space-between; align-items: baseline; }
+.vz-ctl-label {
+  display: block;
+  margin-bottom: .3rem;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--vz-ink);
+}
+.vz-year-out { font-size: .82rem; color: var(--vz-muted); font-variant-numeric: tabular-nums; }
+.vz-ctl-row { display: flex; align-items: center; gap: .55rem; }
+.vz-play {
+  flex: none;
   display: grid;
-  gap: 0.55rem;
-  text-align: left;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--vz-accent);
+  color: #fff;
+  cursor: pointer;
 }
+.vz-play svg { width: 14px; height: 14px; fill: currentColor; }
+.vz-year, .vz-zoom { width: 100%; margin: 0; accent-color: var(--vz-accent); cursor: pointer; }
 
-.marker .tip.tip-congress {
+.vz-ctl-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+  margin-top: .55rem;
+  font-size: .82rem;
+}
+.vz-drag { display: flex; align-items: center; gap: .45rem; color: #143a5a; }
+.vz-drag svg { flex: none; width: 18px; height: 18px; fill: currentColor; }
+.vz-to-log { color: var(--vz-accent); text-decoration: none; white-space: nowrap; }
+.vz-to-log:hover { text-decoration: underline; }
+
+/* ── Tarjeta de un lugar (como las de antes) ───────────────────────────────── */
+.vz-panel {
+  position: absolute;
+  z-index: 6;
+  top: 84px;
+  right: 1rem;
+  width: 400px;
+  max-height: calc(100% - 108px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: .5rem;
+  background: var(--vz-card-solid);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+  color: #111;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .2s, transform .25s ease;
+}
+.vz-panel.is-open { opacity: 1; transform: none; }
+.vz-panel-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: .8rem .9rem .6rem;
+  background: var(--vz-card-solid);
+  border-bottom: 1px solid var(--vz-line);
+}
+.vz-panel-city { margin: 0; padding: 0; border: 0; font-family: var(--vz-serif); font-size: 1.9rem; font-weight: 400; line-height: 1.1; color: var(--vz-ink); }
+.vz-panel-home { font-size: 1rem; color: var(--vz-muted); }
+.vz-panel-meta { margin: .1rem 0 0; font-size: .88rem; color: var(--vz-ink-2); }
+.vz-panel-close {
+  flex: none;
   display: grid;
-  gap: 0.55rem;
-  text-align: left;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--vz-ink);
+  cursor: pointer;
 }
+.vz-panel-close:hover { background: var(--vz-line); }
+.vz-panel-close svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.vz-panel-list { margin: 0; padding: 0 .9rem; list-style: none; }
 
-.tip-congress-entry {
+/* Un mérito: logo a la izquierda; título, entidad y comunicaciones a la derecha */
+.vz-ev {
   display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 0.7rem;
-  row-gap: 0;
-  align-items: start;
+  grid-template-columns: 64px 1fr;
+  column-gap: .7rem;
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--vz-line);
 }
-
-.tip-congress-entry + .tip-congress-entry {
-  padding-top: 0.5rem;
-  border-top: 1px solid rgba(29, 59, 85, 0.18);
+.vz-ev:last-child { border-bottom: 0; }
+.vz-ev-logo { display: block; width: 64px; height: auto; max-height: 64px; object-fit: contain; }
+.vz-ev-logo--none {
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, .92);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+  color: #fff;
+  font-family: var(--vz-serif);
+  font-size: 1.15rem;
+  line-height: 1;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
 }
-
-.tip-visit-logo {
-  display: block;
-  width: 72px;
-  height: auto;
-  margin: 0;
-  grid-column: 1;
-  grid-row: 1 / span 3;
-  justify-self: start;
-}
-
-.tip-visit img[src*="logo_uva"] {
-  width: 54px;
-}
-
-.tip-congress-logo {
-  display: block;
-  width: 64px;
-  height: auto;
-  margin: 0;
-}
-
-.marker .tip.tip-congress .tip-congress-entry > .tip-congress-logo {
-  grid-column: 1;
-  grid-row: 1 / span 3;
-  justify-self: start;
-  align-self: center;
-}
-
-.marker .tip.tip-congress .tip-congress-entry > .tip-title,
-.marker .tip.tip-congress .tip-congress-entry > .tip-institution,
-.marker .tip.tip-congress .tip-congress-entry > .tip-supervisor {
-  grid-column: 2;
-  justify-self: start;
-  text-align: left;
-  width: 100%;
-}
-
-.marker .tip.tip-congress > .tip-supervisor {
-  font-family: "Poppins", "Nunito Sans", sans-serif;
-  font-weight: 500;
-}
-
-.tip-title {
-  display: block;
-  font-size: 0.95rem;
-  line-height: 1.2;
-  margin-bottom: 0.28rem;
-  grid-column: 2;
-  text-align: left;
-}
-
-.tip-institution {
-  display: block;
-  font-size: 0.88rem;
-  line-height: 1.2;
-  color: #1d3b55;
-  margin-bottom: 0.28rem;
-  grid-column: 2;
-  text-align: left;
-}
-
-.tip-supervisor {
-  display: block;
-  margin-top: 0.1rem;
-  font-size: 0.83rem;
-  line-height: 1.2;
-  color: #41586b;
-  font-family: "Poppins", "Nunito Sans", sans-serif;
-  font-weight: 500;
-  grid-column: 2;
-  text-align: left;
-}
-
-.dot {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.vz-ev-logo--congress { background: var(--vz-congress); }
+.vz-ev-logo--visit { background: var(--vz-visit); }
+.vz-ev-logo--talk { background: var(--vz-talk); }
+.vz-ev-body { min-width: 0; }
+.vz-ev-when {
   display: flex;
   align-items: center;
-  justify-content: center;
-  overflow: visible;
+  gap: .4rem;
+  margin: 0 0 .2rem;
+  font-family: var(--vz-sans);
+  font-size: .74rem;
+  color: var(--vz-muted);
 }
+.vz-ev-when .vz-dot { width: .55rem; height: .55rem; }
+.vz-ev-title { display: block; margin-bottom: .2rem; font-size: .98rem; font-weight: 400; line-height: 1.25; color: #111; }
+.vz-ev-title strong { font-weight: 400; }
+.vz-ev-org { display: block; margin-bottom: .2rem; font-size: .88rem; line-height: 1.25; color: var(--vz-ink-2); }
+.vz-ev-award { display: inline-block; margin: .1rem 0 .25rem; font-size: .88rem; color: #8a5a00; }
+.vz-ev-items { display: grid; gap: .35rem; margin: .3rem 0 0; padding: 0; list-style: none; }
+.vz-ev-items li { line-height: 1.25; }
+.vz-ev-type { display: block; font-size: .85rem; color: var(--vz-ink-2); }
+.vz-ev-text { display: block; font-family: var(--vz-sans); font-size: .83rem; font-weight: 500; font-style: italic; color: var(--vz-muted); }
+.vz-ev-text em { font-style: italic; }
+.vz-panel a { color: var(--vz-accent); }
 
-.marker-letter {
-  font-weight: 700;
-  font-size: 0.9em;
+/* ── Diario de viaje (una tarjeta sobre el mar) ────────────────────────────── */
+.vz-log { padding: 4rem 1rem 6rem; }
+.vz-log-card {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(1.3rem, 3vw, 2.6rem);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, .95);
+  box-shadow: 0 14px 40px rgba(18, 48, 74, .2);
+}
+.vz-log h2 { margin: 0 0 .3rem; padding: 0; border: 0; font-family: var(--vz-serif); font-size: 2.6rem; font-weight: 400; color: var(--vz-ink); }
+.vz-log-lead { margin: 0 0 1.8rem; font-family: var(--vz-sans); font-size: .95rem; color: var(--vz-muted); }
+.vz-log-year {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0 18px;
+  padding: 14px 0;
+  border-top: 1px solid var(--vz-line);
+}
+.vz-log-year h3 {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  margin: 8px 0 0;
+  font-family: var(--vz-serif);
+  font-size: 2rem;
+  font-weight: 400;
   line-height: 1;
-  font-family: "DM Serif Display", serif;
-  color: #fff;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  color: var(--vz-accent);
 }
-
-.marker.congress .dot {
-  background: rgba(198, 40, 40, 0.5);
+.vz-log-year ol { margin: 0; padding: 0; list-style: none; }
+.vz-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: .5rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
 }
-
-.marker.visit .dot {
-  background: rgba(239, 108, 0, 0.5);
+button.vz-row { cursor: pointer; transition: background .15s; }
+button.vz-row:hover, button.vz-row:focus-visible { background: rgba(27, 116, 184, .08); outline: none; }
+.vz-row-when {
+  flex: none;
+  width: 64px;
+  font-family: var(--vz-sans);
+  font-size: .74rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--vz-muted);
 }
+.vz-row-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.vz-row-title { font-size: 1.05rem; line-height: 1.3; color: var(--vz-ink); }
+.vz-row-meta { font-family: var(--vz-sans); font-size: .8rem; line-height: 1.4; color: var(--vz-muted); }
+.vz-row-meta .vz-dot { width: .55rem; height: .55rem; margin-right: .35rem; }
+.vz-row-go { flex: none; color: var(--vz-accent); opacity: 0; transition: opacity .15s, transform .15s; }
+button.vz-row:hover .vz-row-go, button.vz-row:focus-visible .vz-row-go { opacity: 1; transform: translateX(3px); }
 
-@media (max-width: 900px) {
-  #map-controls {
-    left: 0.7rem;
-    right: 0.7rem;
-    bottom: 0.7rem;
+/* ── Pantallas estrechas ───────────────────────────────────────────────────── */
+@media (max-width: 979.98px) {
+  .vz-stage { min-height: 560px; }
+  .vz-hero { top: 108px; right: 1rem; bottom: auto; left: 1rem; max-width: none; }
+  .vz-hero h1 { font-size: 3rem; }
+  .vz-hero-sub { font-size: 1.15rem; }
+  .vz-hero-stats { font-size: .82rem; }
+  .vz-controls { left: .7rem; right: .7rem; bottom: .7rem; width: auto; padding: .6rem .7rem; }
+  .vz-key { font-size: .82rem; }
+  .vz-ctl-label, .vz-year-out { font-size: .76rem; }
+  .vz-ctl-foot { font-size: .74rem; }
+  .vz-panel {
+    position: fixed;
+    z-index: 1000;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
     width: auto;
-    padding: 0.6rem 0.7rem;
+    max-height: 70vh;
+    max-height: 70svh;
+    border-radius: 1rem 1rem 0 0;
   }
-
-  .zoom-control {
-    font-size: 0.76rem;
-    margin-bottom: 0.28rem;
-  }
-
-  .drag-hint {
-    margin-top: 0.4rem;
-    font-size: 0.74rem;
-  }
-
-  .map-tile {
-    width: 132vw;
-    flex: 0 0 132vw;
-  }
-
-  .marker {
-    width: calc(36px * var(--marker-scale, 1));
-    height: calc(36px * var(--marker-scale, 1));
-  }
-
-  .marker .tip {
-    min-width: min(78vw, 300px);
-    max-width: min(86vw, 340px);
-    padding: 0.55rem 0.65rem;
-    font-size: 0.83rem;
-    line-height: 1.15rem;
-  }
-
-  .tip-logo {
-    width: 110px;
-  }
-
-  .tip-visit {
-    column-gap: 0.55rem;
-  }
-
-  .tip-visit-logo {
-    width: 58px;
-  }
-
-  .tip-congress-logo {
-    width: 52px;
-  }
-
-  .tip-title {
-    font-size: 0.84rem;
-    margin-bottom: 0.2rem;
-  }
-
-  .tip-institution {
-    font-size: 0.78rem;
-    margin-bottom: 0.2rem;
-  }
-
-  .tip-supervisor {
-    font-size: 0.74rem;
-  }
-
-  .marker-letter {
-    font-size: 0.82em;
-  }
+  .vz-ev { grid-template-columns: 52px 1fr; }
+  .vz-ev-logo { width: 52px; }
+  .vz-log { padding: 3rem .7rem 4rem; }
+  .vz-log h2 { font-size: 2.1rem; }
+  .vz-log-year { grid-template-columns: 1fr; }
+  .vz-log-year h3 { position: static; margin: 4px 0 6px 10px; font-size: 1.7rem; }
+  .vz-row-when { width: 52px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vz-panel, .vz-hero, .vz-canvas { transition: none; }
 }
 
 /* ═══ MODO OSCURO (botón ☾ del menú; ver _includes/theme.html) ═══ */
-/* Mapa nocturno: océano oscuro y continentes en gris azulado */
+/* Mar de noche y continentes en gris azulado */
 html[data-theme="dark"] body::before { filter: brightness(.42) saturate(.9); }
-html[data-theme="dark"] .map-img { filter: brightness(.3) sepia(.25) hue-rotate(170deg) saturate(1.4); }
-html[data-theme="dark"] #map-controls {
-  background: rgba(16, 23, 32, .9);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .5);
-}
-html[data-theme="dark"] .zoom-control { color: #d9e6f2; }
-html[data-theme="dark"] #map-zoom { accent-color: #6fb0ec; }
-html[data-theme="dark"] .drag-hint { color: #b9cde0; }
-html[data-theme="dark"] .marker .dot { border-color: rgba(255, 236, 225, .9); }
-html[data-theme="dark"] .marker .tip {
-  background: rgba(19, 27, 37, .97);
+html[data-theme="dark"] .vz {
+  --vz-land: rgba(66, 84, 100, .95);
+  --vz-coast: rgba(180, 208, 230, .3);
+  --vz-border: rgba(180, 208, 230, .16);
+  --vz-ink: #d9e6f2;
+  --vz-ink-2: #9cc6ea;
+  --vz-muted: #b8c6d2;
+  --vz-line: rgba(160, 190, 215, .2);
+  --vz-card: rgba(16, 23, 32, .9);
+  --vz-card-solid: rgba(19, 27, 37, .97);
+  --vz-pin: #131b25;
+  --vz-congress: #ef5350;
+  --vz-visit: #ff9a3c;
+  --vz-talk: #6fb0ec;
+  --vz-accent: #6fb0ec;
+  --vz-arc: rgba(217, 230, 242, .6);
+  --vz-arc-halo: rgba(10, 18, 28, .45);
+  --vz-globe-sea: rgba(6, 18, 30, .72);
+  --vz-globe-back: rgba(160, 190, 215, .12);
+  --vz-globe-grid: rgba(160, 190, 215, .08);
+  --vz-globe-glow: rgba(111, 176, 236, .28);
+  --vz-globe-light: rgba(255, 255, 255, .07);
+  --vz-globe-shade: rgba(0, 0, 0, .45);
+  --vz-shadow: 0 8px 24px rgba(0, 0, 0, .5);
   color: #e6edf3;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, .6);
 }
-html[data-theme="dark"] .tip-congress-entry + .tip-congress-entry { border-top-color: rgba(160, 190, 215, .2); }
-html[data-theme="dark"] .tip-institution { color: #9cc6ea; }
-html[data-theme="dark"] .tip-supervisor { color: #b8c6d2; }
+html[data-theme="dark"] .vz-pin-ring { filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .6)); }
+html[data-theme="dark"] .vz-drag { color: #b9cde0; }
+html[data-theme="dark"] .vz-views { background: rgba(0, 0, 0, .35); }
+html[data-theme="dark"] .vz-views button[aria-pressed="true"] { background: rgba(160, 190, 215, .24); }
+html[data-theme="dark"] .vz-panel { color: #e6edf3; box-shadow: 0 8px 28px rgba(0, 0, 0, .6); }
+html[data-theme="dark"] .vz-ev-title { color: #e6edf3; }
+html[data-theme="dark"] .vz-ev-award { color: #f0bf57; }
+html[data-theme="dark"] .vz-log-card { background: rgba(19, 27, 37, .95); box-shadow: 0 14px 40px rgba(0, 0, 0, .5); }
+html[data-theme="dark"] button.vz-row:hover, html[data-theme="dark"] button.vz-row:focus-visible { background: rgba(111, 176, 236, .1); }
 /* los logos son oscuros: van sobre una tarjetita clara */
-html[data-theme="dark"] .tip-congress-logo,
-html[data-theme="dark"] .tip-visit-logo {
-  background: #eef2f5;
-  border-radius: 6px;
-  padding: 3px;
-}
+html[data-theme="dark"] .vz-ev-logo:not(.vz-ev-logo--none) { padding: 3px; border-radius: 6px; background: #eef2f5; }
