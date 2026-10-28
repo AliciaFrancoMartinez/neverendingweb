@@ -14,6 +14,16 @@ title_es: "Charlas y talleres invitados"
 web_limit: 6   # en la web se ven las 6 primeras y un botón "Show all"
 
 entries:
+  - date: "Oct 2026"
+    title: "Talk-workshop about *psychological measurement*"
+    title_es: "Ponencia-taller sobre *medición psicológica*"
+    place: "Zaragoza (Spain)"
+    org: "Universidad San Jorge; Degree in Psychology (Psychometrics, 2nd year)"
+    org_es: "Universidad San Jorge; Grado en Psicología (Psicometría, 2.º curso)"
+    detail: "What does it mean to measure the psychological?"
+    detail_es: "¿Qué es medir lo psicológico?"
+    duration: "4h"
+
   - date: "Sept 2026"
     title: "Workshop about *preregistration*"
     title_es: "Taller sobre *prerregistro*"
