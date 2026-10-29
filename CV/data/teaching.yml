@@ -68,6 +68,11 @@ groups:
     chip: "Materials"
     chip_es: "Materiales"
     entries:
+      - title: "*Docencia universitaria accesible para personas con ceguera en asignaturas de metodología*"
+        items:
+          - { date: "2026", place: "Universidad Autónoma de Madrid (Spain)", detail: "Co-author (with C. Martínez-Cantera et al.) · ISBN 978-84-09-87853-6",
+              detail_es: "Coautora (con C. Martínez-Cantera et al.) · ISBN 978-84-09-87853-6" }
+
       - title: "*Guía de ayuda a la inclusión de estudiantes con discapacidad visual en el entorno universitario. Versión dinámicas y espacios de convivencia*"
         items:
           - { date: "2025", place: "Repositorio UAM (Spain)", detail: "Co-author (with L. Brand Durán et al.) · ISBN 978-84-09-78110-2",
