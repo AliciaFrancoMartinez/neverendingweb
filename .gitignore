@@ -11,3 +11,6 @@ CV/cv-print.html
 CV/cv-short.html
 CV/cv-print-es.html
 CV/cv-short-es.html
+
+# Binario de CV/_scripts/merge-pdf.swift (lo compila build-pdf.R)
+CV/_scripts/.bin/

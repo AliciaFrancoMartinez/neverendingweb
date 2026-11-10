@@ -599,16 +599,19 @@ cv_web <- function(root = CV_ROOT, lang = "en") {
 }
 
 # Documento independiente para el PDF (Paged.js lo pagina y Chrome lo imprime)
-cv_print_html <- function(root = CV_ROOT, lang = "en") {
+# page_offset: páginas que build-pdf.R pondrá delante (el CV corto); la numeración empieza después
+cv_print_html <- function(root = CV_ROOT, lang = "en", page_offset = 0) {
   data <- cv_load(root, lang)
   cv$img <- "assets/img/"
   css <- function(f) paste(readLines(file.path(root, "assets", f), encoding = "UTF-8", warn = FALSE), collapse = "\n")
   name <- paste(data$profile$name$first, data$profile$name$last)
   paste0(
-    sprintf("<!doctype html>\n<html lang=\"%s\">\n<head>\n<meta charset=\"utf-8\">\n", lang),
+    sprintf("<!doctype html>\n<html lang=\"%s\" data-cv-page-offset=\"%d\">\n<head>\n<meta charset=\"utf-8\">\n", lang, as.integer(page_offset)),
     sprintf("<title>CV · %s</title>\n", esc(name)),
     sprintf("<link rel=\"stylesheet\" href=\"%s\">\n", esc(CV_FONTS)),
     "<style>\n", css("cv.css"), "\n", css("cv-print.css"), "\n",
+    # el contador de página de la primera página salta las páginas añadidas delante
+    if (page_offset > 0) sprintf(".pagedjs_page.pagedjs_first_page { counter-increment: page %d; }\n", as.integer(page_offset) + 1L) else "",
     sprintf("@page { @bottom-center { content: \"%s\"; } }\n", cv_date(data$profile)),
     "</style>\n",
     # En Chrome sin interfaz (al generar el PDF) requestAnimationFrame/requestIdleCallback no avanzan

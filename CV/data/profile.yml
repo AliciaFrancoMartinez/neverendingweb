@@ -37,6 +37,8 @@ pdf_es: "CV_AliciaFranco-Martinez_ES.pdf"
 short_pdf: "CV_AliciaFranco-Martinez_short.pdf"
 short_pdf_es: "CV_AliciaFranco-Martinez_short_ES.pdf"
 photo: "photo.png"   # foto del CV corto (en CV/assets/img/)
+# true → el PDF largo empieza con el CV corto (con la foto) y el índice pasa a la página 2
+long_pdf_cover: true
 
 # Presentación del CV corto. <mark>texto</mark> lo resalta en azul.
 bio:

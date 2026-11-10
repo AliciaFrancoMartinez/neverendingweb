@@ -162,6 +162,15 @@ En *conferences*, el campo `series` agrupa los congresos (p. ej. "ASSC Annual Me
 Si el contenido no cabe, la letra se reduce sola (hasta un 20 %). Si aun así no cabe, `quarto render` avisa: entonces quita algún `short:`.
 Para verlo en el navegador, abre `CV/cv-short.html`.
 
+### El CV corto como primera página del largo
+
+Con `long_pdf_cover: true` en `profile.yml`, el PDF largo empieza con el CV corto (la página con la foto); el
+índice pasa a la página 2 y sus números de página ya cuentan esa primera hoja. Para quitarla, pon `false`.
+
+Para unir los dos PDF sin perder los enlaces se usa `CV/_scripts/merge-pdf.swift` (PDFKit de macOS). Necesita Swift,
+que viene con las herramientas de línea de comandos de Xcode (`xcode-select --install`). La primera vez se compila
+solo en `CV/_scripts/.bin/`. Si no hay Swift, `quarto render` avisa y el PDF largo sale sin la primera página.
+
 ## Añadir una sección nueva
 
 1. Crea `CV/data/<nombre>.yml` con `title:` y `entries:` (o `groups:`).
