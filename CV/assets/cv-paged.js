@@ -1,6 +1,7 @@
 // Ajustes del PDF durante y tras la paginación con Paged.js:
 //  1. si una sección continúa en otra página, deja hueco arriba y repite su título
-//  2. rellena los números de página del índice de la portada ("p. 4–5")
+//  2. rellena los números de página del índice de la portada ("p. 4–5"), sumando las páginas
+//     que build-pdf.R pone delante (data-cv-page-offset en <html>: el CV corto como primera página)
 class CvPagedHandler extends Paged.Handler {
   beforePageLayout(page, content, breakToken) {
     const node = breakToken && breakToken.node;
@@ -25,10 +26,11 @@ class CvPagedHandler extends Paged.Handler {
       cv.prepend(repeat);
     });
 
+    const offset = Number(document.documentElement.dataset.cvPageOffset || 0);
     const pagesBySection = {};
     document.querySelectorAll(".pagedjs_page").forEach((page, i) => {
       page.querySelectorAll(".cv-section[data-section]").forEach((section) => {
-        (pagesBySection[section.dataset.section] ||= []).push(i + 1);
+        (pagesBySection[section.dataset.section] ||= []).push(i + 1 + offset);
       });
     });
     document.querySelectorAll(".cv-index-page[data-for]").forEach((el) => {
