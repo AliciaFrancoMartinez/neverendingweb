@@ -81,10 +81,31 @@ groups:
     chip_es: "En revisión"
     entries:
       - date: ""
+        authors: "Rey-Sáez, R., Franco-Martínez, A., Vadillo, M. A., & Garre-Frutos, F."
+        title: "A Multilevel Signal Detection Theory Approach to Unconscious Processing Research"
+        venue: "Preprint on *PsyArXiv*."
+        venue_es: "Preprint en *PsyArXiv*."
+        doi_label: "doi of the preprint:"
+        doi_label_es: "doi del preprint:"
+        doi: "10.31234/osf.io/7jrqm_v1"
+        open_access: true
+        badges: { prereg: na, data: yes, materials: yes, code: yes }
+
+      - date: ""
+        authors: "Franco-Martínez, A., Vadillo, M. A., & Rey-Sáez, R."
+        title: "How Many Sites, Participants, and Trials? A Tutorial on Multilevel Power Analysis for Multisite Studies with Repeated Measures"
+        venue: "Preprint on *PsyArXiv*."
+        venue_es: "Preprint en *PsyArXiv*."
+        doi_label: "doi of the preprint:"
+        doi_label_es: "doi del preprint:"
+        doi: "10.31234/osf.io/gwhzv_v2"
+        open_access: true
+        badges: { prereg: na, data: na, materials: yes, code: yes }
+
+      - date: ""
         authors: "Franco-Martínez, A., […] Garre-Frutos, F."
         title: "Choose your own PAS? Quantitative and Qualitative Validity Evidence for the Perceptual Awareness Scale"
-        venue: "*Behavior Research Methods.* (2nd round)"
-        venue_es: "*Behavior Research Methods.* (2.ª ronda)"
+        venue: "*Neuroscience of Consciousness.*"
         doi_label: "doi of the preprint:"
         doi_label_es: "doi del preprint:"
         doi: "10.31234/osf.io/n7zuw_v2"
@@ -111,6 +132,7 @@ groups:
 
   - title: "In Preparation"
     title_es: "En preparación"
+    hide: true   # su único trabajo (SDT multinivel) ya está en revisión; quitar esta línea al añadir otro
     chip: "In preparation"
     chip_es: "En preparación"
     entries:
